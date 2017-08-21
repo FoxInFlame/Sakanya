@@ -50,7 +50,7 @@ class About():
     )
     .set_author(name='🐟 Profile: Sakanya', url=discord.Embed.Empty, icon_url=discord.Embed.Empty)
     .set_thumbnail(url='https://i.imgur.com/09lpIAL.png')
-    .add_field(name='About', value='Version: 1.0.2-fix\n\nAs much as I don\'t want to admit it, I\'m a Discord bot written in *discord.py* by FoxInFlame#9833. I am not an actual cute girl.\n(｡•́︿•̀｡)', inline=False)
+    .add_field(name='About', value='Version: 1.0.2-fix2\n\nAs much as I don\'t want to admit it, I\'m a Discord bot written in *discord.py* by FoxInFlame#9833. I am not an actual cute girl.\n(｡•́︿•̀｡)', inline=False)
     .add_field(name='Name Origin', value='The first goal for me was to reverse image search a lot of ~~lewd~~ pictures o(>ω<)o. "Reverse" in Japanese is 逆, which is read as Saka (or Gyaku). Since my favourite animal is a cat, I am now called as Saka*nya*.', inline=False)
     .add_field(name='Stats', value=str(self.chars) + ' characters, ' + str(self.lines) + ' lines in length\nSpread across ' + str(self.files) + ' files\n%d day(s) and %d hour(s)' % (timediff.days, timediff.seconds / 3600) + ' old')
     )

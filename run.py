@@ -7,12 +7,14 @@
 #                             /____/         
 # 
 # A shy Discord bot written by FoxInFlame in Discord.py.
-# Version 1.0.3
+# Version 1.0.2-fix2
 # Changelog:
-# 1.0.2-fíx
-# - Fix bugs in switchversion
-# - Print debug statuses
 # 1.0.2
+# - -fix2
+#   - Change switchversion to update
+# - -fix
+#   - Fix bugs in switchversion
+#   - Print debug statuses
 # - Added support for updating via Discord using the switchversion command
 # 1.0.1
 # - Now on a stable server
