@@ -9,6 +9,9 @@
 # A shy Discord bot written by FoxInFlame in Discord.py.
 # Version 1.0.2-fix2
 # Changelog:
+# 1.0.3
+# - Output git pull response to chat
+# - [add iam command for AMA]
 # 1.0.2
 # - -fix2
 #   - Change switchversion to update

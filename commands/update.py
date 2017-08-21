@@ -29,8 +29,9 @@ class Update():
       await self.bot.change_presence(game=discord.Game(name='Updating: Downloading...', type=0), status=None, afk=False)
       print('Pulling from git origin/master...')
       try:
-        gitpull = subprocess.run('git pull origin master', check=True)
+        gitpull = subprocess.run('git pull origin master', check=True, stdout=subprocess.PIPE)
         print('Git pull has succeeded.')
+        await self.bot.say('Success:\n```' + gitpull.stdout + '```')
         await self.bot.change_presence(game=discord.Game(name='Updating: Restarting...', type=0), status=None, afk=False)
         # Git pull successful.
         print('Logging out in 3 seconds...')
