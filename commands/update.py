@@ -14,7 +14,7 @@ class Update():
     self.bot = bot
 
   @commands.command(pass_context=True)
-  async def update(self, context, tag=None):
+  async def update(self, context):
     """
     Update Sakanya from git. Only available to FoxInFlame.
     
@@ -25,9 +25,6 @@ class Update():
       >update
     """
     if context.message.author.id == '202501452596379648':
-      if tag is None:
-        await self.bot.add_reaction(context.message, '❎') # Add x mark
-        return
       await self.bot.add_reaction(context.message, '✅') # Add checkmark
       await self.bot.change_presence(game=discord.Game(name='Updating: Downloading...', type=0), status=None, afk=False)
       print('Pulling from git origin/master...')
@@ -45,6 +42,7 @@ class Update():
         print(e.output)
         await self.bot.say('Sakanya ran into an error while pulling from git.\n```' + e.output + '```')
         await self.bot.change_presence(game=discord.Game(name='Updating: Download Error...', type=0), status=None, afk=False)
-
+    else:
+      await self.bot.add_reaction(context.message, '❎') # Add x mark
 def setup(bot):
   bot.add_cog(Update(bot))
