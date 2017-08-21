@@ -47,6 +47,8 @@ bot.remove_command('help') # Remove default help command
 
 scheduler = sched.scheduler(time.time, time.sleep)
 
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'}
+
 @bot.event
 async def on_ready():
   foxinflame = await bot.get_user_info('202501452596379648')
