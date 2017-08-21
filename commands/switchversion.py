@@ -31,19 +31,22 @@ class SwitchVersion():
       await self.bot.change_presence(game=discord.Game(name='Updating: Phase 1...', type=0), status=None, afk=False)
       print('Switching Versions...')
       try:
-        gitpull = subprocess.run('git pull origin master', check=True, stdout=PIPE)
+        gitpull = subprocess.run('git pull origin master', check=True)
+        print('Git pull origin succeeded.')
         await self.bot.change_presence(game=discord.Game(name='Updating: Phase 2...', type=0), status=None, afk=False)
         # Git pull successful.
         try:
-          switchtag = subprocess.run('git checkout ' + tag, check=True, stdout=PIPE)
+          gitcheckout = subprocess.run('git checkout ' + tag, check=True)
+          print('Git checkout ' + tag + 'succeeded.')
           await self.bot.change_presence(game=discord.Game(name='Updating: Restarting...', type=0), status=None, afk=False)
           # Checkout succeeded
+          print('Logging out...')
           await self.bot.logout()
           os.execl(sys.executable, sys.executable, *sys.argv)
         except subprocess.CalledProcessError as e:
           await self.bot.say('Saknya ran into an error while switching tags.\n````' + e.output + '```')
-        await self.bot.change_presence(game=discord.Game(name='Updating: Error in phase 2...', type=0), status=None, afk=False)
-        # It will change to an emoji automatically in less than 15 minutes, so leave the status like that.
+          await self.bot.change_presence(game=discord.Game(name='Updating: Error in phase 2...', type=0), status=None, afk=False)
+          # It will change to an emoji automatically in less than 15 minutes, so leave the status like that.
       except subprocess.CalledProcessError as e:
         await self.bot.say('Sakanya ran into an error while pulling from git.\n```' + e.output + '```')
         await self.bot.change_presence(game=discord.Game(name='Updating: Error in phase 1...', type=0), status=None, afk=False)

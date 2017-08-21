@@ -110,6 +110,8 @@ if __name__ == "__main__":
   print('Connecting...')
   bot.loop.create_task(changePresence())
   bot.run('***REMOVED***')
+  # Sakanya: ***REMOVED***
+  # Reverser: ***REMOVED***
 
 # End of file.
 # 
