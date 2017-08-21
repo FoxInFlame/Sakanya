@@ -30,8 +30,6 @@ import sched, time
 import random
 # Import asynchronous waiting 
 import asyncio
-# TODO: Remove pprint
-import pprint
 
 
 # Import URLlib.request for requests
@@ -48,8 +46,6 @@ bot = commands.Bot(command_prefix='>', description='A reverse image search bot m
 bot.remove_command('help') # Remove default help command
 
 scheduler = sched.scheduler(time.time, time.sleep)
-
-headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'}
 
 @bot.event
 async def on_ready():
@@ -85,6 +81,7 @@ async def changePresence():
 
     type = 0
     if random.random() < 50:
+      # 50% chance of streaming instead of playing
       type = 1
     await bot.change_presence(game=discord.Game(name=kaomoji, type=type), status=None, afk=False)
     await asyncio.sleep(900) # 15 minutes
