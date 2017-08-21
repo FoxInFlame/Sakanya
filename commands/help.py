@@ -89,7 +89,7 @@ class Help():
       for key, value in self.features_dict.items():
         otherfeatures_str = ''.join([otherfeatures_str, ''.join(['`', key, '` - ', value['short_description'], '\n'])])
       helpembed.add_field(name='Other Features', value=otherfeatures_str)
-      helpembed.add_field(name='Learn More', value='Parameters surrounded by <> are required, and ones surrounded by [] are optional.\n*To learn more about each feature, type >help followed by the keyword.*')
+      helpembed.add_field(name='Learn More', value='Parameters surrounded by <> are required, and ones surrounded by [] are optional.\n*To learn more about each feature, type `>help <keyword>`.*')
     elif subcommand in self.commands_dict:
       helpembed.add_field(name=self.commands_dict[subcommand]['usage'], value=self.commands_dict[subcommand]['description'])
     elif subcommand in self.features_dict:
