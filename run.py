@@ -48,7 +48,7 @@ import urllib.error
 # Import lxml to parse XML and HTML
 from lxml import etree
 
-startup_extensions = ['commands.love', 'commands.waifu', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.switchversion', 'other.emojisuggestion', 'other.suggestionremoval', 'other.mentioninteraction']
+startup_extensions = ['commands.love', 'commands.waifu', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'other.emojisuggestion', 'other.suggestionremoval', 'other.mentioninteraction']
 bot = commands.Bot(command_prefix='>', description='A reverse image search bot made for The nulls of MAL.')
 bot.remove_command('help') # Remove default help command
 
