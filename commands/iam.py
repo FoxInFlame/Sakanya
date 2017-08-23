@@ -8,7 +8,7 @@ class IAm():
     self.bot = bot
 
   SelfAssignedRoles = {
-    'lewd': '350015735256449026',
+    'lewd': '350015735256449026', # TODO: Change this.
     'ama': '350015840718159883'
   }
 
@@ -53,7 +53,7 @@ class IAm():
       await self.bot.say(embed=discord.Embed(
         color = 15839636,
         type = 'rich',
-        description = 'You now have the role **' + role.lower() + '**.'
+        description = '（＾³＾）～♪ You now have the role **' + role.lower() + '**.'
       ))
       return
     else:
@@ -97,7 +97,7 @@ class IAm():
       await self.bot.say(embed=discord.Embed(
         color = 15839636,
         type = 'rich',
-        description = 'You no longer have the role **' + role.lower() + '**.'
+        description = '( ´･ω･) You no longer have the role **' + role.lower() + '**.'
       ))
       return
     else:
