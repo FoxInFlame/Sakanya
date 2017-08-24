@@ -27,7 +27,7 @@ class StoryTime():
         append_write_flag = 'a'
       else: 
         append_write_flag = 'w'
-      file = open(filename, append_write_flag)
+      file = open(filename, append_write_flag, encoding='utf8')
       file.write('\t' + message.content.rstrip() + '\n')
       file.close()
 
