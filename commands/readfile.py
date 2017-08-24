@@ -25,14 +25,17 @@ class ReadFile():
     if filename is None:
       await self.bot.say('A file name has to be specified.')
       return
-    with open(filename, encoding='utf8') as f:
-      contents = (f.read()[:1800] + '...') if len(f.read()) > 1802 else f.read()
-      filename, file_extension = os.path.splitext(filename)
-      await self.bot.say(embed=discord.Embed(
-        color = 15839636,
-        title = 'File: ' + filename,
-        type = 'rich',
-        description = '```' + file_extension[1:] + '\n' + contents + '\n```'
-      ))
+    try: 
+      with open(filename, encoding='utf8') as f:
+        contents = (f.read()[:1800] + '...') if len(f.read()) > 1802 else f.read()
+        filename, file_extension = os.path.splitext(filename)
+        await self.bot.say(embed=discord.Embed(
+          color = 15839636,
+          title = 'File: ' + filename,
+          type = 'rich',
+          description = '```' + file_extension[1:] + '\n' + contents + '\n```'
+        ))
+    except Exception as e:
+      await self.bot.say('Error: ' + str(e))
 def setup(bot):
   bot.add_cog(ReadFile(bot))
