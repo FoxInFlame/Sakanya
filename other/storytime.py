@@ -21,7 +21,7 @@ class StoryTime():
     """
     Save each message in #storytime to a TXT file.
     """
-    if message.channel.id == '':
+    if message.channel.id == '350204559089467393':
       filename = 'nullstory.txt'
       if os.path.exists(filename):
         append_write_flag = 'a'

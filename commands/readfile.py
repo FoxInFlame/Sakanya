@@ -28,10 +28,10 @@ class ReadFile():
     try: 
       with open(filename, encoding='utf8') as f:
         contents = (f.read()[:1800] + '...') if len(f.read()) > 1802 else f.read()
-        filename, file_extension = os.path.splitext(filename)
+        filename_parsed, file_extension = os.path.splitext(filename)
         await self.bot.say(embed=discord.Embed(
           color = 15839636,
-          title = 'File: ' + filename,
+          title = 'File: ' + filename_parsed,
           type = 'rich',
           description = '```' + file_extension[1:] + '\n' + contents + '\n```'
         ))
