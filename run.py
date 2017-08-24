@@ -7,8 +7,10 @@
 #                             /____/         
 # 
 # A shy Discord bot written by FoxInFlame in Discord.py.
-# Version 1.0.3
+# Version 1.0.4
 # Changelog:
+# 1.0.4
+# - Commands added: readfile
 # 1.0.3
 # - Output git pull response to chat
 # - Commands added: iam, iamnot
