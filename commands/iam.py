@@ -8,8 +8,8 @@ class IAm():
     self.bot = bot
 
   SelfAssignedRoles = {
-    'lewd': '350015735256449026', # TODO: Change this.
-    'ama': '350015840718159883'
+    'lewd': '350190393607847937',
+    'ama': '349277559449452545'
   }
 
   @commands.command(pass_context=True)

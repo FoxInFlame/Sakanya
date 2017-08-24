@@ -40,6 +40,16 @@ class Help():
       'short_description': 'Reverse image search any picture',
       'description': 'I can reverse image search any image url you send me. SauceNao can find most lewd pictures and drawings, and WhatAnime can find sources for screenshots from anime! (The default is Saucenao if you don\'t specify). You can also attach images instead of pasting the URL if you find that easier.',
       'usage': '>saka [saucenao|whatanime] [url]'
+    }),
+    ('iam', {
+      'short_description': 'Add yourself a self-assigned role',
+      'description': 'You can describe yourself using roles, and access role-specific channels using them! If you have the **AMA** role, you will be mentioend with someone needs help or wants to ask a question. The **lewd** role will give access to the #nsfw channel. If no role is specified, it will list all the self-assigned roles you have.',
+      'usage': '>iam [ama|lewd]'
+    }),
+    ('iamnot', {
+      'short_description': 'Remove a self-assigned role from yourself',
+      'description': 'You can remove a self-assigned role from yourself. To see which roles you have, do `>iam`.',
+      'usage': '>iamnot <ama|lewd>'
     })
   ]
 
