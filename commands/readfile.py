@@ -26,12 +26,13 @@ class ReadFile():
       await self.bot.say('A file name has to be specified.')
       return
     try: 
-      file = open(filename, encoding='utf8')
+      file = open(filename, 'w', encoding='utf8')
       file.write('')
       file.close()
       await self.bot.say('Emptied file ' + filename)
     except Exception as e:
       await self.bot.say('Error: ' + str(e))
+
   @commands.command(pass_context=True)
   async def readfile(self, context, filename=None):
     """
