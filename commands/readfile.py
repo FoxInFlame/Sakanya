@@ -32,7 +32,7 @@ class ReadFile():
         filename_parsed, file_extension = os.path.splitext(filename)
         await self.bot.say(embed=discord.Embed(
           color = 15839636,
-          title = 'File: ' + filename_parsed,
+          title = 'File: ' + filename,
           type = 'rich',
           description = '```' + file_extension[1:] + '\n' + contents + '\n```'
         ))
