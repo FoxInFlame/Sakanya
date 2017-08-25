@@ -10,6 +10,29 @@ class ReadFile():
     self.bot = bot
 
   @commands.command(pass_context=True)
+  async def emptyfile(self, context, filename=None):
+    """
+    Empty a file
+    
+    Format:
+      >emptyfile [filename]
+
+    Examples:
+      >emptyfile nullstory.txt
+    """ 
+    if context.message.author.id != '202501452596379648':
+      return
+    if filename is None:
+      await self.bot.say('A file name has to be specified.')
+      return
+    try: 
+      file = open(filename, encoding='utf8')
+      file.write('')
+      file.close()
+      await self.bot.say('Emptied file ' + filename)
+    except Exception as e:
+      await self.bot.say('Error: ' + str(e))
+  @commands.command(pass_context=True)
   async def readfile(self, context, filename=None):
     """
     Read a file

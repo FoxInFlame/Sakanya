@@ -17,9 +17,6 @@ class StoryTime():
 
   pasteBinDevKey = '8115a7f76471088372c96c36713f64b8'
 
-  file = open(filename, 'w', encoding='utf8')
-  file.write('')
-  file.close()
   async def on_message(self, message):
     """
     Save each message in #storytime to a TXT file.
@@ -30,9 +27,12 @@ class StoryTime():
         append_write_flag = 'a'
       else: 
         append_write_flag = 'w'
-      file = open(filename, append_write_flag, encoding='utf8')
-      file.write('\t' + message.author.name + ': ' + message.content.rstrip() + '\n')
-      file.close()
+      try:
+        file = open(filename, append_write_flag, encoding='utf8')
+        file.write('\t' + message.author.name + ': ' + message.content.rstrip() + '\n')
+        file.close()
+      except Exception as e:
+        await self.bot.say('Error: ' + str(e))
 
 #  @commands.command()
 #  async def readstory(self):
