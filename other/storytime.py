@@ -17,6 +17,9 @@ class StoryTime():
 
   pasteBinDevKey = '8115a7f76471088372c96c36713f64b8'
 
+  file = open(filename, 'w', encoding='utf8')
+  file.write('')
+  file.close()
   async def on_message(self, message):
     """
     Save each message in #storytime to a TXT file.
