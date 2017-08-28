@@ -36,7 +36,7 @@ class MentionInteraction():
         await self.bot.send_message(message.channel, ' ｡･ﾟ･(ﾉД`)ヽ(￣ω￣ )')
       elif mention_andre == False and mention_kaneda == False and mention_nekohime == False:
         await self.bot.send_typing(message.channel)
-        chance = random.random()
+        chance = random.random() * 100
         if chance > 50:
           await self.bot.send_message(message.channel, 'Um, nyani?') # 50% chance
         elif chance > 25:

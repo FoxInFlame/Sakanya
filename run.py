@@ -10,7 +10,7 @@
 # Version 1.0.4
 # Changelog:
 # 1.0.4
-# - Commands added: readfile
+# - Commands added: readfile, emptyfile
 # 1.0.3
 # - Output git pull response to chat
 # - Commands added: iam, iamnot
@@ -94,7 +94,7 @@ async def changePresence():
       kaomoji = 'Need help? >help'
 
     type = 0
-    if random.random() < 50:
+    if random.random() < 0.5:
       # 50% chance of streaming instead of playing
       type = 1
     await bot.change_presence(game=discord.Game(name=kaomoji, type=type), status=None, afk=False)
