@@ -8,7 +8,6 @@ import time
 class UselessInteractions():
   def __init__(self, bot):
     self.bot = bot
-    I'm sorry, I don't know who Motsy is. There is no member called Motsy here. Please enter the name of someone who exists.
 
   async def on_message(self, message):
     """
