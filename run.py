@@ -7,8 +7,10 @@
 #                             /____/         
 # 
 # A shy Discord bot written by FoxInFlame in Discord.py.
-# Version 1.0.6
+# Version 1.0.7
 # Changelog:
+# 1.0.7
+# - Update command now aborts restart if it's already up-to-date.
 # 1.0.6
 # - Properly handle help messages with nonexistent subcommands
 # - New turquoise background in profile picture

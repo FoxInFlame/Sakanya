@@ -31,13 +31,17 @@ class Update():
       try:
         gitpull = subprocess.run(['git', 'pull', 'origin', 'master'], check=True, stdout=subprocess.PIPE, encoding='utf8')
         print('Git pull has succeeded.')
-        await self.bot.say('Success:\n```' + gitpull.stdout + '```')
-        await self.bot.change_presence(game=discord.Game(name='Updating: Restarting...', type=0), status=None, afk=False)
-        # Git pull successful.
-        print('Logging out in 3 seconds...')
-        time.sleep(3) # Time to update presence 
-        await self.bot.logout()
-        os.execl(sys.executable, sys.executable, *sys.argv)
+        if gitpull.stdout == 'Already up-to-date.':
+          print('However, it is already up-to-date. No need for a restart.')
+          await self.bot.say('Success:\n```' + gitpull.stdout + '```\nNo need for restart. Aborted.')
+        else:
+          await self.bot.say('Success:\n```' + gitpull.stdout + '```')
+          await self.bot.change_presence(game=discord.Game(name='Updating: Restarting...', type=0), status=None, afk=False)
+          # Git pull successful.
+          print('Logging out in 3 seconds...')
+          time.sleep(3) # Time to update presence 
+          await self.bot.logout()
+          os.execl(sys.executable, sys.executable, *sys.argv)
       except subprocess.CalledProcessError as e:
         print('Git pull has failed!')
         print(e.output)
