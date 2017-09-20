@@ -7,8 +7,11 @@
 #                             /____/         
 # 
 # A shy Discord bot written by FoxInFlame in Discord.py.
-# Version 1.0.8
+# Version 1.0.9
 # Changelog:
+# 1.0.9
+# - Rename mockxaetral to uselessinteractions
+# - Added response to Andy's 'No Motsy' message
 # 1.0.8
 # - Removed unneccessary new line in >update response
 # - Fixed status message after update was aborted
@@ -70,7 +73,7 @@ from lxml import etree
 prefix = '>'
 description = 'A reverse image search bot made for The nulls of MAL.'
 
-startup_extensions = ['commands.love', 'commands.waifu', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.storytime', 'other.mockxaetral']
+startup_extensions = ['commands.love', 'commands.waifu', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.storytime', 'other.uselessinteractions']
 bot = commands.Bot(command_prefix=prefix, description=description)
 bot.remove_command('help') # Remove default help command
 

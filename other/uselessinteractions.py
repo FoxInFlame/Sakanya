@@ -5,21 +5,24 @@ from discord.ext import commands
 # Import time for sleeping
 import time
 
-class MockXaetral():
+class UselessInteractions():
   def __init__(self, bot):
     self.bot = bot
+    I'm sorry, I don't know who Motsy is. There is no member called Motsy here. Please enter the name of someone who exists.
 
   async def on_message(self, message):
     """
-    Just a joke. Come on Xaetral, add it!
+    Just a couple jokes :)
     """
     if 'n:shrug' in message.content:
+      # Come on Xaetral, add it!
       await self.bot.send_message(message.channel, embed=discord.Embed(
         color = 15839636,
         type = 'rich',
         description = 'Come on <@226457042171330560>, add it!'
       ).set_image(url='https://i.imgur.com/bkNyHTT.png'))
     if 'n:emotes' in message.content:
+      # Come on Xaetral, add it!
       time.sleep(1) # Time to update presence 
       await self.bot.send_message(message.channel, embed=discord.Embed(
         color = 15839636,
@@ -27,5 +30,7 @@ class MockXaetral():
         title = 'Extra available emotes',
         description = 'Type `n:` followed by the name (`n:shrug` for example).\nThey will be replaced with the corresponding extra image. “ψ(｀∇´)ψ '
       ).set_image(url='https://i.imgur.com/Nt0zD5L.png'))
+    if message.author.id == '331874668719898634' and message.content == 'I\'m sorry, I don\'t know who Motsy is. There is no member called Motsy here. Please enter the name of someone who exists.':
+      await self.bot.send_message(message.channel, 'But Motsy exists, and we all know it! It\'s just you, André, who is trying to deny the actual fact and face away from the truth.')
 def setup(bot):
-  bot.add_cog(MockXaetral(bot))
+  bot.add_cog(UselessInteractions(bot))
