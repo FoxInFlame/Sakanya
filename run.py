@@ -70,7 +70,7 @@ from lxml import etree
 prefix = '>'
 description = 'A reverse image search bot made for The nulls of MAL.'
 
-startup_extensions = ['commands.love', 'commands.waifu', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.storytime']
+startup_extensions = ['commands.love', 'commands.waifu', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.storytime', 'other.statistics']
 bot = commands.Bot(command_prefix=prefix, description=description)
 bot.remove_command('help') # Remove default help command
 
