@@ -7,8 +7,12 @@
 #                             /____/         
 # 
 # A shy Discord bot written by FoxInFlame in Discord.py.
-# Version 1.0.7
+# Version 1.0.8
 # Changelog:
+# 1.0.8
+# - Removed unneccessary new line in >update response
+# - Fixed status message after update was aborted
+# - Added a small command that you wouldn't notice :)
 # 1.0.7
 # - Update command now aborts restart if it's already up-to-date.
 # 1.0.6

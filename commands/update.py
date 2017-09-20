@@ -33,7 +33,8 @@ class Update():
         print('Git pull has succeeded.')
         if 'Already up-to-date.' in gitpull.stdout:
           print('However, it is already up-to-date. No need for a restart.')
-          await self.bot.say('Success:\n```' + gitpull.stdout + '```\nNo need for restart. Aborted.')
+          await self.bot.say('Success:\n```' + gitpull.stdout + '```No need for restart. Aborted.')
+          await self.bot.change_presence(game=discord.game(name='٩(͡๏̯͡๏)۶', type=0), status=None, afk=False)
         else:
           await self.bot.say('Success:\n```' + gitpull.stdout + '```')
           await self.bot.change_presence(game=discord.Game(name='Updating: Restarting...', type=0), status=None, afk=False)

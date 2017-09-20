@@ -7,17 +7,15 @@ class Statistics():
   def __init__(self, bot):
     self.bot = bot
 
-  @commands.command(pass_context=True)
-  async def love(self, context, user=None):
+  async def on_message(self, message):
     """
-    Send one of many preconfigured love phrases to a user.
-    
-    Format:
-      >love <username>
-
-    Examples:
-      >love FoxInFlame
+    Just a joke. Come on Xaetral, add it!
     """
+    if 'n:shrug' in message.content:
+      await self.bot.say(embed=discord.Embed(
+        color = 15839636,
+        type = 'rich'
+      ).set_image('https://i.imgur.com/bkNyHTT.png'))
 
 def setup(bot):
   bot.add_cog(Statistics(bot))
