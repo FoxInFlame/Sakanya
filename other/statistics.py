@@ -12,10 +12,11 @@ class Statistics():
     Just a joke. Come on Xaetral, add it!
     """
     if 'n:shrug' in message.content:
-      await self.bot.say(embed=discord.Embed(
+      await self.bot.send_message(message.channel,  embed=discord.Embed(
         color = 15839636,
-        type = 'rich'
-      ).set_image('https://i.imgur.com/bkNyHTT.png'))
+        type = 'rich',
+        description = 'Come on <@226457042171330560>, add it!'
+      ).set_image(url='https://i.imgur.com/bkNyHTT.png'))
 
 def setup(bot):
   bot.add_cog(Statistics(bot))
