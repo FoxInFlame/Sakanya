@@ -31,7 +31,7 @@ class Update():
       try:
         gitpull = subprocess.run(['git', 'pull', 'origin', 'master'], check=True, stdout=subprocess.PIPE, encoding='utf8')
         print('Git pull has succeeded.')
-        if gitpull.stdout == 'Already up-to-date.':
+        if 'Already up-to-date.' in gitpull.stdout:
           print('However, it is already up-to-date. No need for a restart.')
           await self.bot.say('Success:\n```' + gitpull.stdout + '```\nNo need for restart. Aborted.')
         else:
