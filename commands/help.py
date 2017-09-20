@@ -99,6 +99,8 @@ class Help():
       helpembed.add_field(name=self.commands_dict[subcommand]['usage'], value=self.commands_dict[subcommand]['description'])
     elif subcommand in self.features_dict:
       helpembed.add_field(name=self.features_dict[subcommand]['title'], value=self.features_dict[subcommand]['description'])
+    else:
+      helpembed.add_field(name='Not Found!', value='The keyword you specified (' + subcommand +') could not be found in my little list of features!')
     await self.bot.say(embed=helpembed)
 
 def setup(bot):

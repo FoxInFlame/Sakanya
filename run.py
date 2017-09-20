@@ -7,8 +7,11 @@
 #                             /____/         
 # 
 # A shy Discord bot written by FoxInFlame in Discord.py.
-# Version 1.0.5
+# Version 1.0.6
 # Changelog:
+# 1.0.6
+# - Properly handle help messages with nonexistent subcommands
+# - New turquoise background in profile picture
 # 1.0.5
 # - Renamed suggestionremoval file and class to suggestioncontrol
 # - Added auto-reacting to suggestions
