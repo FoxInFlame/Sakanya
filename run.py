@@ -7,8 +7,13 @@
 #                             /____/         
 # 
 # A shy Discord bot written by FoxInFlame in Discord.py.
-# Version 1.0.4
+# Version 1.0.5
 # Changelog:
+# 1.0.5
+# - Renamed suggestionremoval file and class to suggestioncontrol
+# - Added auto-reacting to suggestions
+# - Increased required x count to 5
+# - Rename ReadFile class to FileManagement
 # 1.0.4
 # - Commands added: readfile, emptyfile
 # 1.0.3
@@ -53,8 +58,11 @@ import urllib.error
 # Import lxml to parse XML and HTML
 from lxml import etree
 
-startup_extensions = ['commands.love', 'commands.waifu', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'commands.readfile', 'other.emojisuggestion', 'other.suggestionremoval', 'other.mentioninteraction', 'other.storytime']
-bot = commands.Bot(command_prefix='>', description='A reverse image search bot made for The nulls of MAL.')
+prefix = '>'
+description = 'A reverse image search bot made for The nulls of MAL.'
+
+startup_extensions = ['commands.love', 'commands.waifu', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.storytime']
+bot = commands.Bot(command_prefix=prefix, description=description)
 bot.remove_command('help') # Remove default help command
 
 scheduler = sched.scheduler(time.time, time.sleep)
@@ -64,7 +72,7 @@ headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML
 @bot.event
 async def on_ready():
   foxinflame = await bot.get_user_info('202501452596379648')
-  await bot.send_message(foxinflame, content='Sakanya is now online as ' + bot.user.name + '! Prefix is `>`.')
+  await bot.send_message(foxinflame, content='Sakanya is now online as ' + bot.user.name + '! Prefix is `' + prefix + '`.')
   print('Sakanya by FoxInFlame has logged into Discord as')
   print('@' + bot.user.name)
   print(bot.user.id)
@@ -72,25 +80,24 @@ async def on_ready():
 
 async def changePresence():
   await bot.wait_until_ready()
+  kaomoji_req = urllib.request.Request(url='http://kaomoji.ru/en/', data=None, headers=headers)
+  try:
+    response = urllib.request.urlopen(kaomoji_req)
+    tree = etree.HTML(response.read().decode('utf8'))
+    kaomojis = tree.xpath('//table[@class="table_kaomoji"]//td/span/text()')
+  except (urllib.error.HTTPError, urllib.error.URLError) as e:
+    print('Couldn\'t access kaomoji.ru. Error code: ' + str(e.code), None)
+    kaomojis = ['Need help? >help']
   counter = 0
   while not bot.is_closed:
     counter += 1
-    if counter % 2 == 1:
-      # Odd number
-      kaomoji_req = urllib.request.Request(url='http://kaomoji.ru/en/', data=None, headers=headers)
-      kaomoji = None
-      try:
-        response = urllib.request.urlopen(kaomoji_req)
-        tree = etree.HTML(response.read().decode('utf8'))
-        kaomojis = tree.xpath('//table[@class="table_kaomoji"]//td/span/text()')
-        if len(kaomojis) <= counter:
-          counter = 0
-        kaomoji = kaomojis[counter]
-      except (urllib.error.HTTPError, urllib.error.URLError) as e:
-        kaomoji = '( ͡° ͜ʖ ͡°)'
-        print('Couldn\'t access kaomoji.ru. Error code: ' + str(e.code), None)
+    if counter % 3 == 0:
+      # If divisible by 3
+      if len(kaomojis) <= counter:
+        counter = 0
+      kaomoji = kaomojis[counter]
     else:
-      # Even number
+      # Else
       kaomoji = 'Need help? >help'
 
     type = 0

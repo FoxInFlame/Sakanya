@@ -26,11 +26,12 @@ class Love():
     if context.message.server is None:
       await self.bot.say('You can only send love to someone when you\'re in the same server as them.\no(>< )o')
       return
-    member = context.message.server.get_member_named(user)
+    member = discord.utils.find(lambda m: user.lower() in m.name.lower(), context.server.members)
+    print(member)
     if member is None:
       await self.bot.say('No one called ' + user + ' was found...\no(>< )o')
       return
-    if member == context.message.server.me:
+    if member == context.server.me:
       await self.bot.say('...um. Thanks! (o^ ^o)')
       return
     if member.bot == True:

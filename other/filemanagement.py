@@ -5,7 +5,7 @@ from discord.ext import commands
 # Import os for file system checks
 import os
 
-class ReadFile():
+class FileManagement():
   def __init__(self, bot):
     self.bot = bot
 
@@ -63,4 +63,4 @@ class ReadFile():
     except Exception as e:
       await self.bot.say('Error: ' + str(e))
 def setup(bot):
-  bot.add_cog(ReadFile(bot))
+  bot.add_cog(FileManagement(bot))

@@ -20,14 +20,14 @@ class MentionInteraction():
     for user in list(message.mentions):
       if user.id == '346773965299253250': # If I'm mentioned
         mention_sakanya = True
-      if user.id == '331874668719898634': # If I'm mentioned
+      if user.id == '331874668719898634': # If Andre is mentioned
         mention_andre = True
-      if user.id == '333960965320343552': # If I'm mentioned
+      if user.id == '333960965320343552': # If Kanny is mentioned
         mention_kaneda = True
-      if user.id == '270198146020278272': # If I'm mentioned
+      if user.id == '270198146020278272': # If Nekocchi is mentioned
         mention_nekohime = True
       
-    if mention_sakanya == True:
+    if mention_sakanya == True and message.content[:1] is not '>' and message.author.id is not '346773965299253250':
       if '?' in message.content and message.author.bot == False:
         await self.bot.send_typing(message.channel)
         randomusers = random.sample(list(message.server.members), 2)

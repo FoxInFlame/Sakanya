@@ -56,15 +56,10 @@ class Help():
   commands_dict = OrderedDict(commands_dict)
 
   features_dict = [
-    ('emoji', {
-      'title': 'Emoji Suggestions',
-      'short_description': 'Users can create and vote on emoji suggestions',
-      'description': 'You can suggest an emoji to add by sending a message in <#341874607651029003> in the following format:\n```Emoji Suggestion - :newemojinamegoeshere:\n<imageurl>```\nWhen the message gets at least 5 thumbs up reactions, Fox will be reminded to create the emoji.'
-    }),
-    ('suggestionremoval', {
-      'title': 'Suggestion Removal',
-      'short_description': 'Delete messages in <#341874607651029003> when people decide it\'s not worthy.',
-      'description': 'I remove any messages in <#341874607651029003> when the message gets at least 4 <:x:348390305248182272>s. ~(>_<~)'
+    ('suggestioncontrol', {
+      'title': 'Suggestion Control',
+      'short_description': 'Control messages in <#341874607651029003> as neccessary.',
+      'description': 'I remove any messages in <#341874607651029003> when the message gets at least 5 <:x:348390305248182272>s. ~(>_<~)'
     })
   ]
 
