@@ -1,0 +1,28 @@
+{
+  "days": [
+    {
+      "year": 2017,
+      "month": 9,
+      "day": 20,
+      "hours": {
+        "1": {
+          "messages": 58,
+          "averageonline": 9
+        },
+        "2": {
+          "messages": 58,
+          "averageonline": 9
+        },
+        "3": {
+          "messages": 58,
+          "averageonline": 9
+        },
+        "4": {
+          "messages": 58,
+          "averageonline": 9
+        }
+      },
+      "weekend": false
+    }
+  ]
+}

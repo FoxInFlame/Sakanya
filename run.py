@@ -7,8 +7,13 @@
 #                             /____/         
 # 
 # A shy Discord bot written by FoxInFlame in Discord.py.
-# Version 1.0.9
+# Version 1.0.10
 # Changelog:
+# 1.0.10
+# - Add 'n:cry' and 'n:motherofgod' to further mock Xae.
+# - Confirmed that mentions in embeds don't notify mentioned users.
+# - Changed response to mentioning André.
+# - Add 3 more love messages.
 # 1.0.9
 # - Rename mockxaetral to uselessinteractions
 # - Added response to Andy's 'No Motsy' message

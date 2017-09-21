@@ -30,8 +30,13 @@ class MentionInteraction():
     if mention_sakanya == True and message.content[:1] is not '>' and message.author.id is not '346773965299253250':
       if '?' in message.content and message.author.bot == False:
         await self.bot.send_typing(message.channel)
-        randomusers = random.sample(list(message.server.members), 2)
-        await self.bot.send_message(message.channel, '(・・ ) ? That\'s a good question... Maybe it\'ll be wiser to ask someone smart, like {} or {}.'.format(randomusers[0].name, randomusers[1].name))
+        members = list(message.server.members)
+        members = filter(lambda member: member.status == 'Online' or member.status == discord.Status('online'), members)
+        if len(members) > 2:
+          await self.bot.send_message(message.channel, '(・・ ) ? That\'s a good question... Maybe it\'ll be wiser to ask someone smart, like FoxInFlame.')
+        else:
+          randomusers = random.sample(filter(lambda member: member.id != '202501452596379648', list(members)), 2)
+          await self.bot.send_message(message.channel, '(・・ ) ? That\'s a good question... Maybe it\'ll be wiser to ask someone smart, like {} or {}.'.format(randomusers[0].name, randomusers[1].name))
       elif '😭' in message.content:
         await self.bot.send_message(message.channel, ' ｡･ﾟ･(ﾉД`)ヽ(￣ω￣ )')
       elif mention_andre == False and mention_kaneda == False and mention_nekohime == False:
@@ -45,7 +50,7 @@ class MentionInteraction():
           await self.bot.send_message(message.channel, '...(≧▽≦)/') # 25% chance
       elif mention_andre == True and mention_kaneda == False and mention_nekohime == False:
         await self.bot.send_typing(message.channel)
-        await self.bot.send_message(message.channel, '...André isn\'t really my type... |д･)')
+        await self.bot.send_message(message.channel, '...André... you\'re a bit scary... |д･)')
       elif mention_andre == False and mention_kaneda == True and mention_nekohime == False:
         await self.bot.send_typing(message.channel)
         await self.bot.send_message(message.channel, 'Um. Kanny.... it\'s.. it\'s not like I like you or anything!\n(⁄ ⁄>⁄ ▽ ⁄<⁄ ⁄)')

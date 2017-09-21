@@ -26,12 +26,11 @@ class Love():
     if context.message.server is None:
       await self.bot.say('You can only send love to someone when you\'re in the same server as them.\no(>< )o')
       return
-    member = discord.utils.find(lambda m: user.lower() in m.name.lower(), context.server.members)
-    print(member)
+    member = discord.utils.find(lambda m: user.lower() in m.name.lower(), context.message.server.members)
     if member is None:
       await self.bot.say('No one called ' + user + ' was found...\no(>< )o')
       return
-    if member == context.server.me:
+    if member == context.message.server.me:
       await self.bot.say('...um. Thanks! (o^ ^o)')
       return
     if member.bot == True:
@@ -53,7 +52,10 @@ class Love():
       '❤I want to kiss you all over! I\'m so into smooching with you {0}! --{1}',
       '❤Hi {0}, I like you, like a lot. --{1}',
       '❤I can\'t keep it in anymore, {0}. I have a HUGE crush on you! --{1}',
-      '❤I want to cuddle with you so bad, {0}. --{1}'
+      '❤I want to cuddle with you so bad, {0}. --{1}',
+      '❤{0}... I\'ll love you until the day after forever. --{1}',
+      '❤{0}... There are only two times that I want to be with you... Now and Forever. --{1}',
+      '❤I dreamt of you last night {0}, and we were kissing and laughing. I woke up to realise that dream has already come true. --{1}'
     ]
     await self.bot.send_message(member, 'Here\'s a love message a special someone has sent you!\n' + random.choice(phrases).format(member.name, context.message.author.name))
     await self.bot.say('Your love has been sent to ' + member.name + '! (･ω<)☆')
