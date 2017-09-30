@@ -18,6 +18,8 @@ class MentionInteraction():
     mention_kaneda = False
     mention_nekohime = False
     for user in list(message.mentions):
+#      if user.id == '344956250158661655': # If Reverser mentioned
+#        mention_sakanya = True
       if user.id == '346773965299253250': # If I'm mentioned
         mention_sakanya = True
       if user.id == '331874668719898634': # If Andre is mentioned
@@ -30,18 +32,18 @@ class MentionInteraction():
     if mention_sakanya == True and message.content[:1] is not '>' and message.author.id is not '346773965299253250':
       if '?' in message.content and message.author.bot == False:
         await self.bot.send_typing(message.channel)
-        members = list(message.server.members)
-        members = filter(lambda member: member.status == 'Online' or member.status == discord.Status('online'), members)
-        if len(members) > 2:
+        if message.server is None:
           await self.bot.send_message(message.channel, '(・・ ) ? That\'s a good question... Maybe it\'ll be wiser to ask someone smart, like FoxInFlame.')
         else:
-          members_nofox = []
-          for member in list(members):
-            if member.id != '202501452596379648':
-              members_nofox.append(member)
-          randomusers = random.sample(members_nofox, 2)
-          await self.bot.send_message(message.channel, '(・・ ) ? That\'s a good question... Maybe it\'ll be wiser to ask someone smart, like {} or {}.'.format(randomusers[0].name, randomusers[1].name))
+          members = list(message.server.members)
+          members = list(filter(lambda member: member.status == 'Online' or member.status == discord.Status('online') or member.id != '346773965299253250', members)) # No Saka
+          if len(members) < 2:
+            await self.bot.send_message(message.channel, '(・・ ) ? That\'s a good question... Maybe it\'ll be wiser to ask someone smart, like FoxInFlame.')
+          else:
+            randomusers = random.sample(members, 2)
+            await self.bot.send_message(message.channel, '(・・ ) ? That\'s a good question... Maybe it\'ll be wiser to ask someone smart, like {} or {}.'.format(randomusers[0].name, randomusers[1].name))
       elif '😭' in message.content:
+        await self.bot.send_typing(message.channel)
         await self.bot.send_message(message.channel, ' ｡･ﾟ･(ﾉД`)ヽ(￣ω￣ )')
       elif mention_andre == False and mention_kaneda == False and mention_nekohime == False:
         await self.bot.send_typing(message.channel)
@@ -54,7 +56,7 @@ class MentionInteraction():
           await self.bot.send_message(message.channel, '...(≧▽≦)/') # 25% chance
       elif mention_andre == True and mention_kaneda == False and mention_nekohime == False:
         await self.bot.send_typing(message.channel)
-        await self.bot.send_message(message.channel, '...André... you\'re a bit scary... |д･)')
+        await self.bot.send_message(message.channel, '...André... I think I\'m starting to like you... |д･)')
       elif mention_andre == False and mention_kaneda == True and mention_nekohime == False:
         await self.bot.send_typing(message.channel)
         await self.bot.send_message(message.channel, 'Um. Kanny.... it\'s.. it\'s not like I like you or anything!\n(⁄ ⁄>⁄ ▽ ⁄<⁄ ⁄)')
