@@ -134,11 +134,11 @@ async def changePresence():
         counter = 0
       kaomoji = kaomojis[counter]
       counter += 1
-    elif random_kaomoji < 0.75:
-      # 25%
+    elif random_kaomoji < 0.85:
+      # 35%
       kaomoji = 'Need help? >help'
     else:
-      # 25%
+      # 15%
       kaomoji = random.choice(custom_presences)
 
     type = 0
