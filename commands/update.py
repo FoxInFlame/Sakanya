@@ -50,7 +50,7 @@ class Update():
         await self.bot.change_presence(game=discord.Game(name='Updating: Download Error...', type=0), status=None, afk=False)
       except Exception as e:
         print('Git pull has failed for an unknown reason:')
-        print(e)
+        print('Line ' + str(sys.exc_info()[2].tb_lineno) + ': ' + e)
         await self.bot.say('Sakanya ran into an unexpected error while pulling from git.\n```' + e + '```')
         await self.bot.change_presence(game=discord.Game(name='Updating: Unexpected Error...', type=0), status=None, afk=False)
     else:
