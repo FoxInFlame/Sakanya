@@ -26,7 +26,7 @@ class Robot():
     if text is None: text = context.message.author.name
     await self.bot.say(content='', embed=discord.Embed(
       title = 'Robot: ' + text,
-      color = SakanyCore().embed_color,
+      color = SakanyaCore().embed_color,
       type = 'rich',
     ).set_image(url='https://robohash.org/' + urllib.parse.quote_plus(text))
     )

@@ -7,9 +7,11 @@
 #                             /____/         
 # 
 # A shy Discord bot written by FoxInFlame in Discord.py.
-# Version 1.0.11
+# Version 1.0.11-fix
 # Changelog:
 # 1.0.11
+# - - fix
+#   - Fixed mistyping of SakanyCore to SakanyaCore
 # - Fixed typing bug in mention.
 # - Fixed user selection when mentioning with question mark.
 # - Moved core code to SakanyaCore() class in __main__
@@ -70,7 +72,7 @@ import sched, time
 
 class SakanyaCore():
   # Some basic info
-  version = '1.0.11'
+  version = '1.0.11-fix'
   prefix = '>'
   name = 'Sakanya'
   embed_color = 15839636
