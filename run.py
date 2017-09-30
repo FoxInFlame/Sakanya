@@ -7,8 +7,11 @@
 #                             /____/         
 # 
 # A shy Discord bot written by FoxInFlame in Discord.py.
-# Version 1.0.11-fix
+# Version 1.0.12
 # Changelog:
+# 1.0.12
+# - Comamnds added: ping
+# - Animation + average for ping
 # 1.0.11
 # - - fix
 #   - Fixed mistyping of SakanyCore to SakanyaCore
@@ -72,7 +75,7 @@ import sched, time
 
 class SakanyaCore():
   # Some basic info
-  version = '1.0.11-fix'
+  version = '1.0.12'
   prefix = '>'
   name = 'Sakanya'
   embed_color = 15839636
