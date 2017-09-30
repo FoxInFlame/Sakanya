@@ -23,7 +23,7 @@ class Love():
       >love FoxInFlame
     """
     if user is None:
-      await self.bot.say('Try `' + SakanyCore().prefix + 'help love`.')
+      await self.bot.say('Try `' + SakanyaCore().prefix + 'help love`.')
       return
     if context.message.server is None:
       await self.bot.say('You can only send love to someone when you\'re in the same server as them.\no(>< )o')
