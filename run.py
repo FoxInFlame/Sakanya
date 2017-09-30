@@ -86,6 +86,26 @@ scheduler = sched.scheduler(time.time, time.sleep)
 
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'}
 
+custom_presences = [
+  'No Poverty',
+  'Zero Hunger',
+  'Good Health and Well-being',
+  'Quality Education',
+  'Gender Equality',
+  'Clean Water and Sanitation',
+  'Affordable and Clean Energy',
+  'Decent Work and Economic Growth',
+  'Industry, Innovation and Infrastructure',
+  'Reduced Inequality',
+  'Sustainable Cities and Communities',
+  'Responsible Consumption and Production',
+  'Climate Action',
+  'Life Below Water',
+  'Life on Land',
+  'Peace, Justice and Strong Institutions',
+  'Partnerships for the Goals'
+]
+
 @bot.event
 async def on_ready():
   foxinflame = await bot.get_user_info('202501452596379648')
@@ -107,15 +127,19 @@ async def changePresence():
     kaomojis = ['Need help? >help']
   counter = 0
   while not bot.is_closed:
-    counter += 1
-    if counter % 3 == 0:
-      # If divisible by 3
+    random_kaomoji = random.random()
+    if rrandom_kaomoji < 0.5:
+      # 50%
       if len(kaomojis) <= counter:
         counter = 0
       kaomoji = kaomojis[counter]
-    else:
-      # Else
+      counter += 1
+    elif random_kaomoji < 0.75:
+      # 25%
       kaomoji = 'Need help? >help'
+    else:
+      # 25%
+      kaomoji = random.choice(custom_presences)
 
     type = 0
     if random.random() < 0.5:
