@@ -14,6 +14,8 @@
 # - Fixed user selection when mentioning with question mark.
 # - Moved core code to SakanyaCore() class in __main__
 # - Use SakanyaCore() class in other files instead of hardcoded values.
+# - Moved PresenceUpdate function to individual file.
+# - Output startup errors for modules if there were any to Discord.
 # 1.0.10
 # - Add 'n:cry' and 'n:motherofgod' to further mock Xae.
 # - Confirmed that mentions in embeds don't notify mentioned users.
