@@ -36,7 +36,7 @@ class MentionInteraction():
           await self.bot.send_message(message.channel, '(・・ ) ? That\'s a good question... Maybe it\'ll be wiser to ask someone smart, like FoxInFlame.')
         else:
           members = list(message.server.members)
-          members = list(filter(lambda member: member.status == 'Online' or member.status == discord.Status('online') or member.id != '346773965299253250', members)) # No Saka
+          members = list(filter(lambda member: (member.status == 'Online' or member.status == discord.Status('online')) and member.id != '346773965299253250', members)) # No Saka
           if len(members) < 2:
             await self.bot.send_message(message.channel, '(・・ ) ? That\'s a good question... Maybe it\'ll be wiser to ask someone smart, like FoxInFlame.')
           else:
