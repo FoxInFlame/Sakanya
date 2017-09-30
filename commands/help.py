@@ -75,11 +75,11 @@ class Help():
       >help emojisuggestion
     """
     helpembed = discord.Embed(
-      color = SakanyCore().embed_color,
+      color = SakanyaCore().embed_color,
       type = 'rich',
       description = 'I\'m here to provide you some help on how I function!'
     )
-    helpembed.set_author(name='🐟 Help: ' + SakanyCore().name, url=discord.Embed.Empty, icon_url=discord.Embed.Empty)
+    helpembed.set_author(name='🐟 Help: ' + SakanyaCore().name, url=discord.Embed.Empty, icon_url=discord.Embed.Empty)
     if subcommand is None:
       helpembed.set_thumbnail(url='https://i.imgur.com/09lpIAL.png')
       commands_str = ''
@@ -90,9 +90,9 @@ class Help():
       for key, value in self.features_dict.items():
         otherfeatures_str = ''.join([otherfeatures_str, ''.join(['`', key, '` - ', value['short_description'], '\n'])])
       helpembed.add_field(name='Other Features', value=otherfeatures_str)
-      helpembed.add_field(name='Learn More', value='Parameters surrounded by <> are required, and ones surrounded by [] are optional.\n*To learn more about each feature, type `' + SakanyCore().prefix + 'help <keyword>`.*')
+      helpembed.add_field(name='Learn More', value='Parameters surrounded by <> are required, and ones surrounded by [] are optional.\n*To learn more about each feature, type `' + SakanyaCore().prefix + 'help <keyword>`.*')
     elif subcommand in self.commands_dict:
-      helpembed.add_field(name=SakanyCore().prefix + self.commands_dict[subcommand]['usage'], value=self.commands_dict[subcommand]['description'])
+      helpembed.add_field(name=SakanyaCore().prefix + self.commands_dict[subcommand]['usage'], value=self.commands_dict[subcommand]['description'])
     elif subcommand in self.features_dict:
       helpembed.add_field(name=self.features_dict[subcommand]['title'], value=self.features_dict[subcommand]['description'])
     else:
