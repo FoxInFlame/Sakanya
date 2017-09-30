@@ -97,10 +97,11 @@ startup_errors = ''
 async def on_ready():
   owner = await bot.get_user_info('202501452596379648')
   await bot.send_message(owner, content='Sakanya is now online as ' + bot.user.name + '! Prefix is `' + SakanyaCore().prefix + '`.\nErrors while starting: ' + ('None' if startup_errors == '' else '```' + startup_errors + '```'))
+  print('---------------------------------------------------')
   print('Sakanya by FoxInFlame has logged into Discord as')
   print('@' + bot.user.name)
   print(bot.user.id)
-  print('------')
+  print('---------------------------------------------------')
 
 @bot.event
 async def on_message(message):

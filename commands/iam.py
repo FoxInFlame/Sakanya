@@ -26,6 +26,9 @@ class IAm():
       >iam lewd
       >iam ama
     """
+    if context.message.server == None:
+      await self.bot.say('I\'m sorry, but this command isn\'t available in DMs.')
+      return
     if role is None:
       message = context.message.author.name + '\'s Self-Assigned Roles:'
       for userrole in context.message.author.roles:
@@ -77,6 +80,9 @@ class IAm():
       >iamnot lewd
       >iamnot ama
     """
+    if context.message.server == None:
+      await self.bot.say('I\'m sorry, but this command isn\'t available in DMs.')
+      return
     if role is None:
       await self.bot.say(embed=discord.Embed(
         color = SakanyaCore().embed_color,

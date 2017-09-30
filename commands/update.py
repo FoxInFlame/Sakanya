@@ -2,6 +2,8 @@
 import discord
 # Import undocumented part of Discord to use commands
 from discord.ext import commands
+# Import Sakanya Core
+from __main__ import SakanyaCore
 # Import os and sys for a restart
 import os, sys
 # Import subprocess to call git
@@ -25,6 +27,8 @@ class Update():
       >update
     """
     if context.message.author.id == '202501452596379648':
+      print('---------------------------------------------------')
+      print(SakanyaCore().prefix + 'update initiated.')
       await self.bot.add_reaction(context.message, '✅') # Add checkmark
       await self.bot.change_presence(game=discord.Game(name='Updating: Downloading...', type=0), status=None, afk=False)
       print('Pulling from git origin/master...')
@@ -51,7 +55,7 @@ class Update():
       except Exception as e:
         print('Git pull has failed for an unknown reason:')
         print('Line ' + str(sys.exc_info()[2].tb_lineno) + ': ' + e)
-        await self.bot.say('Sakanya ran into an unexpected error while pulling from git.\n```' + e + '```')
+        await self.bot.say('Sakanya ran into an unexpected error while pulling from git.\nLine ' + str(sys.exc_info()[2].tb_lineno) + ': ```' + e + '```')
         await self.bot.change_presence(game=discord.Game(name='Updating: Unexpected Error...', type=0), status=None, afk=False)
     else:
       await self.bot.add_reaction(context.message, '❎') # Add x mark
