@@ -2,6 +2,8 @@
 import discord
 # Import undocumented part of Discord to use commands
 from discord.ext import commands
+# Import Sakanya Core
+from __main__ import SakanyaCore
 
 class IAm():
   def __init__(self, bot):
@@ -34,7 +36,7 @@ class IAm():
         # Nothing has changed, no role was present
         message = '(ू˃̣̣̣̣̣̣︿˂̣̣̣̣̣̣ ू) You have no self-assigned roles.'
       await self.bot.say(embed=discord.Embed(
-        color = 15839636,
+        color = SakanyCore().embed_color,
         type = 'rich',
         description = message
       ))
@@ -44,21 +46,21 @@ class IAm():
       roleRole = discord.utils.get(context.message.server.roles, id=self.SelfAssignedRoles[role.lower()])
       if roleRole in context.message.author.roles:
         await self.bot.say(embed=discord.Embed(
-          color = 15839636,
+          color = SakanyCore().embed_color,
           type = 'rich',
           description = 'You already have that role!'
         ))
         return
       await self.bot.add_roles(context.message.author, roleRole)
       await self.bot.say(embed=discord.Embed(
-        color = 15839636,
+        color = SakanyCore().embed_color,
         type = 'rich',
         description = '（＾³＾）～♪ You now have the role **' + role.lower() + '**.'
       ))
       return
     else:
       await self.bot.say(embed=discord.Embed(
-        color = 15839636,
+        color = SakanyCore().embed_color,
         type = 'rich',
         description = '(ᗒᗩᗕ) I couldn\'t find a role called ' + role + '...'
       ))
@@ -77,7 +79,7 @@ class IAm():
     """
     if role is None:
       await self.bot.say(embed=discord.Embed(
-        color = 15839636,
+        color = SakanyCore().embed_color,
         type = 'rich',
         description = '（＾ω＾） You have to specify what role you don\'t want to be!'
       ))
@@ -88,21 +90,21 @@ class IAm():
       if roleRole not in context.message.author.roles:
         # User doesn't have it
         await self.bot.say(embed=discord.Embed(
-          color = 15839636,
+          color = SakanyCore().embed_color,
           type = 'rich',
           description = 'You can\'t remove a role you don\'t have!'
         ))
         return
       await self.bot.remove_roles(context.message.author, roleRole)
       await self.bot.say(embed=discord.Embed(
-        color = 15839636,
+        color = SakanyCore().embed_color,
         type = 'rich',
         description = '( ´･ω･) You no longer have the role **' + role.lower() + '**.'
       ))
       return
     else:
       await self.bot.say(embed=discord.Embed(
-        color = 15839636,
+        color = SakanyCore().embed_color,
         type = 'rich',
         description = '(ᗒᗩᗕ) I couldn\'t find a role called ' + role + '...'
       ))

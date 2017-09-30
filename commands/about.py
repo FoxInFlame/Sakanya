@@ -6,6 +6,8 @@ from discord.ext import commands
 import glob
 # Import datetime to find the age
 from datetime import datetime
+# Import Sakanya Core
+from __main__ import SakanyaCore
 
 class About():
   def get_lines(self):
@@ -44,13 +46,13 @@ class About():
     then = datetime(2017, 8, 14, 23, 59, 0, 0) # Checked with André welcome message timestamp
     timediff = now - then
     await self.bot.say(embed=discord.Embed(
-      color = 15839636,
+      color = SakanyaCore().embed_color,
       type = 'rich',
       description = '*Sakanya sakanya sakanya~~~~*\nNice to meet you! I\'m Sakanya.'
     )
-    .set_author(name='🐟 Profile: Sakanya', url=discord.Embed.Empty, icon_url=discord.Embed.Empty)
+    .set_author(name='🐟 Profile: ' + SakanyCore().name, url=discord.Embed.Empty, icon_url=discord.Embed.Empty)
     .set_thumbnail(url='https://i.imgur.com/ARHTNkU.png')
-    .add_field(name='About', value='Version: 1.0.10\n\nI\'m a Discord bot created by the hands of FoxInFlame#9833 using *discord.py*. Although I may not be a girl in real life, I would love it if you could still treat me as a normal girl here on Discord. I wish I were born in real life... \n(｡•́︿•̀｡)', inline=False)
+    .add_field(name='About', value='Version: **' + SakanyaCore().version + '**\n\n' + SakanyaCore().self_introduction, inline=False)
     .add_field(name='Name Origin', value='The first goal for me was to reverse image search a lot of ~~lewd~~ pictures o(>ω<)o. "Reverse" in Japanese is 逆, which is read as Saka (or Gyaku). Since my favourite animal is a cat, I am now called as Saka*nya*.', inline=False)
     .add_field(name='Stats', value=str(self.chars) + ' characters, ' + str(self.lines) + ' lines in length\nSpread across ' + str(self.files) + ' files\n%d day(s) and %d hour(s)' % (timediff.days, timediff.seconds / 3600) + ' old')
     )

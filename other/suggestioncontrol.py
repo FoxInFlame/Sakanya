@@ -2,6 +2,8 @@
 import discord
 # Import undocumented part of Discord to use commands
 from discord.ext import commands
+# Import Sakanya Core
+from __main__ import SakanyaCore
 
 class SuggestionControl():
   def __init__(self, bot):
@@ -28,9 +30,9 @@ class SuggestionControl():
         users = await self.bot.get_reaction_users(discord.Reaction(message=message, emoji='❌')) # A big fat X
         if len(users) >= 5: # Just in case it's really fast and it went over 5
           await self.bot.send_message(self.bot.get_channel('317924870950223872'), 'The following suggestion has been removed due to at least 5 people voting so.', embed=discord.Embed(
-            type='rich',
-            color=15839636,
-            description='>> ' + message.content
+            color = SakanyaCore().embed_color,
+            type = 'rich',
+            description = '>> ' + message.content
           ))
           await self.bot.delete_message(message)
 

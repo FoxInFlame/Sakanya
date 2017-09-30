@@ -2,6 +2,8 @@
 import discord
 # Import undocumented part of Discord to use commands
 from discord.ext import commands
+# Import Sakanya Core
+from __main__ import SakanyaCore
 # Import collections to use Named Tuples
 import collections
 # Import URLlib.request for requests
@@ -25,8 +27,6 @@ class Saka():
   def __init__(self, bot):
     self.bot = bot
 
-  headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'}
-
   async def updateProgressBar(self, message, percentage):
     """
     Update the progress bar message with a cute little kaomoji.
@@ -47,7 +47,7 @@ class Saka():
     """
     await self.updateProgressBar(progressmsg, 10)
     ReturnMessage = collections.namedtuple('ReturnMessage', ['new_content', 'embed'])
-    req = urllib.request.Request(url=url, data=None, headers=self.headers)
+    req = urllib.request.Request(url=url, data=None, headers=SakanyaCore().headers)
     try:
       b = urllib.request.urlopen(req)
       await self.updateProgressBar(progressmsg, 20)
@@ -55,7 +55,7 @@ class Saka():
       if b.info().get_content_maintype() == 'image':
         # Valid image (image/png, jpeg, gif, etc)
         if source == 'saucenao' or source == 'sourcenao' or source == 'sourcenow':
-          query = urllib.request.Request(url='https://saucenao.com/search.php?db=999&api_key=9517b2f1b0fe90f23c2893c386868778baff1cfe&output_type=2&numres=1&url=' + urllib.parse.quote_plus(url), data=None, headers=self.headers)
+          query = urllib.request.Request(url='https://saucenao.com/search.php?db=999&api_key=9517b2f1b0fe90f23c2893c386868778baff1cfe&output_type=2&numres=1&url=' + urllib.parse.quote_plus(url), data=None, headers=SakanyaCore().headers)
         elif source == 'whatanime' or source == 'anime':
           img = Image.open(BytesIO(b.read()))
           img = img.convert('RGB') # Remove alpha
@@ -65,9 +65,9 @@ class Saka():
           send_data = urllib.parse.urlencode({
             'image': base64_str
           }).encode('utf8') # Make it bytes again (POST has to be bytes)
-          query = urllib.request.Request(url='https://whatanime.ga/api/search?token=5ea595796f30ed390813a0c6e7be4216fb1c4419', data=send_data, headers=self.headers)
+          query = urllib.request.Request(url='https://whatanime.ga/api/search?token=5ea595796f30ed390813a0c6e7be4216fb1c4419', data=send_data, headers=SakanyaCore().headers)
         elif source == 'iqdb':
-          query = urllib.request.Request(url='https://iqdb.org/?url=' + urllib.parse.quote_plus(url) + '&more=1', data=None, headers=self.headers)
+          query = urllib.request.Request(url='https://iqdb.org/?url=' + urllib.parse.quote_plus(url) + '&more=1', data=None, headers=SakanyaCore().headers)
           # db=999 is everything | numres=1 is number of results
         else:
           # !saka <somethingelse> <url>
@@ -135,17 +135,18 @@ class Saka():
               resulturl = topresult['data']['url']
             await self.updateProgressBar(progressmsg, 80)
             resultembed = discord.Embed(
-              title = topresult['header']['index_name'],
+              color = SakanyaCore().embed_color,
               type = 'rich',
+              title = topresult['header']['index_name'],
               url = resulturl,
               description = description
             )
             resultembed.set_thumbnail(url=url)
             resultembed.set_image(url=topresult['header']['thumbnail'])
-            resultembed.set_footer(text='Sakanya image results on Saucenao', icon_url='http://www.userlogos.org/files/logos/zoinzberg/SauceNAO.png')
+            resultembed.set_footer(text=SakanyaCore().name + ' image results on Saucenao', icon_url='http://www.userlogos.org/files/logos/zoinzberg/SauceNAO.png')
             await self.updateProgressBar(progressmsg, 100)
             return ReturnMessage(
-              'Sakanya Image Search on Saucenao:',
+              SakanyaCore().name + ' Image Search on Saucenao:',
               resultembed
             )
           elif source == 'whatanime' or source == 'anime':
@@ -161,17 +162,18 @@ class Saka():
             resulturl = 'https://anilist.co/anime/' + str(topresult['anilist_id'])
             await self.updateProgressBar(progressmsg, 80)
             resultembed = discord.Embed(
-              title = topresult['filename'],
+              color = SakanyaCore().embed_color,
               type = 'rich',
+              title = topresult['filename'],
               url = resulturl,
               description = description
             )
             resultembed.set_thumbnail(url=url)
             resultembed.set_image(url='https://whatanime.ga/thumbnail.php?season=' + topresult['season'] + '&anime=' + urllib.parse.quote_plus(topresult['anime']) + '&file=' + urllib.parse.quote_plus(topresult['filename']) + '&t=' + str(topresult['at']) + '&token=' + topresult['tokenthumb'])
-            resultembed.set_footer(text='Sakanya image results on Whatanime', icon_url='https://whatanime.ga/favicon128.png')
+            resultembed.set_footer(text=SakanyaCore().name + ' image results on Whatanime', icon_url='https://whatanime.ga/favicon128.png')
             await self.updateProgressBar(progressmsg, 100)
             return ReturnMessage(
-              'Sakanya Image Search on Whatanime:',
+              SakanyaCore().name + ' Image Search on Whatanime:',
               resultembed
             )
           elif source == 'iqdb':
@@ -189,23 +191,24 @@ class Saka():
             print(resultimage)
             await self.updateProgressBar(progressmsg, 90)
             resultembed = discord.Embed(
-              title = 'IQDb Match',
+              color = SakanyaCore().embed_color,
               type = 'rich',
+              title = 'IQDb Match',
               url = 'hi',
               description = 'ha'
             )
             resultembed.set_thumbnail(url=url)
             resultembed.set_image(url=resultimage)
-            resultembed.set_footer(text='Sakanya image results on iQDB', icon_url=discord.Embed.Empty)
+            resultembed.set_footer(text=SakanyaCore().name + ' image results on iQDB', icon_url=discord.Embed.Empty)
             await self.updateProgressBar(progressmsg, 100)
             return ReturnMessage(
-              'Sakanya Image Search on IQDb:',
+              SakanyaCore().name + ' Image Search on IQDb:',
               resultembed
             )
 
         except (urllib.error.HTTPError, urllib.error.URLError) as e:
           await self.updateProgressBar(progressmsg, 100)
-          return ReturnMessage('Sakanya ran into a problem. Contact FoxinFlame.\n' + str(e), None)
+          return ReturnMessage(SakanyaCore().name + ' ran into a problem. Contact FoxinFlame.\n' + str(e), None)
       else:
         # Invalid (html, xml, etc)
         await self.updateProgressBar(progressmsg, 100)
@@ -228,17 +231,17 @@ class Saka():
     """
     if not context.message.attachments: # No attachments
       if left is None:
-        # !saka
-        await self.bot.say('Format\n`!saka [source] <url>`')
+        # >saka
+        await self.bot.say('Format\n`' + SakanyaCore.prefix + 'saka [source] <url>`')
         return
       elif right is None:
-        # !saka <something>
+        # >saka <something>
         a = urllib.parse.urlparse(left)
         if bool(a.scheme) is False:
-          # !saka <noturl>
-          await self.bot.say('Format\n`!saka [source] <url>`')
+          # >saka <noturl>
+          await self.bot.say('Format\n`' + SakanyaCore.prefix + 'saka [source] <url>`')
           return
-        # !saka <url>
+        # >saka <url>
         url = left
         tmpmsg = await self.bot.say('Please wait, this might take a while... ')
         progressmsg = await self.bot.say('`φ(．．)`')
@@ -246,14 +249,14 @@ class Saka():
         await self.bot.send_message(context.message.channel, content=(topresult.new_content if topresult is not None else topresult), embed=(topresult.embed if topresult is not None else topresult))
         await self.bot.delete_message(tmpmsg)
       else:
-        # !saka <something> <something>
+        # >saka <something> <something>
         # When right is defined, left HAS to be defined, so no check
         a = urllib.parse.urlparse(right)
         if bool(a.scheme) is False:
           # !saka <noturl>
-          await self.bot.say('Format\n`!saka [source] <url>`')
+          await self.bot.say('Format\n`' + SakanyaCore.prefix + 'saka [source] <url>`')
           return
-        # !saka <saucenao|whatanime> <url>
+        # >saka <saucenao|whatanime> <url>
         url = right
         tmpmsg = await self.bot.say('Please wait, this might take a while...')
         progressmsg = await self.bot.say('`φ(．．)`')
@@ -263,8 +266,8 @@ class Saka():
         return
     else:
       # Attachments were found!
-      # !saka
-      # !saka <saucenao|whatanime>
+      # >saka
+      # >saka <saucenao|whatanime>
       for attachment in context.message.attachments:
         url = attachment['url']
         tmpmsg = await self.bot.say('Please wait, this might take a while...')

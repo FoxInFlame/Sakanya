@@ -2,6 +2,8 @@
 import discord
 # Import undocumented part of Discord to use commands
 from discord.ext import commands
+# Import Sakanya Core
+from __main__ import SakanyaCore
 # Import os for file system checks
 import os
 
@@ -55,7 +57,7 @@ class FileManagement():
         contents = (contents[:1800] + '...') if len(contents) > 1802 else contents
         filename_parsed, file_extension = os.path.splitext(filename)
         await self.bot.say(embed=discord.Embed(
-          color = 15839636,
+          color = SakanyaCore().embed_color,
           title = 'File: ' + filename,
           type = 'rich',
           description = '```' + file_extension[1:] + '\n' + contents + '\n```'

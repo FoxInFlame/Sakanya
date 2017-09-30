@@ -2,8 +2,10 @@
 import discord
 # Import undocumented part of Discord to use commands
 from discord.ext import commands
-# import random for randomness
+# Import random for randomness
 import random
+# Import Sakanya Core
+from __main__ import SakanyaCore
 
 class Love():
   def __init__(self, bot):
@@ -21,7 +23,7 @@ class Love():
       >love FoxInFlame
     """
     if user is None:
-      await self.bot.say('Try `>help love`.')
+      await self.bot.say('Try `' + SakanyCore().prefix + 'help love`.')
       return
     if context.message.server is None:
       await self.bot.say('You can only send love to someone when you\'re in the same server as them.\no(>< )o')
