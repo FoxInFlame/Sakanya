@@ -35,16 +35,20 @@ class MentionInteraction():
         if len(members) > 2:
           await self.bot.send_message(message.channel, '(・・ ) ? That\'s a good question... Maybe it\'ll be wiser to ask someone smart, like FoxInFlame.')
         else:
-          randomusers = random.sample(filter(lambda member: member.id != '202501452596379648', list(members)), 2)
+          members_nofox = []
+          for member in list(members):
+            if member.id != '202501452596379648':
+              members_nofox.append(member)
+          randomusers = random.sample(members_nofox, 2)
           await self.bot.send_message(message.channel, '(・・ ) ? That\'s a good question... Maybe it\'ll be wiser to ask someone smart, like {} or {}.'.format(randomusers[0].name, randomusers[1].name))
       elif '😭' in message.content:
         await self.bot.send_message(message.channel, ' ｡･ﾟ･(ﾉД`)ヽ(￣ω￣ )')
       elif mention_andre == False and mention_kaneda == False and mention_nekohime == False:
         await self.bot.send_typing(message.channel)
-        chance = random.random() * 100
-        if chance > 50:
+        chance = random.random()
+        if chance > 0.5:
           await self.bot.send_message(message.channel, 'Um, nyani?') # 50% chance
-        elif chance > 25:
+        elif chance > 0.25:
           await self.bot.send_message(message.channel, '...wha!? (つ✧ω✧)つ') # 25% chance
         else:
           await self.bot.send_message(message.channel, '...(≧▽≦)/') # 25% chance
