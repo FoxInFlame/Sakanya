@@ -128,7 +128,7 @@ async def changePresence():
   counter = 0
   while not bot.is_closed:
     random_kaomoji = random.random()
-    if rrandom_kaomoji < 0.5:
+    if random_kaomoji < 0.5:
       # 50%
       if len(kaomojis) <= counter:
         counter = 0
