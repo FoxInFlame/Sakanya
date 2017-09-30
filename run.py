@@ -116,11 +116,10 @@ if __name__ == "__main__":
     except Exception as e:
       startup_errors += 'Failed to load extension {0}\n{1}: {2}'.format(extension, type(e).__name__, e)
 
-  print(startup_errors)
-
   print('') # Empty line in case of continuous execution
+  print(startup_errors)
   print('Connecting...')
-  bot.run(SakanyaCore().bot_token(True)) # True or empty/False for debug
+  bot.run(SakanyaCore().bot_token(False)) # True or empty/False for debug
 
 # End of file.
 # 
