@@ -50,7 +50,7 @@ class About():
       type = 'rich',
       description = '*Sakanya sakanya sakanya~~~~*\nNice to meet you! I\'m Sakanya.'
     )
-    .set_author(name='🐟 Profile: ' + SakanyCore().name, url=discord.Embed.Empty, icon_url=discord.Embed.Empty)
+    .set_author(name='🐟 Profile: ' + SakanyaCore().name, url=discord.Embed.Empty, icon_url=discord.Embed.Empty)
     .set_thumbnail(url='https://i.imgur.com/ARHTNkU.png')
     .add_field(name='About', value='Version: **' + SakanyaCore().version + '**\n\n' + SakanyaCore().self_introduction, inline=False)
     .add_field(name='Name Origin', value='The first goal for me was to reverse image search a lot of ~~lewd~~ pictures o(>ω<)o. "Reverse" in Japanese is 逆, which is read as Saka (or Gyaku). Since my favourite animal is a cat, I am now called as Saka*nya*.', inline=False)
