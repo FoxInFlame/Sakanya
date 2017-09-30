@@ -68,7 +68,7 @@ class PresenceUpdate():
         kaomoji = 'Need help? ' + SakanyaCore().prefix + 'help'
       else:
         # 15%
-        kaomoji = random.choice(custom_presences)
+        kaomoji = random.choice(self.custom_presences)
 
       type = 0
       if random.random() < 0.5:
