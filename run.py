@@ -7,8 +7,12 @@
 #                             /____/         
 # 
 # A shy Discord bot written by FoxInFlame in Discord.py.
-# Version 1.0.12
+# Version 1.0.13
 # Changelog:
+# 1.1.13
+# - Moved debug setting to Core.
+# - Removed all of Saka's useless Xaetral emote interactions
+# - Removed Saka's useless no-motsy interaction
 # 1.0.12
 # - Comamnds added: ping
 # - Animation + average for ping
@@ -77,18 +81,19 @@ class SakanyaCore():
   # Some basic info
   version = '1.0.12'
   prefix = '>'
+  debug = True
   name = 'Sakanya'
   embed_color = 15839636
   description = 'A reverse image search bot made for The nulls of MAL.'
   self_introduction = 'I\'m a Discord bot created by the hands of FoxInFlame#9833 using *discord.py*. Although I may not be a girl in real life, I would love it if you could still treat me as a normal girl here on Discord. I wish I were born in real life... \n(｡•́︿•̀｡)'
 
   # Actual core code stuff
-  def bot_token(self, debug):
-    if debug is True:
+  def bot_token(self):
+    if self.debug is True:
       return '***REMOVED***'
     else:
       return '***REMOVED***'
-  startup_extensions = ['commands.love', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'commands.ping', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.uselessinteractions', 'other.presenceupdate']
+  startup_extensions = ['commands.love', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'commands.ping', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.uselessinteractions', 'other.presenceupdate', 'other.rolecolour']
   headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'}
 
 bot = commands.Bot(command_prefix=SakanyaCore().prefix, description=SakanyaCore().description)
@@ -124,8 +129,9 @@ if __name__ == "__main__":
 
   print('') # Empty line in case of continuous execution
   print(startup_errors)
+  print(tuple(bot.extensions))
   print('Connecting...')
-  bot.run(SakanyaCore().bot_token(False)) # True or empty/False for debug
+  bot.run(SakanyaCore().bot_token()) # True or empty/False for debug
 
 # End of file.
 # 
