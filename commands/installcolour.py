@@ -13,7 +13,7 @@ class InstallColour():
   def __init__(self, bot):
     self.bot = bot
 
-  @commands.command(pass_context=True):
+  @commands.command(pass_context=True)
   async def modules(self, context):
     await self.bot.say(''.join(tuple(self.bot.extensions)))
 
