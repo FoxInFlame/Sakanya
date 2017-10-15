@@ -24,6 +24,9 @@ class InstallColour():
     Examples:
       >update
     """
+    old_stdout = stdout
+    log_file = open("message.log", "w")
+    sys.stdout = log_file
     if context.message.author.id == '202501452596379648':
       print('---------------------------------------------------')
       print(SakanyaCore().prefix + 'installcolour initiated. Beginning installation of the colour package.')
@@ -47,5 +50,7 @@ class InstallColour():
         await self.bot.change_presence(game=discord.Game(name='Package: Unexpected Error...', type=0), status=None, afk=False)
     else:
       await self.bot.add_reaction(context.message, '❎') # Add x mark
+    sys.stdout = old_stdout
+    log_file.close()
 def setup(bot):
   bot.add_cog(InstallColour(bot))
