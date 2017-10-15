@@ -9,10 +9,11 @@
 # A shy Discord bot written by FoxInFlame in Discord.py.
 # Version 1.0.13
 # Changelog:
-# 1.1.13
+# 1.0.13
 # - Moved debug setting to Core.
 # - Removed all of Saka's useless Xaetral emote interactions
 # - Removed Saka's useless no-motsy interaction
+# - Add temporary module to pip install colour
 # 1.0.12
 # - Comamnds added: ping
 # - Animation + average for ping
@@ -79,9 +80,9 @@ import sched, time
 
 class SakanyaCore():
   # Some basic info
-  version = '1.0.12'
+  version = '1.0.13'
   prefix = '>'
-  debug = True
+  debug = False
   name = 'Sakanya'
   embed_color = 15839636
   description = 'A reverse image search bot made for The nulls of MAL.'
@@ -93,7 +94,7 @@ class SakanyaCore():
       return '***REMOVED***'
     else:
       return '***REMOVED***'
-  startup_extensions = ['commands.love', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'commands.ping', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.uselessinteractions', 'other.presenceupdate', 'other.rolecolour']
+  startup_extensions = ['commands.love', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'commands.ping', 'commands.installcolour', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.uselessinteractions', 'other.presenceupdate', 'other.rolecolour']
   headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'}
 
 bot = commands.Bot(command_prefix=SakanyaCore().prefix, description=SakanyaCore().description)
