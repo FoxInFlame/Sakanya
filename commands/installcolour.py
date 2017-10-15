@@ -29,7 +29,7 @@ class InstallColour():
       >update
     """
     try:
-      old_stdout = stdout
+      old_stdout = sys.stdout
       log_file = open("message.log", "w")
       sys.stdout = log_file
       if context.message.author.id == '202501452596379648':
