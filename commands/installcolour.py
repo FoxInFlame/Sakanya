@@ -15,7 +15,16 @@ class InstallColour():
 
   @commands.command(pass_context=True)
   async def modules(self, context):
-    await self.bot.say(''.join(tuple(self.bot.extensions)))
+    """
+    Shows all enabled modules.
+
+    Format:
+      >modules
+
+    Examples:
+      >modules
+      """
+    await self.bot.say('Modules: ' + ', '.join(tuple(self.bot.extensions)))
 
   @commands.command(pass_context=True)
   async def installcolour(self, context):
@@ -58,6 +67,7 @@ class InstallColour():
       sys.stdout = old_stdout
       log_file.close()
     except Exception as e:
-      await self.bot.say(e)
+      exc_type, exc_obj, tb = sys.exc_info()
+      await self.bot.say(e + '\nLine ' + str(tb.tb_lineno))
 def setup(bot):
   bot.add_cog(InstallColour(bot))
