@@ -13,7 +13,7 @@
 # - Moved debug setting to Core.
 # - Removed all of Saka's useless Xaetral emote interactions
 # - Removed Saka's useless no-motsy interaction
-# - Add temporary module to pip install colour
+# - Commands added: >colour
 # 1.0.12
 # - Comamnds added: ping
 # - Animation + average for ping
@@ -83,18 +83,26 @@ class SakanyaCore():
   version = '1.0.13'
   prefix = '>'
   debug = False
+  debug_server = '344957370901856266'
+  production_server = '317924870950223872'
   name = 'Sakanya'
   embed_color = 15839636
   description = 'A reverse image search bot made for The nulls of MAL.'
   self_introduction = 'I\'m a Discord bot created by the hands of FoxInFlame#9833 using *discord.py*. Although I may not be a girl in real life, I would love it if you could still treat me as a normal girl here on Discord. I wish I were born in real life... \n(｡•́︿•̀｡)'
 
   # Actual core code stuff
+  def server_id(self):
+    if self.debug is True:
+      return self.debug_server
+    else:
+      return self.production_server
+
   def bot_token(self):
     if self.debug is True:
       return '***REMOVED***'
     else:
       return '***REMOVED***'
-  startup_extensions = ['commands.love', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'commands.ping', 'commands.installcolour', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.uselessinteractions', 'other.presenceupdate', 'other.rolecolour']
+  startup_extensions = ['commands.love', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'commands.ping', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.uselessinteractions', 'other.presenceupdate', 'other.rolecolour']
   headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'}
 
 bot = commands.Bot(command_prefix=SakanyaCore().prefix, description=SakanyaCore().description)
