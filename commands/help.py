@@ -46,6 +46,11 @@ class Help():
       'short_description': 'Remove a self-assigned role from yourself',
       'description': 'You can remove a self-assigned role from yourself. To see which roles you have, do `>iam`.',
       'usage': 'iamnot <ama|lewd>'
+    }),
+    ('colour', {
+      'short_description': 'Set your display colour on this server',
+      'description': 'You can let Saka update your display colour on this server to any colour you want! There is of course also an alias `color` for anyone feeling American. Supported formats are hex and rgb. ',
+      'usage': 'colour|color <hex_color|rgb()>'
     })
   ]
 

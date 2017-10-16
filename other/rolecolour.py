@@ -39,6 +39,9 @@ class RoleColour():
       >colour rgb(25, 123, 19)
       >color 51ab21
     """
+    if argument is None:
+      await self.bot.say('Try `' + SakanyaCore().prefix + 'help colour`.')
+      return
     if 'admin:' in argument:
       if context.message.author.id != '202501452596379648':
         await self.bot.say('☆⌒(>。<) You don\'t have the right to execute this command...')
