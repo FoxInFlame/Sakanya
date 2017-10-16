@@ -12,6 +12,8 @@ import os
 import json
 # Import re for regular expression search (rgb)
 import re
+# Import math to round.
+import math
 
 class RoleColour():
   def __init__(self, bot):
@@ -55,7 +57,12 @@ class RoleColour():
             continue
           msg += 'Role Name: ' + role.name + '\nRole Id: ' + role.id + '\nRole Colour:' + str(role.colour.value) + '\n'
         owner = await self.bot.get_user_info('202501452596379648')
-        await self.bot.send_message(owner, content=msg) 
+        if len(msg) > 1800:
+          msgs = [msg[i:i+n] for i in range(0, len(msg), n)]
+          for x in msgs:
+            await self.bot.send_message(owner, content=x)
+        else:
+          await self.bot.send_message(owner, content=msg)
         await self.bot.say('*DEBUG*: Sent.')
       elif argument == 'pair':
         pairing_message = await self.bot.say(embed=discord.Embed(
