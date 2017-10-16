@@ -58,6 +58,7 @@ class RoleColour():
           msg += 'Role Name: ' + role.name + '\nRole Id: ' + role.id + '\nRole Colour:' + str(role.colour.value) + '\n'
         owner = await self.bot.get_user_info('202501452596379648')
         if len(msg) > 1800:
+          n = 1800
           msgs = [msg[i:i+n] for i in range(0, len(msg), n)]
           for x in msgs:
             await self.bot.send_message(owner, content=x)
