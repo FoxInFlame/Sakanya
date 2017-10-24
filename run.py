@@ -7,8 +7,10 @@
 #                             /____/         
 # 
 # A shy Discord bot written by FoxInFlame in Discord.py.
-# Version 1.0.13
+# Version 1.0.14
 # Changelog:
+# 1.0.14
+# - Added >colour random, and >colour remove
 # 1.0.13
 # - Moved debug setting to Core.
 # - Removed all of Saka's useless Xaetral emote interactions
@@ -80,7 +82,7 @@ import sched, time
 
 class SakanyaCore():
   # Some basic info
-  version = '1.0.13'
+  version = '1.0.14'
   prefix = '>'
   debug = False
   debug_server = '344957370901856266'

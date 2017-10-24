@@ -14,6 +14,8 @@ import json
 import re
 # Import math to round.
 import math
+# Import random to random colours
+import random
 
 class RoleColour():
   def __init__(self, bot):
@@ -131,7 +133,11 @@ class RoleColour():
       # Check if the message contains an rgb(), which isn't natively supported by the colour package
       expression = re.compile('rgb\(([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5]), ?([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5]), ?([01]?[0-9]?[0-9]|2[0-4][0-9]|25[0-5])\)')
       search = expression.search(argument)
-      if search is not None:
+      if argument.lower() == 'remove':
+        new_colour = colour.Color(rgb=(0, 0, 0))
+      elif argument.lower() == 'random':
+        new_colour = colour.Color(rgb=(random.random(), random.random(), random.random()))
+      elif search is not None:
         new_colour = colour.Color(rgb=(int(search.group(1))/255, int(search.group(2))/255, int(search.group(3))/255))
       else:
         # Raises exceptions automatically in case it's not a colour (we catch it later)
@@ -150,11 +156,15 @@ class RoleColour():
         self.roles_json[context.message.author.id]['colour'] = new_colour.hex_l[1:] # Update the JSON
         with open(os.path.join(os.path.dirname(__file__), 'roles.json'), 'w') as file: # Then overwrite the file
           file.write(json.dumps(self.roles_json, indent=2))
-        await self.bot.say('*<@' + context.message.author.id + '> ٩(｡•́‿•̀｡)۶ You have changed your colour to ' + new_colour.hex_l + '!*') # Send confirmation message
+        if new_colour.hex_1 == '#000000':
+          await self.bot.say('*<@' + context.message.author.id + '> ٩(｡•́‿•̀｡)۶ You have removed your role-specific colour!*') # Send confirmation message
+        else:
+          await self.bot.say('*<@' + context.message.author.id + '> ٩(｡•́‿•̀｡)۶ You have changed your colour to ' + new_colour.hex_l + '!*') # Send confirmation message
       else:
         await self.bot.say('(-_-;)・・・ Your username is not yet bound to a specifc role. Let\'s mention Fox so that he can do that for you. \n<@202501452596379648>')
 
     except (ValueError, AttributeError) as e:
+      print(e)
       await self.bot.say('☆ｏ(＞＜；)○ `' + argument + '` is not a valid colour...')
     except Exception as e:
       await self.bot.say('(-_-;)・・・ ' + e)
