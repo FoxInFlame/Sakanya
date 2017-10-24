@@ -49,8 +49,8 @@ class Help():
     }),
     ('colour', {
       'short_description': 'Set your display colour on this server',
-      'description': 'You can let Saka update your display colour on this server to any colour you want! There is of course also an alias `color` for anyone feeling American. Supported formats are hex and rgb. ',
-      'usage': 'colour|color <hex_color|rgb()>'
+      'description': 'You can let Saka update your display colour on this server to any colour you want! There is of course also an alias `color` for anyone feeling American. Supported formats are hex and rgb, and the text values `random` for a random colour, and `remove` to go back to the default colour.',
+      'usage': 'colour|color <hex_color|rgb()|\'random\'|\'remove\'>'
     })
   ]
 

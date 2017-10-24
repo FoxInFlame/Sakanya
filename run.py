@@ -11,6 +11,7 @@
 # Changelog:
 # 1.0.14
 # - Added >colour random, and >colour remove
+# - Update help message for >colour
 # 1.0.13
 # - Moved debug setting to Core.
 # - Removed all of Saka's useless Xaetral emote interactions
