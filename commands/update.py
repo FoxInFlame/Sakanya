@@ -25,7 +25,7 @@ class Update():
 
     Examples:
       >update
-    """
+    """ 
     if context.message.author.id == '202501452596379648':
       print('---------------------------------------------------')
       print(SakanyaCore().prefix + 'update initiated.')
