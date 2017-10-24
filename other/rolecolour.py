@@ -156,7 +156,7 @@ class RoleColour():
         self.roles_json[context.message.author.id]['colour'] = new_colour.hex_l[1:] # Update the JSON
         with open(os.path.join(os.path.dirname(__file__), 'roles.json'), 'w') as file: # Then overwrite the file
           file.write(json.dumps(self.roles_json, indent=2))
-        if new_colour.hex_1 == '#000000':
+        if new_colour.hex_l == '#000000':
           await self.bot.say('*<@' + context.message.author.id + '> ٩(｡•́‿•̀｡)۶ You have removed your role-specific colour!*') # Send confirmation message
         else:
           await self.bot.say('*<@' + context.message.author.id + '> ٩(｡•́‿•̀｡)۶ You have changed your colour to ' + new_colour.hex_l + '!*') # Send confirmation message
