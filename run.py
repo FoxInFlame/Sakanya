@@ -85,7 +85,7 @@ import sched, time
 class SakanyaCore():
   # Some basic info
   version = '1.0.14'
-  prefix = '.'
+  prefix = '>'
   debug = False
   debug_server = '344957370901856266'
   production_server = '317924870950223872'
