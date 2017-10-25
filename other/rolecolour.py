@@ -147,7 +147,10 @@ class RoleColour():
       if argument.lower() == 'remove':
         new_colour = colour.Color(rgb=(0, 0, 0))
       elif argument.lower() == 'random':
-        new_colour = colour.Color(rgb=(random.random(), random.random(), random.random()))
+        while True:
+          new_colour = colour.Color(rgb=(random.random(), random.random(), random.random()))
+          if self.contrast([new_colour.red * 255, new_colour.green * 255, new_colour.blue * 255], [54, 57, 62]) >= 4:
+            break
       elif search is not None:
         new_colour = colour.Color(rgb=(int(search.group(1))/255, int(search.group(2))/255, int(search.group(3))/255))
       else:
