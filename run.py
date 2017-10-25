@@ -12,6 +12,7 @@
 # 1.0.14
 # - Added >colour random, and >colour remove
 # - Update help message for >colour
+# - Added contrast checker for >colour
 # 1.0.13
 # - Moved debug setting to Core.
 # - Removed all of Saka's useless Xaetral emote interactions
@@ -84,7 +85,7 @@ import sched, time
 class SakanyaCore():
   # Some basic info
   version = '1.0.14'
-  prefix = '>'
+  prefix = '.'
   debug = False
   debug_server = '344957370901856266'
   production_server = '317924870950223872'
