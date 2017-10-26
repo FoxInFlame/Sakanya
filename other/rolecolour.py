@@ -147,18 +147,22 @@ class RoleColour():
       if argument.lower() == 'remove':
         new_colour = colour.Color(rgb=(0, 0, 0))
       elif argument.lower() == 'random':
-        while True:
+        if SakanyaCore().colourrestrictions is True:
+          while True:
+            new_colour = colour.Color(rgb=(random.random(), random.random(), random.random()))
+            if self.contrast([new_colour.red * 255, new_colour.green * 255, new_colour.blue * 255], [54, 57, 62]) >= 4:
+              break
+        else:
           new_colour = colour.Color(rgb=(random.random(), random.random(), random.random()))
-          if self.contrast([new_colour.red * 255, new_colour.green * 255, new_colour.blue * 255], [54, 57, 62]) >= 4:
-            break
       elif search is not None:
         new_colour = colour.Color(rgb=(int(search.group(1))/255, int(search.group(2))/255, int(search.group(3))/255))
       else:
         # Raises exceptions automatically in case it's not a colour (we catch it later)
         new_colour = colour.Color(argument)
-        if self.contrast([new_colour.red * 255, new_colour.green * 255, new_colour.blue * 255], [54, 57, 62]) < 4:
-          await self.bot.say('☆(＃××) Your colour has **NOT** been applied. ' + new_colour.hex_l + ' is not legible enough on Discord Dark Mode! ')
-          return
+        if SakanyaCore().colourrestrictions is True:
+          if self.contrast([new_colour.red * 255, new_colour.green * 255, new_colour.blue * 255], [54, 57, 62]) < 4:
+            await self.bot.say('☆(＃××) Your colour has **NOT** been applied. ' + new_colour.hex_l + ' is not legible enough on Discord Dark Mode! ')
+            return
 
       if context.message.author.id in self.roles_json:
         # If the author already has a role then change it

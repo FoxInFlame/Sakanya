@@ -7,8 +7,10 @@
 #                             /____/         
 # 
 # A shy Discord bot written by FoxInFlame in Discord.py.
-# Version 1.0.14
+# Version 1.0.15
 # Changelog:
+# 1.0.15
+# - Added SakanyaCore boolean to disable colour restrictions
 # 1.0.14
 # - Added >colour random, and >colour remove
 # - Update help message for >colour
@@ -84,7 +86,7 @@ import sched, time
 
 class SakanyaCore():
   # Some basic info
-  version = '1.0.14'
+  version = '1.0.15'
   prefix = '>'
   debug = False
   debug_server = '344957370901856266'
@@ -93,6 +95,7 @@ class SakanyaCore():
   embed_color = 15839636
   description = 'A reverse image search bot made for The nulls of MAL.'
   self_introduction = 'I\'m a Discord bot created by the hands of FoxInFlame#9833 using *discord.py*. Although I may not be a girl in real life, I would love it if you could still treat me as a normal girl here on Discord. I wish I were born in real life... \n(｡•́︿•̀｡)'
+  colourrestrictions = False
 
   # Actual core code stuff
   def server_id(self):
