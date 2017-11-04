@@ -17,6 +17,7 @@ class MentionInteraction():
     mention_andre = False
     mention_kaneda = False
     mention_nekohime = False
+    mention_margarine = False
     for user in list(message.mentions):
 #      if user.id == '344956250158661655': # If Reverser mentioned
 #        mention_sakanya = True
