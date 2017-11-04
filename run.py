@@ -7,8 +7,10 @@
 #                             /____/         
 # 
 # A shy Discord bot written by FoxInFlame in Discord.py.
-# Version 1.0.15
+# Version 1.0.16
 # Changelog:
+# 1.0.16
+# - Rewrote >saka using aiohttp instead of urllib so that it no longer crashes
 # 1.0.15
 # - Added SakanyaCore boolean to disable colour restrictions
 # 1.0.14
@@ -86,7 +88,7 @@ import sched, time
 
 class SakanyaCore():
   # Some basic info
-  version = '1.0.15'
+  version = '1.0.16'
   prefix = '>'
   debug = False
   debug_server = '344957370901856266'
