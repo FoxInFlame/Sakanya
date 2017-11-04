@@ -28,6 +28,8 @@ class MentionInteraction():
         mention_kaneda = True
       if user.id == '270198146020278272': # If Nekocchi is mentioned
         mention_nekohime = True
+      if user.id == '315132794172997633': # If Mary is mentioned
+        mention_margarine = True
       
     if mention_sakanya == True and message.content[:1] is not '>' and message.author.id is not '346773965299253250':
       if '?' in message.content and message.author.bot == False:
@@ -54,16 +56,19 @@ class MentionInteraction():
           await self.bot.send_message(message.channel, '...wha!? (つ✧ω✧)つ') # 25% chance
         else:
           await self.bot.send_message(message.channel, '...(≧▽≦)/') # 25% chance
-      elif mention_andre == True and mention_kaneda == False and mention_nekohime == False:
+      elif mention_andre == True and mention_kaneda == False and mention_nekohime == False and mention_margarine == False:
         await self.bot.send_typing(message.channel)
         await self.bot.send_message(message.channel, '...André... I think I\'m starting to like you... |д･)')
-      elif mention_andre == False and mention_kaneda == True and mention_nekohime == False:
+      elif mention_andre == False and mention_kaneda == True and mention_nekohime == False and mention_margarine == False:
         await self.bot.send_typing(message.channel)
         await self.bot.send_message(message.channel, 'Um. Kanny.... it\'s.. it\'s not like I like you or anything!\n(⁄ ⁄>⁄ ▽ ⁄<⁄ ⁄)')
+      elif mention_andre == False and mention_kaneda == False and mention_nekohime == False and mention_margarine == True:
+        await self.bot.send_typing(message.channel)
+        await self.bot.send_message(message.channel, 'Mary, you\'re a sweet friend and everything, but I don\'t think we agree regarding our preferences. I like Jam more!')
       elif mention_andre == False and mention_kaneda == False and mention_nekohime == True:
         await self.bot.send_typing(message.channel)
         await self.bot.send_message(message.channel, 'Nyaa! (\*・∀・)爻(・∀・\*)')
-      elif mention_andre == True and mention_kaneda == True and mention_nekohime == True:
+      elif mention_andre == True and mention_kaneda == True and mention_nekohime == True and mention_margarine == True:
         await self.bot.send_typing(message.channel)
         await self.bot.send_message(message.channel, 'What did you call us all in for?')
 

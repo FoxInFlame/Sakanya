@@ -36,6 +36,8 @@ class RoleColour():
   def contrast(self, rgb1, rgb2):
     return (self.luminance(rgb1[0], rgb1[1], rgb1[2]) + 0.05) / (self.luminance(rgb2[0], rgb2[1], rgb2[2]) + 0.05)
 
+  async def on_member_join(self, member): 
+    await self.bot.send_message(member.server, 'Testing member recognition:' + member.name)
 
   @commands.command(pass_context=True, aliases=['color'])
   async def colour(self, context, *, argument=None):
