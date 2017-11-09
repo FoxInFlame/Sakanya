@@ -10,8 +10,8 @@ class BotChains():
     self.bot = bot
     self.times = 5
 
-  @commands.command(pass_context=True)
-  async def hello(self, context):
+  @commands.command(pass_context=True, aliases=['poke', 'hello'])
+  async def chain(self, context):
     """
     Part of a bot chain - Sends message to n:hello.
     
