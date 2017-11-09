@@ -26,7 +26,7 @@ class BotChains():
   @commands.command(pass_context=True)
   async def helloreset(self, context):
     if context.message.author.id == '202501452596379648':
-      self.times = 5
+      self.times = 3
 
   async def on_message(self, message):
     if message.author.id == '270198146020278272' and message.content == 'k/hello':
