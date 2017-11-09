@@ -20,7 +20,6 @@ class BotChains():
     Examples:
       >hello
     """
-    await self.bot.say('Hello.')
     await self.bot.say('n:hello')
 
 def setup(bot):
