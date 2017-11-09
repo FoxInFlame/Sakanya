@@ -7,8 +7,10 @@
 #                             /____/         
 # 
 # A shy Discord bot written by FoxInFlame in Discord.py.
-# Version 1.0.16
+# Version 1.0.17
 # Changelog:
+# 1.0.17
+# - Add botchain >hello
 # 1.0.16
 # - Rewrote >saka using aiohttp instead of urllib so that it no longer crashes
 # 1.0.15
@@ -88,7 +90,7 @@ import sched, time
 
 class SakanyaCore():
   # Some basic info
-  version = '1.0.16'
+  version = '1.0.17'
   prefix = '>'
   debug = False
   debug_server = '344957370901856266'
@@ -111,7 +113,7 @@ class SakanyaCore():
       return '***REMOVED***'
     else:
       return '***REMOVED***'
-  startup_extensions = ['commands.love', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'commands.ping', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.uselessinteractions', 'other.presenceupdate', 'other.rolecolour']
+  startup_extensions = ['commands.love', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'commands.ping', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.uselessinteractions', 'other.presenceupdate', 'other.rolecolour', 'other.botchains']
   headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'}
 
 bot = commands.Bot(command_prefix=SakanyaCore().prefix, description=SakanyaCore().description)

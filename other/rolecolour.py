@@ -38,6 +38,7 @@ class RoleColour():
 
   async def on_member_join(self, member): 
     await self.bot.send_message(member.server, 'Testing member recognition:' + member.name)
+    
 
   @commands.command(pass_context=True, aliases=['color'])
   async def colour(self, context, *, argument=None):
