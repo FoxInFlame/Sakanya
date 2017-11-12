@@ -6,11 +6,11 @@ from discord.ext import commands
 from __main__ import SakanyaCore
 # Import collections to use Named Tuples
 import collections
-# Import URLlib.request for requests
-# import urllib.request
 # Import URLlib.parse to manipulate URLs
 import urllib.parse
+# Import asyncio for more async stuff
 import asyncio
+# Import aiohttp for asynchronous HTTP requests
 import aiohttp
 # Import Pillow to manipulate images
 from PIL import Image
