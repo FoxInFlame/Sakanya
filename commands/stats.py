@@ -7,6 +7,9 @@ import os
 # Import JSON to read roles.json
 import json
 # Import matplotlib to plot stuff
+import matplotlib
+# Force matplotlib to not use any XWindows backend (removing will result in "no $display environment variable" error)
+matplotlib.use('Agg') 
 import matplotlib.pyplot as plot
 # Import ticker to set ticks to integer
 from matplotlib.ticker import MaxNLocator
@@ -65,6 +68,8 @@ class Stats():
           data.pop(key)
       plot.bar(range(len(data)), data.values(), align='center')
       plot.xticks(range(len(data)), list(data.keys()), rotation='vertical')
+      plot.margins(0.08)
+      plot.tight_layout()
       plot.title('Messages sent by users')
       location = os.path.join(os.path.join(os.path.join(os.path.dirname(__file__), '..'), 'stats'), 'tmp.png')
     elif argument == 'messages_bybots':
@@ -83,6 +88,8 @@ class Stats():
       print(data)
       plot.bar(range(len(data)), data.values(), align='center')
       plot.xticks(range(len(data)), list(data.keys()), rotation='vertical')
+      plot.margins(0.08)
+      plot.tight_layout()
       plot.title('Messages sent by bots')
       location = os.path.join(os.path.join(os.path.join(os.path.dirname(__file__), '..'), 'stats'), 'tmp.png')
     elif argument == 'messages_byeveryone':
