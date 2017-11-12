@@ -33,7 +33,7 @@ class Stats():
       await self.bot.delete_message(message=message)
       return
     outoften = round(percentage / 10)
-    await self.bot.edit_message(message=message, new_content='`' + ('__' * outoften)[:-1] + 'φ(．．) ' + comment + '`')
+    #await self.bot.edit_message(message=message, new_content='`' + ('__' * outoften)[:-1] + 'φ(．．) ' + comment + '`')
     await self.bot.edit_message(message=message, new_content='`' + ('__' * outoften) + 'φ(．．) ' + comment + '`')
 
 
@@ -63,14 +63,15 @@ class Stats():
         if user is not None and user.bot is False:
           data[user.name] = data[key]
           data.pop(key)
-          await self.updateProgressBar(progressmsg, 20 + (50 / len(data) * count), user.name)
+          await self.updateProgressBar(progressmsg, 20 + (50 / len(data) * count), 'Analysing ' + user.name)
         else:
           data.pop(key)
       plot.bar(range(len(data)), data.values(), align='center')
       plot.xticks(range(len(data)), list(data.keys()), rotation='vertical')
       plot.margins(0.08)
-      plot.tight_layout()
       plot.title('Messages sent by users')
+      plot.tight_layout()
+      #plot.subplots_adjust(top=0.09) # Bottom is 0.1 by default, and top cannot be >= to bottom
       location = os.path.join(os.path.join(os.path.join(os.path.dirname(__file__), '..'), 'stats'), 'tmp.png')
     elif argument == 'messages_bybots':
       tmpmsg = await self.bot.send_message(context.message.channel, 'Generating chart...')
@@ -82,15 +83,15 @@ class Stats():
         if user is not None and user.bot is True:
           data[user.name] = data[key]
           data.pop(key)
-          await self.updateProgressBar(progressmsg, 20 + (50 / len(data) * count), user.name)
+          await self.updateProgressBar(progressmsg, 20 + (50 / len(data) * count), 'Analysing ' + user.name)
         else:
           data.pop(key)
-      print(data)
       plot.bar(range(len(data)), data.values(), align='center')
       plot.xticks(range(len(data)), list(data.keys()), rotation='vertical')
       plot.margins(0.08)
-      plot.tight_layout()
       plot.title('Messages sent by bots')
+      plot.tight_layout()
+      #plot.subplots_adjust(top=0.09) # Bottom is 0.1 by default, and top cannot be >= to bottom
       location = os.path.join(os.path.join(os.path.join(os.path.dirname(__file__), '..'), 'stats'), 'tmp.png')
     elif argument == 'messages_byeveryone':
       tmpmsg = await self.bot.send_message(context.message.channel, 'Generating chart...')
@@ -102,14 +103,15 @@ class Stats():
         if user is not None:
           data[user.name] = data[key]
           data.pop(key)
-          await self.updateProgressBar(progressmsg, 20 + (50 / len(data) * count), user.name)
+          await self.updateProgressBar(progressmsg, 20 + (50 / len(data) * count), 'Analysing ' + user.name)
         else:
           data.pop(key)
       plot.bar(range(len(data)), data.values(), align='center')
       plot.xticks(range(len(data)), list(data.keys()), rotation='vertical')
       plot.margins(0.08)
-      plot.tight_layout()
       plot.title('Messages sent by everyone')
+      plot.tight_layout()
+      #plot.subplots_adjust(top=0.09) # Bottom is 0.1 by default, and top cannot be >= to bottom
       location = os.path.join(os.path.join(os.path.join(os.path.dirname(__file__), '..'), 'stats'), 'tmp.png')
     else:
       await self.bot.send_message(context.message.channel, 'Statistics for `' + argument + '` could not be found within me...')
