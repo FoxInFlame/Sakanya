@@ -10,12 +10,12 @@ from __main__ import SakanyaCore
 import random
 # Import asynchronous waiting 
 import asyncio
-# Import URLlib.request for requests
-import urllib.request
 # Import URLlib.parse to manipulate URLs
 import urllib.parse
-# Import URLlib.error to handle error
-import urllib.error
+# Import asyncio for more async stuff
+import asyncio
+# Import aiohttp for asynchronous HTTP requests
+import aiohttp
 # Import lxml to parse XML and HTML
 from lxml import etree
 
@@ -46,14 +46,15 @@ class PresenceUpdate():
 
   async def changePresence(self):
     await self.bot.wait_until_ready()
-    kaomoji_req = urllib.request.Request(url='http://kaomoji.ru/en/', data=None, headers=SakanyaCore().headers)
-    try:
-      response = urllib.request.urlopen(kaomoji_req)
-      tree = etree.HTML(response.read().decode('utf8'))
-      kaomojis = tree.xpath('//table[@class="table_kaomoji"]//td/span/text()')
-    except (urllib.error.HTTPError, urllib.error.URLError) as e:
-      print('Couldn\'t access kaomoji.ru. Error code: ' + str(e.code), None)
-      kaomojis = ['Need help? ' + SakanyaCore().prefix + 'help']
+    async with aiohttp.ClientSession() as session:
+      try:
+        async with session.get('http://kaomoji.ru/en/', headers=SakanyaCore().headers) as response:
+          tree = etree.HTML((await response.read()).decode('utf8'))
+          kaomojis = tree.xpath('//table[@class="table_kaomoji"]//td/span/text()')
+      except Exception as e:
+        print(Exception)
+        print('Couldn\'t access kaomoji.ru.', None)
+        kaomojis = ['Need help? ' + SakanyaCore().prefix + 'help']
     counter = 0
     while not self.bot.is_closed:
       random_kaomoji = random.random()
