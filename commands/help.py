@@ -39,7 +39,7 @@ class Help():
     }),
     ('iam', {
       'short_description': 'Add yourself a self-assigned role',
-      'description': 'You can describe yourself using roles, and access role-specific channels using them! If you have the **AMA** role, you will be mentioend with someone needs help or wants to ask a question. The **lewd** role will give access to the #nsfw channel. If no role is specified, it will list all the self-assigned roles you have.',
+      'description': 'You can describe yourself using roles, and access role-specific channels using them! If you have the **AMA** role, you will be mentioned with someone needs help or wants to ask a question. The **lewd** role will give access to the #nsfw channel. If no role is specified, I will list all the self-assigned roles you have.',
       'usage': 'iam [ama|lewd]'
     }),
     ('iamnot', {
@@ -49,8 +49,13 @@ class Help():
     }),
     ('colour', {
       'short_description': 'Set your display colour on this server',
-      'description': 'You can let Saka update your display colour on this server to any colour you want! There is of course also an alias `color` for anyone feeling American. Supported formats are hex and rgb, and the text values `random` for a random colour, and `remove` to refer back to the default colour.' + ('\nYour colour will be denied if Saka deems it illegible on Discord Dark Mode. On the contrary, no one cares about light mode anyway, so you can set it however light you want.' if SakanyaCore().colourrestrictions is True else ''),
+      'description': 'You can let me update your display colour on this server to any colour you want! There is of course also an alias `color` for anyone feeling American. Supported formats are hex and rgb, and the text values `random` for a random colour, and `remove` to refer back to the default colour.' + ('\nYour colour will be denied if I deem it illegible on Discord Dark Mode. On the contrary, no one cares about light mode anyway, so you can set it however light you want.' if SakanyaCore().colourrestrictions is True else ''),
       'usage': 'colour|color <#000000|rgb(0, 0, 0)|random|remove>'
+    }),
+    ('stats', {
+      'short_description': 'View various stats about this server',
+      'description': 'I record quite a lot of things (more as Fox implements more!), and you can view a visualised representation of these stats. Currently, `messages_byeverone`, `messages_byusers`, and `messages_bybots` is available for you to use with me! These charts take quite a while to load, so please be patient and don\'t spam me out of rage - I\'ll just crash out of stress.',
+      'usage': 'stats <stat_name>'
     })
   ]
 
