@@ -36,8 +36,22 @@ class RoleColour():
   def contrast(self, rgb1, rgb2):
     return (self.luminance(rgb1[0], rgb1[1], rgb1[2]) + 0.05) / (self.luminance(rgb2[0], rgb2[1], rgb2[2]) + 0.05)
 
-  async def on_member_join(self, member): 
-    await self.bot.send_message(member.server, 'Testing member recognition:' + member.name)
+  async def on_member_join(self, member):
+    role_permissions = member.server.default_role.permissions
+
+    roles = len(member.server.roles)
+    new_role = await self.bot.create_role(member.server, name=member.name, permissions=role_permissions, hoist=False, mentionable=False)
+    await self.bot.move_role(member.server, new_role, (roles - 2))
+    await self.bot.add_roles(member, new_role)
+    self.roles_json.setdefault(member.id, {
+      "role": new_role.id,
+      "colour": "0",
+      "name": member.name
+    })
+    with open(os.path.join(os.path.dirname(__file__), 'roles.json'), 'w') as file: # Then overwrite the file
+      file.write(json.dumps(self.roles_json, indent=2))
+    owner = await self.bot.get_user_info('202501452596379648')
+    await self.bot.send_message(owner, content='*' + member.name + ' has been automatically paired with a new role: ' + new_role.name + '*')
     
 
   @commands.command(pass_context=True, aliases=['color'])
@@ -167,7 +181,7 @@ class RoleColour():
             await self.bot.say('☆(＃××) Your colour has **NOT** been applied. ' + new_colour.hex_l + ' is not legible enough on Discord Dark Mode! ')
             return
 
-      if context.message.author.id in self.roles_json:
+      if context.message.author.id in self.roles_json:  
         # If the author already has a role then change it
         server = self.bot.get_server(SakanyaCore().server_id()) # Get the server
         roles_server = server.roles # Get the roles in the server
