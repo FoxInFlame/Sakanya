@@ -48,7 +48,7 @@ class MentionInteraction():
       elif '😭' in message.content:
         await self.bot.send_typing(message.channel)
         await self.bot.send_message(message.channel, ' ｡･ﾟ･(ﾉД`)ヽ(￣ω￣ )')
-      elif mention_andre == False and mention_kaneda == False and mention_nekohime == False:
+      elif mention_andre == False and mention_kaneda == False and mention_nekohime == False and mention_margarine == False:
         await self.bot.send_typing(message.channel)
         chance = random.random()
         if chance > 0.5:
