@@ -48,9 +48,9 @@ class PresenceUpdate():
     await self.bot.wait_until_ready()
     async with aiohttp.ClientSession() as session:
       try:
-        async with session.get('http://kaomoji.ru/en/', headers=SakanyaCore().headers) as response:
-          tree = etree.HTML((await response.read()).decode('utf8'))
-          kaomojis = tree.xpath('//table[@class="table_kaomoji"]//td/span/text()')
+        response = await session.get('http://kaomoji.ru/en/', headers=SakanyaCore().headers)
+        tree = etree.HTML((await response.read()).decode('utf8'))
+        kaomojis = tree.xpath('//table[@class="table_kaomoji"]//td/span/text()')
       except Exception as e:
         print(Exception)
         print('Couldn\'t access kaomoji.ru.', None)
@@ -76,7 +76,7 @@ class PresenceUpdate():
         # 50% chance of streaming instead of playing
         type = 1
       await self.bot.change_presence(game=discord.Game(name=kaomoji, type=type), status=None, afk=False)
-      await asyncio.sleep(900) # 15 minutes
+      await asyncio.sleep(SakanyaCore().presenceupdate_timer)
 
 def setup(bot):
   bot.add_cog(PresenceUpdate(bot))

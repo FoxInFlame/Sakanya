@@ -104,6 +104,7 @@ class SakanyaCore():
   description = 'A reverse image search bot made for The nulls of MAL.'
   self_introduction = 'I\'m a Discord bot created by the hands of FoxInFlame#9833 using *discord.py*. Although I may not be a girl in real life, I would love it if you could still treat me as a normal girl here on Discord. I wish I were born in real life... \n(｡•́︿•̀｡)'
   colourrestrictions = False
+  presenceupdate_timer = 1800 # seconds
 
   # Actual core code stuff
   def server_id(self):
