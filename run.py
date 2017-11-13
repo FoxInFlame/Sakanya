@@ -13,6 +13,7 @@
 # - Automatically add roles to new users
 # - Now counts messages sent by authors.
 # - Commands added: >stats
+# - Now supports quoting using >
 # 1.0.17
 # - Add botchain >hello
 # 1.0.16
@@ -142,8 +143,21 @@ async def on_message(message):
   await bot.process_commands(message)
 
 @bot.event
-async def on_command_error(ctx, error):
+async def on_command_error(error, context):
   if isinstance(error, commands.CommandNotFound):
+    if context.message.channel is None:
+      return
+    quote = discord.Embed(
+      type = 'rich',
+      color = SakanyaCore().embed_color,
+      description = context.message.content[1:].strip()
+    )
+    quote.set_author(name=context.message.author.name, icon_url=context.message.author.avatar_url)
+    await bot.send_message(context.message.channel, embed=quote)
+    try: 
+      await bot.delete_message(context.message)
+    except discord.errors.Forbidden:
+      return
     return
 
 if __name__ == "__main__":
