@@ -152,7 +152,7 @@ async def on_command_error(error, context):
       color = SakanyaCore().embed_color,
       description = context.message.content.strip()
     )
-    quote.set_author(name=context.message.author.name, icon_url=context.message.author.avatar_url)
+    quote.set_author(name=context.message.author.name + ' quoted:', icon_url=context.message.author.avatar_url)
     await bot.send_message(context.message.channel, embed=quote)
     try: 
       await bot.delete_message(context.message)
