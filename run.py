@@ -7,8 +7,11 @@
 #                             /____/         
 # 
 # A shy Discord bot written by FoxInFlame in Discord.py.
-# Version 1.0.18
+# Version 1.0.19
 # Changelog:
+# 1.0.19
+# - Add "hungry for new waifu" as the role to get notified by BobDono.
+# - Reset messagecounter and change JSON format.
 # 1.0.18
 # - Automatically add roles to new users
 # - Now counts messages sent by authors.
@@ -95,7 +98,7 @@ import sched, time
 
 class SakanyaCore():
   # Some basic info
-  version = '1.0.18'
+  version = '1.0.19'
   prefix = '>'
   debug = False
   debug_server = '344957370901856266'
@@ -106,6 +109,11 @@ class SakanyaCore():
   self_introduction = 'I\'m a Discord bot created by the hands of FoxInFlame#9833 using *discord.py*. Although I may not be a girl in real life, I would love it if you could still treat me as a normal girl here on Discord. I wish I were born in real life... \n(｡•́︿•̀｡)'
   colourrestrictions = False
   presenceupdate_timer = 1800 # seconds
+  self_assigned_roles = {
+    'lewd': '350190393607847937',
+    'ama': '349277559449452545',
+    'hungry for new waifus': '381412270481342465'
+  }
 
   # Actual core code stuff
   def server_id(self):

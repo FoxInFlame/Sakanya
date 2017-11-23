@@ -52,8 +52,8 @@ class PresenceUpdate():
         tree = etree.HTML((await response.read()).decode('utf8'))
         kaomojis = tree.xpath('//table[@class="table_kaomoji"]//td/span/text()')
       except Exception as e:
-        print(Exception)
-        print('Couldn\'t access kaomoji.ru.', None)
+        print(e)
+        print('Couldn\'t access kaomoji.ru.')
         kaomojis = ['Need help? ' + SakanyaCore().prefix + 'help']
     counter = 0
     while not self.bot.is_closed:

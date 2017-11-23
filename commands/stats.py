@@ -58,16 +58,18 @@ class Stats():
       progressmsg = await self.bot.say('`φ(．．)`')
       data = await self.loadStatFile('authors.json')
       await self.updateProgressBar(progressmsg, 20)
-      for count, (key) in enumerate(list(data.keys()), 1):
-        user = await self.bot.get_user_info(key)
-        if user is not None and user.bot is False:
-          data[user.name] = data[key]
-          data.pop(key)
-          await self.updateProgressBar(progressmsg, 20 + (50 / len(data) * count), 'Analysing ' + user.name)
-        else:
-          data.pop(key)
-      plot.bar(range(len(data)), data.values(), align='center')
-      plot.xticks(range(len(data)), list(data.keys()), rotation='vertical')
+      graph_data = {}
+      for count, (key, value) in enumerate(list(data.items()), 1):
+        if isinstance(value, int):
+          continue
+        if value["bot"] is False:
+          graph_data[value["name"]] = value["count"]
+          await self.updateProgressBar(progressmsg, 20 + (50 / len(data) * count), 'Analysing ' + value["name"])
+      if(len(graph_data) == 0):
+        await self.bot.send_message(context.message.channel, 'Data malformed...')
+        return
+      plot.bar(range(len(graph_data)), graph_data.values(), align='center')
+      plot.xticks(range(len(graph_data)), list(graph_data.keys()), rotation='vertical')
       plot.margins(0.08)
       plot.title('Messages sent by users')
       plot.tight_layout()
@@ -78,16 +80,18 @@ class Stats():
       progressmsg = await self.bot.say('`φ(．．)`')
       data = await self.loadStatFile('authors.json')
       await self.updateProgressBar(progressmsg, 20)
-      for count, (key) in enumerate(list(data.keys()), 1):
-        user = await self.bot.get_user_info(key)
-        if user is not None and user.bot is True:
-          data[user.name] = data[key]
-          data.pop(key)
-          await self.updateProgressBar(progressmsg, 20 + (50 / len(data) * count), 'Analysing ' + user.name)
-        else:
-          data.pop(key)
-      plot.bar(range(len(data)), data.values(), align='center')
-      plot.xticks(range(len(data)), list(data.keys()), rotation='vertical')
+      graph_data = {}
+      for count, (key, value) in enumerate(list(data.items()), 1):
+        if isinstance(value, int):
+          continue
+        if value["bot"] is True:
+          graph_data[value["name"]] = value["count"]
+          await self.updateProgressBar(progressmsg, 20 + (50 / len(data) * count), 'Analysing ' + value["name"])
+      if(len(graph_data) == 0):
+        await self.bot.send_message(context.message.channel, 'Data malformed...')
+        return
+      plot.bar(range(len(graph_data)), graph_data.values(), align='center')
+      plot.xticks(range(len(graph_data)), list(graph_data.keys()), rotation='vertical')
       plot.margins(0.08)
       plot.title('Messages sent by bots')
       plot.tight_layout()
@@ -98,16 +102,17 @@ class Stats():
       progressmsg = await self.bot.say('`φ(．．)`')
       data = await self.loadStatFile('authors.json')
       await self.updateProgressBar(progressmsg, 20)
-      for count, (key) in enumerate(list(data.keys()), 1):
-        user = await self.bot.get_user_info(key)
-        if user is not None:
-          data[user.name] = data[key]
-          data.pop(key)
-          await self.updateProgressBar(progressmsg, 20 + (50 / len(data) * count), 'Analysing ' + user.name)
-        else:
-          data.pop(key)
-      plot.bar(range(len(data)), data.values(), align='center')
-      plot.xticks(range(len(data)), list(data.keys()), rotation='vertical')
+      graph_data = {}
+      for count, (key, value) in enumerate(list(data.items()), 1):
+        if isinstance(value, int):
+          continue
+        graph_data[value["name"]] = value["count"]
+        await self.updateProgressBar(progressmsg, 20 + (50 / len(data) * count), 'Analysing ' + value["name"])
+      if(len(graph_data) == 0):
+        await self.bot.send_message(context.message.channel, 'Data malformed...')
+        return
+      plot.bar(range(len(graph_data)), graph_data.values(), align='center')
+      plot.xticks(range(len(graph_data)), list(graph_data.keys()), rotation='vertical')
       plot.margins(0.08)
       plot.title('Messages sent by everyone')
       plot.tight_layout()

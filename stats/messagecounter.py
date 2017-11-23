@@ -9,7 +9,7 @@ from __main__ import SakanyaCore
 
 class Stats_MessageCounter():
   """
-  Counting since 2017-11-12 10:00 JST
+  Counting since 2017-11-23 22:00 JST
   """
   
   def __init__(self, bot):
@@ -31,9 +31,23 @@ class Stats_MessageCounter():
       return
 
     if message.author.id in self.authors_json:
-      self.authors_json[message.author.id] = self.authors_json[message.author.id] + 1
+      if isinstance(self.authors_json[message.author.id], int):
+        self.authors_json[message.author.id] = {
+          "count": self.authors_json[message.author.id] + 1
+        }
+      else:
+        self.authors_json[message.author.id]["count"] = self.authors_json[message.author.id]["count"] + 1
     else:
-      self.authors_json[message.author.id] = 1
+      self.authors_json[message.author.id] = {
+        "count": 1
+      }
+
+    if "name" not in self.authors_json[message.author.id]:
+      if message.author.nick is not None:
+        self.authors_json[message.author.id]["name"] = message.author.nick
+      else:
+        self.authors_json[message.author.id]["name"] = message.author.name
+      self.authors_json[message.author.id]["bot"] = message.author.bot
 
     with open(os.path.join(os.path.dirname(__file__), 'authors.json'), 'w') as file: # Then overwrite the file
       file.write(json.dumps(self.authors_json, indent=2))
