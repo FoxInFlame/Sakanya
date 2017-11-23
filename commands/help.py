@@ -15,7 +15,7 @@ class Help():
     ('help', {
       'short_description': 'Show this Help Message',
       'description': 'I\'ll show you a help message where you can learn all the features I have inside me.\n(´｡• ᵕ •｡`) ♡',
-      'usage': 'help'
+      'usage': 'help [keyword]'
     }),
     ('about', {
       'short_description': 'Learn more about me',
@@ -25,7 +25,7 @@ class Help():
     ('love', {
       'short_description': 'Send your love to someone!',
       'description': '*The username is case-sensitive.*\nI\'ll pick a suitable love phrase for me to send your recipient. (´• ω •`) ♡',
-      'usage': 'love [username]'
+      'usage': 'love <username>'
     }),
     ('robot', {
       'short_description': 'What do you look like as a robot?',
@@ -40,17 +40,17 @@ class Help():
     ('iam', {
       'short_description': 'Add yourself a self-assigned role',
       'description': 'You can describe yourself using roles, and access role-specific channels using them! If you have the **AMA** role, you will be mentioned with someone needs help or wants to ask a question. The **lewd** role will give access to the #nsfw channel. If no role is specified, I will list all the self-assigned roles you have.',
-      'usage': 'iam [ama|lewd]'
+      'usage': 'iam (ama | lewd | hungry for new waifus)]'
     }),
     ('iamnot', {
       'short_description': 'Remove a self-assigned role from yourself',
       'description': 'You can remove a self-assigned role from yourself. To see which roles you have, do `>iam`.',
-      'usage': 'iamnot <ama|lewd>'
+      'usage': 'iamnot (ama | lewd)>'
     }),
     ('colour', {
       'short_description': 'Set your display colour on this server',
       'description': 'You can let me update your display colour on this server to any colour you want! There is of course also an alias `color` for anyone feeling American. Supported formats are hex and rgb, and the text values `random` for a random colour, and `remove` to refer back to the default colour.' + ('\nYour colour will be denied if I deem it illegible on Discord Dark Mode. On the contrary, no one cares about light mode anyway, so you can set it however light you want.' if SakanyaCore().colourrestrictions is True else ''),
-      'usage': 'colour|color <#000000|rgb(0, 0, 0)|random|remove>'
+      'usage': 'colour|color (#000000 | rgb(0, 0, 0) | random | remove)>'
     }),
     ('stats', {
       'short_description': 'View various stats about this server',
