@@ -39,13 +39,13 @@ class Help():
     }),
     ('iam', {
       'short_description': 'Add yourself a self-assigned role',
-      'description': 'You can describe yourself using roles, and access role-specific channels using them! If you have the **AMA** role, you will be mentioned with someone needs help or wants to ask a question. The **lewd** role will give access to the #nsfw channel. If no role is specified, I will list all the self-assigned roles you have.',
-      'usage': 'iam (ama | lewd | hungry for new waifus)]'
+      'description': 'You can describe yourself using roles, and access role-specific channels using them!\n\nIf you have the **AMA** role, you will be mentioned with someone needs help or wants to ask a question.\n\nThe **lewd** role will give access to the #nsfw channel.\n\nFinally, having the **hungry for new waifus** role will make Bob notify you when a new waifu war stage is initiated.\n\nIf no role is specified, I will list all the self-assigned roles you have.',
+      'usage': 'iam (ama | lewd | hungry for new waifus)'
     }),
     ('iamnot', {
       'short_description': 'Remove a self-assigned role from yourself',
       'description': 'You can remove a self-assigned role from yourself. To see which roles you have, do `>iam`.',
-      'usage': 'iamnot (ama | lewd)>'
+      'usage': 'iamnot (ama | lewd | hungry for new waifus)>'
     }),
     ('colour', {
       'short_description': 'Set your display colour on this server',
