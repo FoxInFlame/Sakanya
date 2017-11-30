@@ -26,6 +26,15 @@ class SuggestionControl():
   
       if jsonmsg['d']['channel_id'] == '341874607651029003':
         # In #suggestions
+        # Check if the reaction is a green checkmark by the author (if so, mark as complete)
+        if jsonmsg['d']['user_id'] == message.author.id and jsonmsg['d']['emoji']['name'] == '✅': #:white_check_mark:
+          await self.bot.send_message(self.bot.get_channel('317924870950223872'), 'Wooh! The following suggestion been marked as completed by the author!', embed=discord.Embed(
+            color = SakanyaCore().embed_color,
+            type = 'rich',
+            description = '>> ' + message.content
+          ))
+          await self.bot.delete_message(message)
+          return
         # Check if it already has an X (if so, delete)
         users = await self.bot.get_reaction_users(discord.Reaction(message=message, emoji='❌')) # A big fat X
         if len(users) >= 5: # Just in case it's really fast and it went over 5
@@ -35,6 +44,7 @@ class SuggestionControl():
             description = '>> ' + message.content
           ))
           await self.bot.delete_message(message)
+          return
 
 def setup(bot):
   bot.add_cog(SuggestionControl(bot))
