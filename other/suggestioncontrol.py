@@ -28,7 +28,7 @@ class SuggestionControl():
         # In #suggestions
         # Check if the reaction is a green checkmark by the author (if so, mark as complete)
         if jsonmsg['d']['user_id'] == message.author.id and jsonmsg['d']['emoji']['name'] == '✅': #:white_check_mark:
-          await self.bot.send_message(self.bot.get_channel('317924870950223872'), 'Wooh! The following suggestion been marked as completed by the author!', embed=discord.Embed(
+          await self.bot.send_message(self.bot.get_channel('317924870950223872'), '✅ Wooh! The following suggestion been marked as completed by the author (' + (message.author.nick if message.author.nick is not None else message.author.name) + ')!', embed=discord.Embed(
             color = SakanyaCore().embed_color,
             type = 'rich',
             description = '>> ' + message.content
