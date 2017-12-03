@@ -37,6 +37,17 @@ class RoleColour():
     return (self.luminance(rgb1[0], rgb1[1], rgb1[2]) + 0.05) / (self.luminance(rgb2[0], rgb2[1], rgb2[2]) + 0.05)
 
   async def on_member_join(self, member):
+    if member.server.id != SakanyaCore().server_id():
+      return
+    
+    if member.id in self.roles_json:
+      roles_server = member.server.roles
+      roleInstance_server = next((role for role in roles_server if role.id == self.roles_json[member.id]["role"]), None)
+      if roleInstance_server is not None:
+        await self.bot.add_roles(member, roleInstance_server)
+        owner = await self.bot.get_user_info('202501452596379648')
+        await self.bot.send_message(owner, content='*' + member.name + ' has been automatically paired with an existing role: ' + roleInstance_server.name + '*')
+        return
     role_permissions = member.server.default_role.permissions
 
     roles = len(member.server.roles)
