@@ -12,8 +12,6 @@ import random
 import asyncio
 # Import URLlib.parse to manipulate URLs
 import urllib.parse
-# Import asyncio for more async stuff
-import asyncio
 # Import aiohttp for asynchronous HTTP requests
 import aiohttp
 # Import lxml to parse XML and HTML
@@ -21,7 +19,6 @@ from lxml import etree
 
 class PresenceUpdate():
   def __init__(self, bot):
-    bot.loop.create_task(self.changePresence())
     self.bot = bot
 
   custom_presences = [
@@ -44,8 +41,10 @@ class PresenceUpdate():
     'Partnerships for the Goals'
   ]
 
+  async def on_ready(self):
+    self.bot.loop.create_task(self.changePresence())
+
   async def changePresence(self):
-    await self.bot.wait_until_ready()
     async with aiohttp.ClientSession() as session:
       try:
         response = await session.get('http://kaomoji.ru/en/', headers=SakanyaCore().headers)
