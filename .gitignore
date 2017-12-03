@@ -4,5 +4,6 @@ waitforapprovals.csv
 nullstory.txt
 other/roles.json
 stats/authors.json
+stats/lastactivity.json
 stats/tmp.png
 tmp.png
