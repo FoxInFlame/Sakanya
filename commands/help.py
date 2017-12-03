@@ -70,7 +70,7 @@ class Help():
     ('automatickick', {
       'title': 'Automatic Kick System',
       'short_description': 'I kick users automatically if they have been deemed inactive.',
-      'description': 'When users on this server have been inactive (not posting, not adding reactions, not using voice chat, etc) for over 30 days, I will automatically kick the users. Kicked users cannot join using the public invite URL on the club page any more, but don\'t worry, they will be provided a one-time invite code in case they want to rejoin.' 
+      'description': 'When users on this server have been inactive for over 30 days, I will automatically kick the users. Specifically, I will consider you as inactive when all of these are true for 30 days:\n- Not showing any "typing..."\n- Not sending any messages\n- Not adding or removing reactions to any messages\n- Not editing any existing messages\n- Not joining any voice channel\nBasically, everything that happens when you\'re actually inactive.\n\nHere\'s a random situation you might be worried about. You went on a trip to the North Pole for 3 months and come back, to find yourself kicked. Kicked users cannot join using the public invite URL on the club page any more. Worry no longer, because I will provide you a one-time invite code in case you want to rejoin.' 
       })
   ]
 
