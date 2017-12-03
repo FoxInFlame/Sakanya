@@ -65,8 +65,13 @@ class Help():
     ('suggestioncontrol', {
       'title': 'Suggestion Control',
       'short_description': 'Control messages in <#341874607651029003> as neccessary.',
-      'description': 'I remove any messages in <#341874607651029003> when the message gets at least 5 <:x:348390305248182272>s. ~(>_<~)'
-    })
+      'description': 'I remove any messages in <#341874607651029003> when the message gets at least 5 <:x:348390305248182272>s, or when it gets one ✅ by the author of the message. ~(>_<~)'
+    }),
+    ('automatickick', {
+      'title': 'Automatic Kick System',
+      'short_description': 'I kick users automatically if they have been deemed inactive.',
+      'description': 'When users on this server have been inactive (not posting, not adding reactions, not using voice chat, etc) for over 30 days, I will automatically kick the users. Kicked users cannot join using the public invite URL on the club page any more, but don\'t worry, they will be provided a one-time invite code in case they want to rejoin.' 
+      })
   ]
 
   features_dict = OrderedDict(features_dict)

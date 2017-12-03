@@ -7,8 +7,10 @@
 #                             /____/         
 # 
 # A shy Discord bot written by FoxInFlame in Discord.py.
-# Version 1.0.19
+# Version 1.1.0
 # Changelog:
+# 1.1.0
+# - Now automatically kicks users if they're inactive!
 # 1.0.19
 # - Add "hungry for new waifu" as the role to get notified by BobDono.
 # - Reset messagecounter and change JSON format.
@@ -98,11 +100,13 @@ import sched, time
 
 class SakanyaCore():
   # Some basic info
-  version = '1.0.19'
+  version = '1.1.0'
   prefix = '>'
   debug = False
   debug_server = '344957370901856266'
+  debug_channel = '344957370901856268'
   production_server = '317924870950223872'
+  production_channel = '317924870950223872'
   name = 'Sakanya'
   embed_color = 15839636
   description = 'A reverse image search bot made for The nulls of MAL.'
@@ -122,13 +126,19 @@ class SakanyaCore():
     else:
       return self.production_server
 
+  def channel_id(self):
+    if self.debug is True:
+      return self.debug_channel
+    else:
+      return self.production_channel
+
   def bot_token(self):
     if self.debug is True:
       return '***REMOVED***'
     else:
       return '***REMOVED***'
 
-  startup_extensions = ['commands.love', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'commands.ping', 'commands.stats', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.uselessinteractions', 'other.presenceupdate', 'other.rolecolour', 'other.botchains', 'stats.messagecounter'] 
+  startup_extensions = ['commands.love', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'commands.ping', 'commands.stats', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.uselessinteractions', 'other.presenceupdate', 'other.rolecolour', 'other.botchains', 'stats.messagecounter', 'stats.lastactivity'] 
   headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'}
 
 bot = commands.Bot(command_prefix=SakanyaCore().prefix, description=SakanyaCore().description)
@@ -177,8 +187,8 @@ if __name__ == "__main__":
 
   print('') # Empty line in case of continuous execution
   print(startup_errors)
-  print(tuple(bot.extensions))
-  print('Connecting...')
+  print('Loaded Modules:', tuple(bot.extensions))
+  print('Connecting to Discord...')
   bot.run(SakanyaCore().bot_token()) # True or empty/False for debug
 
 # End of file.
