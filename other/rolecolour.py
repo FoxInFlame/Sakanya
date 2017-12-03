@@ -42,7 +42,10 @@ class RoleColour():
     
     if member.id in self.roles_json:
       roles_server = member.server.roles
-      roleInstance_server = next((role for role in roles_server if role.id == self.roles_json[member.id]["role"]), None)
+      for role in roles_server:
+        if role.id == self.roles_json[member.id]["role"]:
+          roleInstance_server = role
+          break
       if roleInstance_server is not None:
         await self.bot.add_roles(member, roleInstance_server)
         owner = await self.bot.get_user_info('202501452596379648')
@@ -62,7 +65,7 @@ class RoleColour():
     with open(os.path.join(os.path.dirname(__file__), 'roles.json'), 'w') as file: # Then overwrite the file
       file.write(json.dumps(self.roles_json, indent=2))
     owner = await self.bot.get_user_info('202501452596379648')
-    await self.bot.send_message(owner, content='*' + member.name + ' has been automatically paired with a new role: ' + new_role.name + '*')
+    await self.bot.send_message(owner, content='*' + member.name + ' has been automatically paired with a new role.')
     
 
   @commands.command(pass_context=True, aliases=['color'])
