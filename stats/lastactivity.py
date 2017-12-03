@@ -36,7 +36,6 @@ class Stats_LastActivity():
       self.dates_json = {}
       for member in server.members:
         if member.bot is False:
-          await self.bot.send_message(member, "I apologise deeply for causing trouble in the message above. I forgot to enable the debug flag. I'm really, really sorry. Be assured, you haven't been kicked from the server yet.")
           self.dates_json[member.id] = str(datetime.datetime.utcnow())
 
   async def updateActivity(self, user):
