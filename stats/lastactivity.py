@@ -77,6 +77,7 @@ class Stats_LastActivity():
         timestamp = datetime.datetime.strptime(timestamp_naive, '%Y-%m-%d %H:%M:%S.%f')
         timedelta = currenttime - timestamp
         if timedelta.total_seconds() >= 86400 * 30:
+          """
           # Over a month ago. Kick!
           channel = self.bot.get_channel(SakanyaCore().channel_id())
           server = self.bot.get_server(SakanyaCore().server_id())
@@ -100,10 +101,26 @@ class Stats_LastActivity():
             ))
             await self.bot.kick(member)
             # Will be removed in the event handler in function above
+            await self.bot.send_message(channel, embed=discord.Embed(
+              title = 'Kicked due to inactivity',
+              type = 'rich',
+              color = SakanyaCore().embed_color,
+              description = 'Sad to say, ' + user.name + ' has just been kicked by me due to their inactivity on this server for the past 30 days. They have received a new invite link in case they want to rejoin, so not much harm has been done!'
+            ))
           except discord.errors.Forbidden as e:
             # No Permissions, user is admin or something. Just ignore
             print(e)
             continue
+          """
+          server = self.bot.get_server(SakanyaCore().server_id())
+          member = self.bot.get_server(SakanyaCore().server_id()).get_member(member_id)
+          user = await self.bot.get_user_info(member_id)
+          await self.bot.send_message(server, embed=discord.Embed(
+            title = 'Inactive user',
+            type = 'rich',
+            color = SakanyaCore().embed_color,
+            description = 'So, ' + user.name + ' has been inactive in this server for the past 30 days. This would\'ve resulted in a kick with a rejoin link, however there has been many oppositions, and therefore that feature has been disabled. They are still in this server! :)'
+          ))
 
       await asyncio.sleep(86400) # one day!
 
