@@ -6,13 +6,16 @@
 # /____/\__,_/_/|_|\__,_/_/ /_/\__, /\__,_/     `=.____.="  `._\
 #                             /____/         
 # 
-# A shy Discord bot written by FoxInFlame in Discord.py.
+# A shy but energetic Discord bot written by FoxInFlame in Discord.py.
 # Version 1.1.1
 # Changelog:
 # 1.1.1
 # - Disable Automatic Kicking System
-# - Commands added: >modules
+# - Commands added: >modules, >reset_messagecount
 # - Now changes presence to "Listening to" and "Watching" as well
+# - Change font for matplotlib to Osaka (installed by IATGOF)
+# - >readfile sends to Gist now
+# - Fix restart now working
 # 1.1.0
 # - Now automatically kicks users if they're inactive!
 # 1.0.19
