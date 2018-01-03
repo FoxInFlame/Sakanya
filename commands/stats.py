@@ -57,6 +57,7 @@ class Stats():
 
   @commands.command(pass_context=True)
   async def stats(self, context, argument=None):
+    await self.bot.send_message(context.message.author, "\n".join(sorted(set(f.name for f in matplotlib.font_manager.fontManager.ttflist]))))
     if argument is None:
       await self.bot.say('Try `' + SakanyaCore().prefix + 'help stats`.')
       return
