@@ -116,7 +116,8 @@ class SakanyaCore():
   self_assigned_roles = {
     'lewd': '350190393607847937',
     'ama': '349277559449452545',
-    'hungry for new waifus': '381412270481342465'
+    'hungry for new waifus': '381412270481342465',
+    'houkai3rd': '397940005735104512'
   }
 
   # Actual core code stuff
@@ -138,7 +139,7 @@ class SakanyaCore():
     else:
       return '***REMOVED***'
 
-  startup_extensions = ['commands.love', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'commands.ping', 'commands.stats', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.uselessinteractions', 'other.presenceupdate', 'other.rolecolour', 'other.botchains', 'stats.messagecounter', 'stats.lastactivity'] 
+  startup_extensions = ['commands.love', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'commands.ping', 'commands.stats', 'commands.modules', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.uselessinteractions', 'other.presenceupdate', 'other.rolecolour', 'other.botchains', 'stats.messagecounter', 'stats.lastactivity'] 
   headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'}
 
 bot = commands.Bot(command_prefix=SakanyaCore().prefix, description=SakanyaCore().description)
@@ -183,7 +184,7 @@ if __name__ == "__main__":
     try:
       bot.load_extension(extension)
     except Exception as e:
-      startup_errors += 'Failed to load extension {0}\n{1}: {2}'.format(extension, type(e).__name__, e)
+      startup_errors += 'Failed to load extension {0}\n{1}: {2}'.format(extension, type(e).__name__, str(e))
 
   print('') # Empty line in case of continuous execution
   print(startup_errors)
