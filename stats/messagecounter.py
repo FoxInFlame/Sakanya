@@ -53,5 +53,17 @@ class Stats_MessageCounter():
       file.write(json.dumps(self.authors_json, indent=2))
 
 
+  @commands.command(pass_context=True)
+  async def reset_messagecount(self, context, userid=None):
+    if context.message.author.id == '202501452596379648':
+      resetuser = self.authors_json.pop(userid, None)
+      if resetuser is not None:
+        # Then overwrite the file
+        with open(os.path.join(os.path.dirname(__file__), 'authors.json'), 'w') as file:
+          file.write(json.dumps(self.authors_json, indent=2))
+          await self.bot.add_reaction(context.message, '✅')  # Add checkmark
+    else:
+      await self.bot.add_reaction(context.message, '❎') # Add x mark
+
 def setup(bot):
   bot.add_cog(Stats_MessageCounter(bot))
