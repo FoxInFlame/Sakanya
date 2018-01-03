@@ -21,26 +21,6 @@ class PresenceUpdate():
   def __init__(self, bot):
     self.bot = bot
 
-  custom_presences = [
-    'No Poverty',
-    'Zero Hunger',
-    'Good Health and Well-being',
-    'Quality Education',
-    'Gender Equality',
-    'Clean Water and Sanitation',
-    'Affordable and Clean Energy',
-    'Decent Work and Economic Growth',
-    'Industry, Innovation and Infrastructure',
-    'Reduced Inequality',
-    'Sustainable Cities and Communities',
-    'Responsible Consumption and Production',
-    'Climate Action',
-    'Life Below Water',
-    'Life on Land',
-    'Peace, Justice and Strong Institutions',
-    'Partnerships for the Goals'
-  ]
-
   async def on_ready(self):
     self.bot.loop.create_task(self.changePresence())
 
@@ -91,7 +71,7 @@ class PresenceUpdate():
                 tree = etree.fromstring(nyaaanime_xml)
                 game_name = re.sub("[\(\[].*?[\)\]]", "", tree.xpath('//item[1]/title/text()'))
         except Exception as e:
-          owner = await bot.get_user_info('202501452596379648')
+          owner = await self.bot.get_user_info('202501452596379648')
           await self.bot.send_message(owner, 'Error while changing presence:```{}```'.format(repr(e)))
 
         await self.bot.change_presence(game=discord.Game(name=game_name, type=game_type), status=None, afk=False)
