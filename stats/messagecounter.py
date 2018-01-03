@@ -1,5 +1,7 @@
 # Import discord
 import discord
+# Import undocumented part of Discord to use commands
+from discord.ext import commands
 # Import os to use relative file names
 import os
 # Import JSON to read roles.json
@@ -63,7 +65,7 @@ class Stats_MessageCounter():
           file.write(json.dumps(self.authors_json, indent=2))
           await self.bot.add_reaction(context.message, '✅')  # Add checkmark
     else:
-      await self.bot.add_reaction(context.message, '❎') # Add x mark
+      await self.bot.add_reaction(context.message, '❎')  # Add x mark
 
 def setup(bot):
   bot.add_cog(Stats_MessageCounter(bot))
