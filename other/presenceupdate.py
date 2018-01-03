@@ -14,6 +14,8 @@ import urllib.parse
 import aiohttp
 # Import lxml to parse XML and HTML
 from lxml import etree
+# Import regex to find []
+import re
 
 class PresenceUpdate():
   def __init__(self, bot):
@@ -52,29 +54,44 @@ class PresenceUpdate():
         print(e)
         print('Couldn\'t access kaomoji.ru.')
         kaomojis = ['Need help? {}help'.format(SakanyaCore().prefix)]
-    counter = 0
-    while not self.bot.is_closed:
-      random_kaomoji = random.random()
-      if random_kaomoji < 0.5:
-        # 50%
-        if len(kaomojis) <= counter:
-          counter = 0
-        kaomoji = kaomojis[counter]
-        counter += 1
-      elif random_kaomoji < 0.85:
-        # 35%
-        kaomoji = 'Need help? {}help'.format(SakanyaCore().prefix)
-      else:
-        # 15%
-        kaomoji = random.choice(self.custom_presences)
 
-      type = random.randint(0, 3)
-      if type == 3 or type == 2:
-        random_you = random.random()
-        if random_you < 0.3:
-          kaomoji = 'you'
-      await self.bot.change_presence(game=discord.Game(name=kaomoji, type=type), status=None, afk=False)
-      await asyncio.sleep(SakanyaCore().presenceupdate_timer)
+      counter_kaomoji = 0
+      while not self.bot.is_closed:
+        
+        # Random boolean
+        is_help = bool(random.getrandbits(1))
+        if is_help:
+          # Random game type
+          game_type = random.randint(0, 3)
+          game_name = 'Need help? {}help'.format(SakanyaCore().prefix)
+        else:
+          # Random game type
+          game_type = random.choice([0, 2, 3]) # No Streaming because there's nothing yet to put as a name
+
+          if game_type == 0:
+            # Playing - random kaomoji
+            if len(kaomojis) <= counter_kaomoji:
+              counter_kaomoji = 0
+            game_name = kaomojis[counter_kaomoji]
+            counter_kaomoji += 1
+          elif game_type == 2:
+            # Listening to - random nyaa music
+            nyaamusic_xml = await session.get('https://nyaa.si/?page=rss&c=2_0&f=0', headers=SakanyaCore().headers)
+            tree = etree.fromstring(nyaamusic_xml)
+            game_name = tree.xpath('//item[1]/title/text()')
+          elif game_type == 3:
+            # Watching - you
+            # Watching - random nyaa anime
+            is_watchingyou = bool(random.getrandbits(1))
+            if is_watchingyou:
+              game_name = 'you'
+            else:
+              nyaaanime_xml = await session.get('https://nyaa.si/?page=rss&c=1_2&f=0', headers=SakanyaCore().headers)
+              tree = etree.fromstring(nyaaanime_xml)
+              game_name = re.sub("[\(\[].*?[\)\]]", "", tree.xpath('//item[1]/title/text()')))
+
+        await self.bot.change_presence(game=discord.Game(name=game_name, type=game_type), status=None, afk=False)
+        await asyncio.sleep(SakanyaCore().presenceupdate_timer)
 
 def setup(bot):
   bot.add_cog(PresenceUpdate(bot))
