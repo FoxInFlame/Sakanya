@@ -10,7 +10,7 @@ class Modules():
     self.bot = bot
 
   @commands.command(pass_context=True)
-  async def modules(self, action=None, moduleName=None):
+  async def modules(self, context, action=None, moduleName=None):
     """
     List, enable or disable modules.
     
