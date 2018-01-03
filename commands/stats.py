@@ -13,6 +13,8 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plot
 # Import ticker to set ticks to integer
 from matplotlib.ticker import MaxNLocator
+# Import asynchronous waiting
+import asyncio
 # Import Sakanya Core
 from __main__ import SakanyaCore
 
@@ -108,6 +110,7 @@ class Stats():
           continue
         graph_data[value["name"]] = value["count"]
         await self.updateProgressBar(progressmsg, 20 + (50 / len(data) * count), 'Analysing ' + value["name"])
+        await asyncio.sleep(1)
       if(len(graph_data) == 0):
         await self.bot.send_message(context.message.channel, 'Data malformed...')
         return
