@@ -112,14 +112,15 @@ class Stats_LastActivity():
             print(e)
             continue
           """
+          owner = await bot.get_user_info('202501452596379648')
           server = self.bot.get_server(SakanyaCore().server_id())
           member = self.bot.get_server(SakanyaCore().server_id()).get_member(member_id)
           user = await self.bot.get_user_info(member_id)
-          await self.bot.send_message(server, embed=discord.Embed(
+          await self.bot.send_message(owner, embed=discord.Embed(
             title = 'Inactive user',
             type = 'rich',
             color = SakanyaCore().embed_color,
-            description = 'So, ' + user.name + ' has been inactive in this server for the past 30 days. This would\'ve resulted in a kick with a rejoin link, however there has been many oppositions, and therefore that feature has been disabled. They are still in this server! :)'
+            description = 'So, ' + user.name + ' has been inactive in The nulls of MAL for the past 30 days. This would\'ve resulted in a kick with a rejoin link, however there has been many oppositions, and therefore that feature has been disabled. They are still in the server! :)'
           ))
 
       await asyncio.sleep(86400) # one day!
