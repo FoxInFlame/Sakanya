@@ -117,7 +117,7 @@ class SakanyaCore():
     'lewd': '350190393607847937',
     'ama': '349277559449452545',
     'hungry for new waifus': '381412270481342465',
-    'houkai3rd': '397940005735104512  '
+    'houkai3rd': '397940005735104512'
   }
 
   # Actual core code stuff
@@ -191,6 +191,7 @@ if __name__ == "__main__":
   print('Loaded Modules:', tuple(bot.extensions))
   print('Connecting to Discord...')
   bot.run(SakanyaCore().bot_token()) # True or empty/False for debug
+
 
 # End of file.
 # 
