@@ -2,8 +2,6 @@
 import discord
 # Import undocumented part of Discord to use commands
 from discord.ext import commands
-# Import random for randomness
-import random
 # Import Sakanya Core
 from __main__ import SakanyaCore
 # import random for randomness (used in setting presence)
@@ -70,10 +68,7 @@ class PresenceUpdate():
         # 15%
         kaomoji = random.choice(self.custom_presences)
 
-      type = 0
-      if random.random() < 0.5:
-        # 50% chance of streaming instead of playing
-        type = 1
+      type = random.randint(0, 3)
       await self.bot.change_presence(game=discord.Game(name=kaomoji, type=type), status=None, afk=False)
       await asyncio.sleep(SakanyaCore().presenceupdate_timer)
 
