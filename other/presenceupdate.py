@@ -88,7 +88,7 @@ class PresenceUpdate():
             else:
               nyaaanime_xml = await session.get('https://nyaa.si/?page=rss&c=1_2&f=0', headers=SakanyaCore().headers)
               tree = etree.fromstring(nyaaanime_xml)
-              game_name = re.sub("[\(\[].*?[\)\]]", "", tree.xpath('//item[1]/title/text()')))
+              game_name = re.sub("[\(\[].*?[\)\]]", "", tree.xpath('//item[1]/title/text()'))
 
         await self.bot.change_presence(game=discord.Game(name=game_name, type=game_type), status=None, afk=False)
         await asyncio.sleep(SakanyaCore().presenceupdate_timer)
