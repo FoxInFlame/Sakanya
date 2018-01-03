@@ -53,7 +53,7 @@ class PresenceUpdate():
       except Exception as e:
         print(e)
         print('Couldn\'t access kaomoji.ru.')
-        kaomojis = ['Need help? ' + SakanyaCore().prefix + 'help']
+        kaomojis = ['Need help? {}help'.format(SakanyaCore().prefix)]
     counter = 0
     while not self.bot.is_closed:
       random_kaomoji = random.random()
@@ -65,7 +65,7 @@ class PresenceUpdate():
         counter += 1
       elif random_kaomoji < 0.85:
         # 35%
-        kaomoji = 'Need help? ' + SakanyaCore().prefix + 'help'
+        kaomoji = 'Need help? {}help'.format(SakanyaCore().prefix)
       else:
         # 15%
         kaomoji = random.choice(self.custom_presences)
