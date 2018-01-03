@@ -11,7 +11,7 @@ import matplotlib
 # Force matplotlib to not use any XWindows backend (removing will result in "no $display environment variable" error)
 matplotlib.use('Agg') 
 # Say, "the default sans-serif font is COMIC SANS"
-matplotlib.rcParams['font.sans-serif'] = "DejaVu"
+matplotlib.rcParams['font.sans-serif'] = "Osaka"
 # Then, "ALWAYS use sans-serif fonts"
 matplotlib.rcParams['font.family'] = "sans-serif"
 
@@ -57,7 +57,7 @@ class Stats():
 
   @commands.command(pass_context=True)
   async def stats(self, context, argument=None):
-    await self.bot.send_message(context.message.author, "\n".join(sorted(set([f.name for f in matplotlib.font_manager.fontManager.ttflist]))))
+    #await self.bot.send_message(context.message.author, "\n".join(sorted(set([f.name for f in matplotlib.font_manager.fontManager.ttflist]))))
     if argument is None:
       await self.bot.say('Try `' + SakanyaCore().prefix + 'help stats`.')
       return
