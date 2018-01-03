@@ -24,7 +24,7 @@ class Restart():
     if context.message.author.id == '202501452596379648':
       await self.bot.add_reaction(context.message, '✅') # Add checkmark
       print('Accepted. Restarting...')
-      await bot.change_presence(game=discord.Game(name='Restarting: Restarting...', type=0), status=None, afk=False)
+      await self.bot.change_presence(game=discord.Game(name='Restarting: Restarting...', type=0), status=None, afk=False)
       await self.bot.logout()
       os.execl(sys.executable, sys.executable, *sys.argv)
 def setup(bot):
