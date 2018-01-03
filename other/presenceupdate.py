@@ -69,6 +69,8 @@ class PresenceUpdate():
         kaomoji = random.choice(self.custom_presences)
 
       type = random.randint(0, 3)
+      if type == 3:
+        kaomoji = 'you'
       await self.bot.change_presence(game=discord.Game(name=kaomoji, type=type), status=None, afk=False)
       await asyncio.sleep(SakanyaCore().presenceupdate_timer)
 
