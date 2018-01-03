@@ -117,7 +117,7 @@ class SakanyaCore():
     'lewd': '350190393607847937',
     'ama': '349277559449452545',
     'hungry for new waifus': '381412270481342465',
-    'houkai3rd': '397940005735104512'
+    'houkai3rd': '397940005735104512  '
   }
 
   # Actual core code stuff

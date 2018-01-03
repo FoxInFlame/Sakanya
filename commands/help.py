@@ -77,15 +77,16 @@ class Help():
       'short_description': 'Control messages in <#341874607651029003> as neccessary.',
       'description': 'I remove any messages in <#341874607651029003> when the message gets at least 5 <:x:348390305248182272>s, or when it gets one ✅ by the author of the message. ~(>_<~)'
     })
-    """,
+  ]
+
+  """,
     ('automatickick', {
       'module': 'stats.lastactivity',
       'title': 'Automatic Kick System',
       'short_description': 'I kick users automatically if they have been deemed inactive.',
       'description': 'When users on this server have been inactive for over 30 days, I will automatically kick the users. Specifically, I will consider you as inactive when all of these are true for 30 days:\n- Not showing any "typing..."\n- Not sending any messages\n- Not adding or removing reactions to any messages\n- Not editing any existing messages\n- Not joining any voice channel\nBasically, everything that happens when you\'re actually inactive.\nヽ(´ー` )┌\n\nHere\'s a random situation you might be worried about. You went on a trip to the North Pole for 3 months and come back, to find yourself kicked. Kicked users cannot join using the public invite URL on the club page any more. Oh no! What should you do?\nヽ(´∀｀。ヽ) Worry no longer, because I will provide you a one-time invite code in case you want to rejoin! Go enjoy your North Pole!' 
       })
-    """
-  ]
+  """
 
   features_dict = OrderedDict(features_dict)
 
