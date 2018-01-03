@@ -38,6 +38,8 @@ class PresenceUpdate():
       counter_kaomoji = 0
       while not self.bot.is_closed:
         
+        # Flowchart https://i.imgur.com/iHTsRMk.png
+
         try:
           # Random boolean
           is_help = bool(random.random() < 0.35) 

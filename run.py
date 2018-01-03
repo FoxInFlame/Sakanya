@@ -16,6 +16,7 @@
 # - Change font for matplotlib to Osaka (installed by IATGOF)
 # - >readfile sends to Gist now
 # - Fix restart now working
+# - Rewrote logic for presence update randomness
 # 1.1.0
 # - Now automatically kicks users if they're inactive!
 # 1.0.19
