@@ -78,7 +78,7 @@ class Stats():
         return
       plot.bar(range(len(graph_data)), graph_data.values(), align='center')
       plot.xticks(range(len(graph_data)), list(graph_data.keys()), rotation='vertical')
-      plot.margins(0.08)
+      plot.margins(0.005)
       plot.title('Messages sent by users')
       plot.tight_layout()
       #plot.subplots_adjust(top=0.09) # Bottom is 0.1 by default, and top cannot be >= to bottom
@@ -100,7 +100,7 @@ class Stats():
         return
       plot.bar(range(len(graph_data)), graph_data.values(), align='center')
       plot.xticks(range(len(graph_data)), list(graph_data.keys()), rotation='vertical')
-      plot.margins(0.08)
+      plot.margins(0.005)
       plot.title('Messages sent by bots')
       plot.tight_layout()
       #plot.subplots_adjust(top=0.09) # Bottom is 0.1 by default, and top cannot be >= to bottom
@@ -122,7 +122,7 @@ class Stats():
         return
       plot.bar(range(len(graph_data)), graph_data.values(), align='center')
       plot.xticks(range(len(graph_data)), list(graph_data.keys()), rotation='vertical')
-      plot.margins(0)
+      plot.margins(0.005)
       plot.title('Messages sent by everyone')
       plot.tight_layout()
       #plot.subplots_adjust(top=0.09) # Bottom is 0.1 by default, and top cannot be >= to bottom
