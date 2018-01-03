@@ -23,7 +23,6 @@ import json
 # Import lxml to parse XML and HTML
 from lxml import etree
 # Import URLlib.error to handle error
-# import urllib.error
 
 class Saka():
   def __init__(self, bot):

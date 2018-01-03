@@ -44,11 +44,12 @@ class Stats_MessageCounter():
         "count": 1
       }
 
-    if "name" not in self.authors_json[message.author.id]:
-      if message.author.nick is not None:
-        self.authors_json[message.author.id]["name"] = message.author.nick
-      else:
-        self.authors_json[message.author.id]["name"] = message.author.name
+    if message.author.nick is not None:
+      self.authors_json[message.author.id]["name"] = message.author.nick
+    else:
+      self.authors_json[message.author.id]["name"] = message.author.name
+    
+    if "bot" not in self.authors_json[message.author.id]:
       self.authors_json[message.author.id]["bot"] = message.author.bot
 
     with open(os.path.join(os.path.dirname(__file__), 'authors.json'), 'w') as file: # Then overwrite the file
