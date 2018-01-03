@@ -36,6 +36,7 @@ class PresenceUpdate():
         kaomojis = ['Need help? {}help'.format(SakanyaCore().prefix)]
 
       counter_kaomoji = 0
+      owner = await self.bot.get_user_info('202501452596379648')
       while not self.bot.is_closed:
         
         try:
@@ -58,7 +59,7 @@ class PresenceUpdate():
             elif game_type == 2:
               # Listening to - random nyaa music
               nyaamusic_xml = await session.get('https://nyaa.si/?page=rss&c=2_0&f=0', headers=SakanyaCore().headers)
-              tree = etree.fromstring(await nyaamusic_xml.read())
+              tree = etree.fromstring((await nyaamusic_xml.read()).decode('utf-8'))
               game_name = tree.xpath('//item[1]/title/text()')
             elif game_type == 3:
               # Watching - you
@@ -68,10 +69,10 @@ class PresenceUpdate():
                 game_name = 'you'
               else:
                 nyaaanime_xml = await session.get('https://nyaa.si/?page=rss&c=1_2&f=0', headers=SakanyaCore().headers)
-                tree = etree.fromstring(await nyaaanime_xml.read())
+                tree = etree.fromstring((await nyaaanime_xml.read()).decode('utf-8'))
+                await self.bot.send_message(owner, tree.xpath('//item[1]/title/text()'))
                 game_name = re.sub("[\(\[].*?[\)\]]", "", tree.xpath('//item[1]/title/text()'))
         except Exception as e:
-          owner = await self.bot.get_user_info('202501452596379648')
           await self.bot.send_message(owner, 'Error while changing presence:```{}```'.format(repr(e)))
 
         await self.bot.change_presence(game=discord.Game(name=game_name, type=game_type), status=None, afk=False)
