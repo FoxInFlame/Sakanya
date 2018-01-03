@@ -58,7 +58,7 @@ class PresenceUpdate():
             elif game_type == 2:
               # Listening to - random nyaa music
               nyaamusic_xml = await session.get('https://nyaa.si/?page=rss&c=2_0&f=0', headers=SakanyaCore().headers)
-              tree = etree.fromstring(nyaamusic_xml)
+              tree = etree.fromstring((await nyaamusic_xml.read()).decode('utf8'))
               game_name = tree.xpath('//item[1]/title/text()')
             elif game_type == 3:
               # Watching - you
@@ -68,7 +68,7 @@ class PresenceUpdate():
                 game_name = 'you'
               else:
                 nyaaanime_xml = await session.get('https://nyaa.si/?page=rss&c=1_2&f=0', headers=SakanyaCore().headers)
-                tree = etree.fromstring(nyaaanime_xml)
+                tree = etree.fromstring((await nyaaanime_xml.read()).decode('utf8'))
                 game_name = re.sub("[\(\[].*?[\)\]]", "", tree.xpath('//item[1]/title/text()'))
         except Exception as e:
           owner = await self.bot.get_user_info('202501452596379648')
