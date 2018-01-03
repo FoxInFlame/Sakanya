@@ -44,10 +44,7 @@ class Stats_MessageCounter():
         "count": 1
       }
 
-    if message.author.nick is not None:
-      self.authors_json[message.author.id]["name"] = message.author.nick
-    else:
-      self.authors_json[message.author.id]["name"] = message.author.name
+    self.authors_json[message.author.id]["name"] = message.author.name
     
     if "bot" not in self.authors_json[message.author.id]:
       self.authors_json[message.author.id]["bot"] = message.author.bot
