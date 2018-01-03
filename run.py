@@ -7,8 +7,12 @@
 #                             /____/         
 # 
 # A shy Discord bot written by FoxInFlame in Discord.py.
-# Version 1.1.0
+# Version 1.1.1
 # Changelog:
+# 1.1.1
+# - Disable Automatic Kicking System
+# - Commands added: >modules
+# - Now changes presence to "Listening to" and "Watching" as well
 # 1.1.0
 # - Now automatically kicks users if they're inactive!
 # 1.0.19
@@ -100,7 +104,7 @@ import sched, time
 
 class SakanyaCore():
   # Some basic info
-  version = '1.1.0'
+  version = '1.1.1'
   prefix = '>'
   debug = False
   debug_server = '344957370901856266'
