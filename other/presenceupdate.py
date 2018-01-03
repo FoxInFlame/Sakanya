@@ -40,7 +40,7 @@ class PresenceUpdate():
         
         try:
           # Random boolean
-          is_help = bool(random.getrandbits(1))
+          is_help = bool(random.random() < 0.35) 
           if is_help:
             # Random game type
             game_type = random.randint(0, 3)
@@ -59,7 +59,7 @@ class PresenceUpdate():
               # Listening to - random nyaa music
               nyaamusic_xml = await session.get('https://nyaa.si/?page=rss&c=2_0&f=0', headers=SakanyaCore().headers)
               tree = etree.fromstring((await nyaamusic_xml.read()).decode('utf-8'))
-              game_name = tree.xpath('//item[1]/title/text()')[0]
+              game_name = re.sub("[\(\[].*?[\)\]]", "", tree.xpath('//item[1]/title/text()')[0])
             elif game_type == 3:
               # Watching - you
               # Watching - random nyaa anime
