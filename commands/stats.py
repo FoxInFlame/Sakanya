@@ -11,7 +11,7 @@ import matplotlib
 # Force matplotlib to not use any XWindows backend (removing will result in "no $display environment variable" error)
 matplotlib.use('Agg') 
 # Say, "the default sans-serif font is COMIC SANS"
-matplotlib.rcParams['font.sans-serif'] = "Meiryo"
+matplotlib.rcParams['font.sans-serif'] = "DejaVu"
 # Then, "ALWAYS use sans-serif fonts"
 matplotlib.rcParams['font.family'] = "sans-serif"
 
