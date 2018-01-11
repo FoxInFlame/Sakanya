@@ -21,9 +21,10 @@ class BotChains():
       if resultanime is not None:
         await self.bot.send_message(message.channel, '!anime ' + resultanime)
 
-      resultmanga = re.search(r'https://myanimelist.net/manga/([0-9]+?)/', message.content).group(1)
-      if resultmanga is not None:
-        await self.bot.send_message(message.channel, '!manga ' + resultmanga)
+      # Somehow the following didn't work...?
+      # resultmanga = re.search(r'https://myanimelist.net/manga/([0-9]+?)/', message.content).group(1)
+      # if resultmanga is not None:
+      #  await self.bot.send_message(message.channel, '!manga ' + resultmanga)
 
   @commands.command(pass_context=True, aliases=['poke', 'hello'])
   async def chain(self, context):
