@@ -2,6 +2,8 @@
 import discord
 # Import undocumented part of Discord to use commands
 from discord.ext import commands
+# Import regexp
+import re
 # Import Sakanya Core
 from __main__ import SakanyaCore
 
@@ -9,6 +11,13 @@ class BotChains():
   def __init__(self, bot):
     self.bot = bot
     #self.times = 3
+  
+  async def on_message(self, message):
+    """
+    Handle MAL Anime links for Andre
+    """
+    result = re.search(r'https://myanimelist.net/anime/([0-9]+?)/', message.content).group(1)
+    await self.bot.send_message(message.channel, '!anime ' + result)
 
   @commands.command(pass_context=True, aliases=['poke', 'hello'])
   async def chain(self, context):
