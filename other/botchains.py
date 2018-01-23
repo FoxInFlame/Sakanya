@@ -17,15 +17,20 @@ class BotChains():
     Handle MAL Anime links for Andre
     """
     if message.server is not None and message.server.id == '317924870950223872':
-      resultanime = re.search(r'https://myanimelist.net/anime/([0-9]+?)/', message.content).group(1)
-      if resultanime is not None:
-        await self.bot.send_message(message.channel, '!anime ' + resultanime)
-
-      # Somehow the following didn't work...?
-      # resultmanga = re.search(r'https://myanimelist.net/manga/([0-9]+?)/', message.content).group(1)
-      # if resultmanga is not None:
-      #  await self.bot.send_message(message.channel, '!manga ' + resultmanga)
-
+      try:
+        resultanime = re.search(r'https://myanimelist.net/anime/([0-9]+?)/', message.content).group(1)
+        if resultanime is not None:
+          await self.bot.send_message(message.channel, '!anime ' + resultanime)
+      except:
+        pass
+      try:
+        # Somehow the following didn't work...?
+        resultmanga = re.search(r'https://myanimelist.net/manga/([0-9]+?)/', message.content).group(1)
+        if resultmanga is not None:
+          await self.bot.send_message(message.channel, '!manga ' + resultmanga)
+      except:
+        pass
+        
   @commands.command(pass_context=True, aliases=['poke', 'hello'])
   async def chain(self, context):
     """

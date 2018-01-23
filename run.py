@@ -7,8 +7,10 @@
 #                             /____/         
 # 
 # A shy but energetic Discord bot written by FoxInFlame in Discord.py.
-# Version 1.1.1
+# Version 1.1.2
 # Changelog:
+# 1.1.2
+# - Add support for !manga url detection.
 # 1.1.1
 # - Disable Automatic Kicking System
 # - Commands added: >modules, >reset_messagecount
@@ -108,7 +110,7 @@ import sched, time
 
 class SakanyaCore():
   # Some basic info
-  version = '1.1.1'
+  version = '1.1.2'
   prefix = '>'
   debug = False
   debug_server = '344957370901856266'
