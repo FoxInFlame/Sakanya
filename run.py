@@ -11,6 +11,7 @@
 # Changelog:
 # 1.1.2
 # - Add support for !manga url detection.
+# - Fix KeyError: 'emoji' in case Emoji didn't exist for some unknown Discord bug
 # 1.1.1
 # - Disable Automatic Kicking System
 # - Commands added: >modules, >reset_messagecount
