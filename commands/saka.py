@@ -151,6 +151,10 @@ class Saka():
                   # If bcy.net
                   description += '**Title:** ' + topresult['data']['title'] + '\n**Author:** ' + (topresult['data']['member_name'] if topresult['data']['member_name'] is not None else 'Unknown') + ('#' + topresult['data']['member_id'] if topresult['data']['member_id'] is not None else '') + '\n**Source:** bcy.net'
                   resulturl = 'http://bcy.net/coser/detail/' + str(topresult['data']['member_link_id']) + '/' + str(topresult['data']['bcy_id'])
+                elif 'mu_id' in topresult['data']:
+                  # If MangaUpdates
+                  description += '**Title:** ' + topresult['data']['part'] + '\n**Series**: ' + topresult['data']['source'] + '\n**Source:** mangaupdates.com'
+                  resulturl = topresult['data']['ext_urls'][0]
                 elif 'url' in topresult['data'] and 'medibang' in topresult['data']['url']:
                   # If medibang
                   description += '**Title:** ' + topresult['data']['title'] + '\n**Author:** ' + (topresult['data']['member_name'] if topresult['data']['member_name'] is not None else 'Unknown') + ('#' + topresult['data']['member_id'] if topresult['data']['member_id'] is not None else '') + '\n**Source:** Medibang'
@@ -164,7 +168,7 @@ class Saka():
                   description = description
                 )
                 resultembed.set_thumbnail(url=url)
-                resultembed.set_image(url=topresult['header']['thumbnail'])
+                resultembed.set_image(url=topresult['header']['thumbnail'].replace(' ', '%20'))
                 resultembed.set_footer(text=SakanyaCore().name + ' image results on Saucenao', icon_url='http://www.userlogos.org/files/logos/zoinzberg/SauceNAO.png')
                 await self.updateProgressBar(progressmsg, 100)
                 return ReturnMessage(

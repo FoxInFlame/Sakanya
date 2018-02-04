@@ -71,13 +71,14 @@ class Stats_LastActivity():
         file.write(json.dumps(self.dates_json, indent=2))
 
   async def checkForInactiveUsers(self):
+    """
     while not self.bot.is_closed:
       currenttime = datetime.datetime.utcnow()
       for member_id, timestamp_naive in list(self.dates_json.items()):
         timestamp = datetime.datetime.strptime(timestamp_naive, '%Y-%m-%d %H:%M:%S.%f')
         timedelta = currenttime - timestamp
         if timedelta.total_seconds() >= 86400 * 30:
-          """
+          
           # Over a month ago. Kick!
           channel = self.bot.get_channel(SakanyaCore().channel_id())
           server = self.bot.get_server(SakanyaCore().server_id())
@@ -111,8 +112,8 @@ class Stats_LastActivity():
             # No Permissions, user is admin or something. Just ignore
             print(e)
             continue
-          """
-          owner = await bot.get_user_info('202501452596379648')
+          
+          owner = await self.bot.get_user_info('202501452596379648')
           server = self.bot.get_server(SakanyaCore().server_id())
           member = self.bot.get_server(SakanyaCore().server_id()).get_member(member_id)
           user = await self.bot.get_user_info(member_id)
@@ -124,6 +125,8 @@ class Stats_LastActivity():
           ))
 
       await asyncio.sleep(86400) # one day!
+  
+  """
 
 
 def setup(bot):

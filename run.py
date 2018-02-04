@@ -195,7 +195,7 @@ if __name__ == "__main__":
     try:
       bot.load_extension(extension)
     except Exception as e:
-      startup_errors += 'Failed to load extension {0}\n{1}: {2}'.format(extension, type(e).__name__, str(e))
+      startup_errors += 'Failed to load extension {0}\n{1}: {2}\n'.format(extension, type(e).__name__, str(e))
 
   print('') # Empty line in case of continuous execution
   print(startup_errors)
