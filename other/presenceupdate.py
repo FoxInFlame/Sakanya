@@ -6,6 +6,8 @@ from discord.ext import commands
 from __main__ import SakanyaCore
 # import random for randomness (used in setting presence)
 import random
+# import json for JSON handling of APIs
+import json
 # Import asynchronous waiting 
 import asyncio
 # Import URLlib.parse to manipulate URLs
@@ -65,13 +67,22 @@ class PresenceUpdate():
             elif game_type == 3:
               # Watching - you
               # Watching - random nyaa anime
-              is_watchingyou = bool(random.getrandbits(1))
-              if is_watchingyou:
+              # Watching - random youtube video
+              watching_type = random.randint(0, 3)
+              if watching_type == 0:
+                # Watching - you
                 game_name = 'you'
-              else:
+              elif watching_type == 1:
+                # Watching - random nyaa anime
                 nyaaanime_xml = await session.get('https://nyaa.si/?page=rss&c=1_2&f=0', headers=SakanyaCore().headers)
                 tree = etree.fromstring((await nyaaanime_xml.read()).decode('utf-8'))
                 game_name = re.sub("[\(\[].*?[\)\]]", "", tree.xpath('//item[1]/title/text()')[0])
+              else:
+                # Watching - random youtube video
+                randomyoutube = await session.get('https://randomyoutube.net/api/getvid?api_token=E08bTMeguELFi8ypAkqzp5GOrW5VlPfryXOH51dhbkIl3vl2m7XwXYAQOyzE')
+                video_id = json.loads(await randomyoutube.read())['vid']
+                youtubeinformation = await session.get('https://www.googleapis.com/youtube/v3/videos?id=' + video_id + '&key=AIzaSyANYEAX7HHS2FtLghu6MNbOUVAADk9ziLg&part=snippet,contentDetails,statistics,status')
+                game_name = json.loads(await youtubeinformation.read())['items'][0]['snippet']['title']
         except Exception as e:
           owner = await self.bot.get_user_info('202501452596379648')
           await self.bot.send_message(owner, 'Error while changing presence:```{}```'.format(repr(e)))
