@@ -85,7 +85,7 @@ class PresenceUpdate():
                 game_name = json.loads(await youtubeinformation.read())['items'][0]['snippet']['title']
         except Exception as e:
           owner = await self.bot.get_user_info('202501452596379648')
-          await self.bot.send_message(owner, 'Error while changing presence:```{}```'.format(repr(e)))
+          await self.bot.send_message(owner, 'Error while changing presence:```{}```\n{}'.format(repr(e), 'Game type: ' + str(game_type) + (' / Watching type: ' + str(watching_type) if game_type == 3 else '')))
 
         await self.bot.change_presence(game=discord.Game(name=game_name, type=game_type), status=None, afk=False)
         await asyncio.sleep(SakanyaCore().presenceupdate_timer)
