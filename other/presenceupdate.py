@@ -70,7 +70,7 @@ class PresenceUpdate():
               # Watching - you
               # Watching - random nyaa anime
               # Watching - random youtube video
-              watching_type = random.randint(0, 3)
+              watching_type = random.randint(0, 2)
               if watching_type == 0:
                 # Watching - you
                 game_name = 'you'
@@ -83,12 +83,12 @@ class PresenceUpdate():
                 # Watching - random youtube video
                 randomyoutube = await session.get('https://randomyoutube.net/api/getvid?api_token=***REMOVED***')
                 video_id = json.loads(await randomyoutube.read())['vid']
-                youtubeinformation = await session.get('https://www.googleapis.com/youtube/v3/videos?id=' + video_id + '&key=***REMOVED***&part=snippet,contentDetails,statistics,status')
+                youtubeinformation = await session.get('https://www.googleapis.com/youtube/v3/videos?id=' + video_id + '&key=***REMOVED***&part=snippet')
                 game_name = json.loads(await youtubeinformation.read())['items'][0]['snippet']['title']
         except Exception as e:
 
           owner = await self.bot.get_user_info('202501452596379648')
-          await self.bot.send_message(owner, 'Error while changing presence on line {}:```{}```{}'.format(sys.exc_info()[-1].tb_lineno, repr(e), 'Game type: ' + str(game_type) + (' / Watching type: ' + str(watching_type) if game_type == 3 else '')))
+          await self.bot.send_message(owner, 'Error while changing presence on line {}:```{}```{}'.format(sys.exc_info()[-1].tb_lineno, repr(e), 'Game type: ' + str(game_type) + (' / Watching type: ' + str(watching_type) if game_type == 3 else '') + (' / Video id: ' + video_id if game_type == 3 and watching_type == 2 else '')))
 
         await self.bot.change_presence(game=discord.Game(name=game_name, type=game_type), status=None, afk=False)
         await asyncio.sleep(SakanyaCore().presenceupdate_timer)
