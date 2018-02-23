@@ -47,11 +47,13 @@ class Update():
           time.sleep(3) # Time to update presence 
           await self.bot.logout()
           os.execl(sys.executable, sys.executable, *sys.argv)
+
       except subprocess.CalledProcessError as e:
         print('Git pull has failed!')
         print(e.output)
         await self.bot.say('Sakanya ran into an error while pulling from git.\n```' + e.output + '```')
         await self.bot.change_presence(game=discord.Game(name='Updating: Download Error...', type=0), status=None, afk=False)
+        
       except Exception as e:
         exc_type, exc_obj, tb = sys.exc_info()
         print('Git pull has failed for an unknown reason:')
