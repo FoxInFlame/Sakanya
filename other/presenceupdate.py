@@ -84,7 +84,11 @@ class PresenceUpdate():
                 randomyoutube = await session.get('https://randomyoutube.net/api/getvid?api_token=***REMOVED***')
                 video_id = json.loads(await randomyoutube.read())['vid']
                 youtubeinformation = await session.get('https://www.googleapis.com/youtube/v3/videos?id=' + video_id + '&key=***REMOVED***&part=snippet')
-                game_name = json.loads(await youtubeinformation.read())['items'][0]['snippet']['title']
+                parsed = json.loads(await youtubeinformation.read())['items']
+                if len(parsed) > 0:
+                  game_name = parsed[0]['snippet']['title']
+                else:
+                  game_name = 'Need help? {}help'.format(SakanyaCore().prefix)
         except Exception as e:
 
           owner = await self.bot.get_user_info('202501452596379648')
