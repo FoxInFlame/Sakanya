@@ -82,6 +82,13 @@ class Help():
       'usage': 'ping',
       'admin': False
     }),
+    ('modules', {
+      'module': 'commands.modules',
+      'short_description': 'View a list of modules, enable modules, or disable modules',
+      'description': '**Fox only:** You can see the list of enabled modules I run on, enable certain modules, or disable others. Useful when a certain module is causing a havoc and you want to temporarily disable it while you work on the solution.',
+      'usage': 'modules [enable|disable] [modulename]',
+      'admin': True
+    }),
     ('update', {
       'module': 'commands.update',
       'short_description': 'Updates me to the latest version',
