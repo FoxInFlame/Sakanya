@@ -7,8 +7,11 @@
 #                             /____/         
 # 
 # A shy but energetic Discord bot written by FoxInFlame in Discord.py.
-# Version 1.1.2
+# Version 1.2.0
 # Changelog:
+# 1.2.0
+# - Commands added: >addreaction
+# - Added Admin help inside >help that only shows when Fox sends the message
 # 1.1.2
 # - Add support for !manga url detection.
 # - Fix KeyError: 'emoji' in case Emoji didn't exist for some unknown Discord bug
@@ -112,7 +115,7 @@ import sched, time
 
 class SakanyaCore():
   # Some basic info
-  version = '1.1.2'
+  version = '1.2.0'
   prefix = '>'
   debug = False
   debug_server = '344957370901856266'
@@ -129,7 +132,7 @@ class SakanyaCore():
     'lewd': '350190393607847937',
     'ama': '349277559449452545',
     'hungry for new waifus': '381412270481342465',
-    'houkai3rd': '397940005735104512'
+    'playing houkai3rd': '397940005735104512'
   }
 
   # Actual core code stuff
@@ -154,7 +157,7 @@ class SakanyaCore():
   startup_extensions = ['commands.love', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'commands.ping', 'commands.stats', 'commands.modules', 'commands.addreaction', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.uselessinteractions', 'other.presenceupdate', 'other.rolecolour', 'other.botchains', 'stats.messagecounter', 'stats.lastactivity'] 
   headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'}
 
-bot = commands.Bot(command_prefix=SakanyaCore().prefix, description=SakanyaCore().description)
+bot = commands.Bot(command_prefix=[SakanyaCore().prefix, SakanyaCore().prefix + ' '], description=SakanyaCore().description)
 bot.remove_command('help') # Remove default help command
 
 startup_errors = ''
@@ -165,8 +168,7 @@ async def on_ready():
   await bot.send_message(owner, content='Sakanya is now online as ' + bot.user.name + '! Prefix is `' + SakanyaCore().prefix + '`.\nErrors while starting: ' + ('None' if startup_errors == '' else '```' + startup_errors + '```'))
   print('---------------------------------------------------')
   print('Sakanya by FoxInFlame has logged into Discord as')
-  print('@' + bot.user.name)
-  print(bot.user.id)
+  print('@' + bot.user.name + ' ID' + bot.user.id)
   print('---------------------------------------------------')
 
 @bot.event

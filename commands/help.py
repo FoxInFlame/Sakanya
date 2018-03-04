@@ -85,21 +85,21 @@ class Help():
     ('update', {
       'module': 'commands.update',
       'short_description': 'Updates me to the latest version',
-      'description': 'This command will make me download the latest commit from my git repository, and restart myself.',
+      'description': '**Fox only:** This command will make me download the latest commit from my git repository, and restart myself.',
       'usage': 'update',
       'admin': True
     }),
     ('restart', {
       'module': 'commands.restart',
       'short_description': 'Makes me restart',
-      'description': 'This command will make me restart.',
+      'description': '**Fox only:** This command will make me restart.',
       'usage': 'restart',
       'admin': True
     }),
     ('addreaction', {
       'module': 'commands.addreaction',
       'short_description': 'Add a reaction to a specific message',
-      'description': 'I can react to a specific message with an emoji of your choice. Unfortunately you will have to go through the process of gathering message and channel ids.',
+      'description': '**Fox only:** I can react to a specific message with an emoji of your choice. Unfortunately you will have to go through the process of gathering message and channel ids.',
       'usage': 'addreaction <channelid> <messageid> <reaction>',
       'admin': True
     })
@@ -113,6 +113,13 @@ class Help():
       'title': 'Suggestion Control',
       'short_description': 'Control messages in <#341874607651029003> as neccessary.',
       'description': 'I remove any messages in <#341874607651029003> when the message gets at least 5 <:x:348390305248182272>s, or when it gets one ✅ by the author of the message. ~(>_<~)',
+      'admin': False
+    }),
+    ('quote', {
+      'module': 'commands.modules', # Just a random one because it's in the main file
+      'title': 'Quote',
+      'short_descrpition': 'Passively quote messages in chats.',
+      'description': 'When a message starting with the Saka prefix (' + SakanyaCore().prefix + ') is posted, and I can\'t find a matching command, I will take that message as a quote and create an embed out of it. This feature is one of the most disliked features I have inside of me, apparently.\n(´。＿。｀)',
       'admin': False
     })
   ]
