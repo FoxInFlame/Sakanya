@@ -125,7 +125,7 @@ class Help():
     ('quote', {
       'module': 'commands.modules', # Just a random one because it's in the main file
       'title': 'Quote',
-      'short_descrpition': 'Passively quote messages in chats.',
+      'short_description': 'Passively quote messages in chats.',
       'description': 'When a message starting with the Saka prefix (' + SakanyaCore().prefix + ') is posted, and I can\'t find a matching command, I will take that message as a quote and create an embed out of it. This feature is one of the most disliked features I have inside of me, apparently.\n(´。＿。｀)',
       'admin': False
     })
@@ -163,6 +163,7 @@ class Help():
     )
     helpembed.set_author(name='🐟 Help: ' + SakanyaCore().name, url=discord.Embed.Empty, icon_url=discord.Embed.Empty)
     if subcommand is None:
+      print('hi')
       helpembed.set_thumbnail(url='https://i.imgur.com/09lpIAL.png')
       commands_str = ''
       for key, value in self.commands_dict.items():
