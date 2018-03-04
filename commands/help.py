@@ -172,7 +172,7 @@ class Help():
       if self.commands_dict[subcommand]['admin'] is False or context.message.author.id == '202501452596379648':
         helpembed.add_field(name=SakanyaCore().prefix + self.commands_dict[subcommand]['usage'], value=self.commands_dict[subcommand]['description'])
     elif subcommand in self.features_dict:
-      if self.commands_dict[subcommand]['admin'] is False or context.message.author.id == '202501452596379648':
+      if self.features_dict[subcommand]['admin'] is False or context.message.author.id == '202501452596379648':
         helpembed.add_field(name=self.features_dict[subcommand]['title'], value=self.features_dict[subcommand]['description'])
     else:
       helpembed.add_field(name='Not Found!', value='The keyword you specified (' + subcommand +') could not be found in my little list of features!')
