@@ -21,7 +21,7 @@ class AddReaction():
     if context.message.author.id == '202501452596379648':
       await self.bot.add_reaction(context.message, '✅') # Add checkmark
       try:
-        message = await self.bot.get_message(discord.Object(messageid))
+        message = await self.bot.get_message(discord.Object(channelid), messageid)
         await self.bot.add_reaction(message, reaction)
       except Exception as e:
         owner = await bot.get_user_info('202501452596379648')
