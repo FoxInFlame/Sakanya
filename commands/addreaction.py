@@ -25,7 +25,7 @@ class AddReaction():
         await self.bot.add_reaction(message, reaction)
       except Exception as e:
         owner = await bot.get_user_info('202501452596379648')
-        await bot.send_message(owner, content='Could not react to the message: ' + str(e)))
+        await bot.send_message(owner, content='Could not react to the message: ' + str(e))
     else:
       await self.bot.add_reaction(context.message, '❌');
 def setup(bot):
