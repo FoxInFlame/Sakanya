@@ -13,10 +13,10 @@ class AddReaction():
     Add a reaction to the specified message. Only available to FoxInFlame.
     
     Format:
-      >restart
+      >addreaction <channelid> <messageid> <reaction>
 
     Examples:
-      >restart
+      >addreaction 418558526827266070 419691101826580490 :two:
     """
     if context.message.author.id == '202501452596379648':
       await self.bot.add_reaction(context.message, '✅') # Add checkmark
