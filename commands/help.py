@@ -162,10 +162,10 @@ class Help():
       helpembed.add_field(name='Other Features', value=otherfeatures_str)
       helpembed.add_field(name='Learn More', value='Parameters surrounded by <> are required, and ones surrounded by [] are optional.\n*To learn more about each feature, type `' + SakanyaCore().prefix + 'help <keyword>`.*')
     elif subcommand in self.commands_dict:
-      if self.comamnds_dict[subcommand]['admin'] is False or context.message.author.id == '202501452596379648':
+      if self.commands_dict[subcommand]['admin'] is False or context.message.author.id == '202501452596379648':
         helpembed.add_field(name=SakanyaCore().prefix + self.commands_dict[subcommand]['usage'], value=self.commands_dict[subcommand]['description'])
     elif subcommand in self.features_dict:
-      if self.comamnds_dict[subcommand]['admin'] is False or context.message.author.id == '202501452596379648':
+      if self.commands_dict[subcommand]['admin'] is False or context.message.author.id == '202501452596379648':
         helpembed.add_field(name=self.features_dict[subcommand]['title'], value=self.features_dict[subcommand]['description'])
     else:
       helpembed.add_field(name='Not Found!', value='The keyword you specified (' + subcommand +') could not be found in my little list of features!')
