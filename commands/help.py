@@ -65,7 +65,7 @@ class Help():
       'module': 'other.rolecolour',
       'short_description': 'Set your display colour on this server',
       'description': 'You can let me update your display colour on this server to any colour you want! There is of course also an alias `color` for anyone feeling American. Supported formats are hex and rgb, and the text values `random` for a random colour, and `remove` to refer back to the default colour.' + ('\nYour colour will be denied if I deem it illegible on Discord Dark Mode. On the contrary, no one cares about light mode anyway, so you can set it however light you want.' if SakanyaCore().colourrestrictions is True else ''),
-      'usage': 'colour|color (#000000 | rgb(0, 0, 0) | random | remove)>',
+      'usage': 'colour|color (#000000 | rgb(0, 0, 0) | random | remove)',
       'admin': False
     }),
     ('stats', {
