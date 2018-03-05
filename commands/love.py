@@ -4,6 +4,8 @@ import discord
 from discord.ext import commands
 # Import random for randomness
 import random
+# Import difflib for string difference calculation
+import difflib
 # Import Sakanya Core
 from __main__ import SakanyaCore
 
@@ -28,24 +30,29 @@ class Love():
     if context.message.server is None:
       await self.bot.say('You can only send love to someone when you\'re in the same server as them.\no(>< )o')
       return
-    member = None
+
+    member = {
+      'difference': 9999999,
+      'member': None
+    }
     server_members = context.message.server.members
     for server_member in server_members:
-      if server_member.name == user or ('nick' in server_member and server_member.nick == user):
-        member = server_member
-        break
-    #member = context.message.server.get_member_named(user)
-    #member = discord.utils.find(lambda m: user.lower() in m.name.lower(), context.message.server.members)
-    if member is None:
+      # You have to sum to get the length of a generator (can't len())
+      difference = sum(1 for _ in difflib.ndiff(user, server_member.name)) 
+      if difference < member['difference'] and difference < 30: # 30 seems nice.
+        member['difference'] = difference
+        member['member'] = server_member
+
+    if member['member'] is None:
       await self.bot.say('No one called ' + user + ' was found...\no(>< )o')
       return
-    if member == context.message.server.me:
+    if member['member'] == context.message.server.me:
       await self.bot.say('...um. Thanks! (o^ ^o)')
       return
-    if member.bot == True:
+    if member['member'].bot == True:
       await self.bot.say('Unfortunately, normal bots can\'t feel love... So I can\'t send the love to them. (-ω-、)')
       return
-    if member.id == context.message.author.id:
+    if member['member'].id == context.message.author.id:
       await self.bot.say('Awww. Sending love to yourself... ⊂(･ω･*⊂) Well, loving yourself is always good!')
     phrases = [
       '❤Um, {0}? I\'m really sorry to disturb you, but... I... I... I love you! --{1}',
@@ -66,8 +73,8 @@ class Love():
       '❤{0}... There are only two times that I want to be with you... Now and Forever. --{1}',
       '❤I dreamt of you last night {0}, and we were kissing and laughing. I woke up to realise that dream has already come true. --{1}'
     ]
-    await self.bot.send_message(member, 'Here\'s a love message a special someone has sent you!\n' + random.choice(phrases).format(member.name, context.message.author.name))
-    await self.bot.say('Your love has been sent to ' + member.name + '! (･ω<)☆')
+    await self.bot.send_message(member['member'], 'Here\'s a love message a special someone has sent you!\n' + random.choice(phrases).format(member['member'].name, context.message.author.name))
+    await self.bot.say('Your love has been sent to ' + member['member'].name + '! (･ω<)☆')
 
 def setup(bot):
   bot.add_cog(Love(bot))
