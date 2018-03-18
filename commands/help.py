@@ -163,7 +163,6 @@ class Help():
     )
     helpembed.set_author(name='🐟 Help: ' + SakanyaCore().name, url=discord.Embed.Empty, icon_url=discord.Embed.Empty)
     if subcommand is None:
-      print('hi')
       helpembed.set_thumbnail(url='https://i.imgur.com/09lpIAL.png')
       commands_str = ''
       for key, value in self.commands_dict.items():

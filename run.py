@@ -7,8 +7,10 @@
 #                             /____/         
 # 
 # A shy but energetic Discord bot written by FoxInFlame in Discord.py.
-# Version 1.2.0
+# Version 1.3.0
 # Changelog:
+# 1.3.0
+# - Reformatted >stats for simpler, more quicker layout that matches Andre's
 # 1.2.0
 # - Commands added: >addreaction
 # - Added Admin help inside >help that only shows when Fox sends the message
@@ -115,7 +117,7 @@ import sched, time
 
 class SakanyaCore():
   # Some basic info
-  version = '1.2.0'
+  version = '1.3.0'
   prefix = '>'
   debug = False
   debug_server = '344957370901856266'
