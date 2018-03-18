@@ -72,8 +72,7 @@ class Stats():
           continue
         if value["bot"] is False:
           graph_data[value["name"]] = value["count"]
-          await self.updateProgressBar(progressmsg, 20 + (50 / len(data) * count), 'Analysing ' + value["name"])
-      if(len(graph_data) == 0):
+      if(empty(graph_data)):
         await self.bot.send_message(context.message.channel, 'Data malformed...')
         return
       plot.bar(range(len(graph_data)), graph_data.values(), align='center')
@@ -94,7 +93,6 @@ class Stats():
           continue
         if value["bot"] is True:
           graph_data[value["name"]] = value["count"]
-          await self.updateProgressBar(progressmsg, 20 + (50 / len(data) * count), 'Analysing ' + value["name"])
       if(len(graph_data) == 0):
         await self.bot.send_message(context.message.channel, 'Data malformed...')
         return
@@ -115,7 +113,6 @@ class Stats():
         if isinstance(value, int):
           continue
         graph_data[value["name"]] = value["count"]
-        await self.updateProgressBar(progressmsg, 20 + (50 / len(data) * count), 'Analysing ' + value["name"])
         await asyncio.sleep(1)
       if(len(graph_data) == 0):
         await self.bot.send_message(context.message.channel, 'Data malformed...')
