@@ -61,81 +61,84 @@ class Stats():
     if argument is None:
       await self.bot.say('Try `' + SakanyaCore().prefix + 'help stats`.')
       return
+    
+
+    embed = discord.Embed(
+      color = SakanyaCore().embed_color,
+      type = 'rich'
+    ).set_author(name='🐟 Statistics', url=discord.Embed.Empty, icon_url=discord.Embed.Empty)
+
     if argument == 'messages_byusers':
-      tmpmsg = await self.bot.send_message(context.message.channel, 'Generating chart...')
-      progressmsg = await self.bot.say('`φ(．．)`')
+
       data = await self.loadStatFile('authors.json')
-      await self.updateProgressBar(progressmsg, 20)
       graph_data = {}
+      total_messages = 0
       for count, (key, value) in enumerate(list(data.items()), 1):
-        if isinstance(value, int):
-          continue
-        if value["bot"] is False:
-          graph_data[value["name"]] = value["count"]
-      if(empty(graph_data)):
+        if not isinstance(value, int) and value['bot'] is False:
+          total_messages += value['count']
+          graph_data[value['name']] = value['count']
+      if not graph_data:
         await self.bot.send_message(context.message.channel, 'Data malformed...')
         return
-      plot.bar(range(len(graph_data)), graph_data.values(), align='center')
-      plot.xticks(range(len(graph_data)), list(graph_data.keys()), rotation='vertical')
-      plot.margins(0.005)
-      plot.title('Messages sent by users')
-      plot.tight_layout()
-      #plot.subplots_adjust(top=0.09) # Bottom is 0.1 by default, and top cannot be >= to bottom
-      location = os.path.join(os.path.join(os.path.join(os.path.dirname(__file__), '..'), 'stats'), 'tmp.png')
+
+      embed_graph = ''
+
+      for item in sorted(graph_data, key=str.lower):
+        embed_graph += '**' + item + '**: ' + str(graph_data[item]) + \
+        ' (' + "%.2f" % round(graph_data[item] / total_messages * 100, 2) + '%)' + '\n'
+
+      embed.add_field(name='❯ Messages sent by users',
+                      value=embed_graph, inline=False)
+        
     elif argument == 'messages_bybots':
-      tmpmsg = await self.bot.send_message(context.message.channel, 'Generating chart...')
-      progressmsg = await self.bot.say('`φ(．．)`')
+
       data = await self.loadStatFile('authors.json')
-      await self.updateProgressBar(progressmsg, 20)
       graph_data = {}
+      total_messages = 0
       for count, (key, value) in enumerate(list(data.items()), 1):
-        if isinstance(value, int):
-          continue
-        if value["bot"] is True:
-          graph_data[value["name"]] = value["count"]
-      if(len(graph_data) == 0):
+        if not isinstance(value, int) and value['bot'] is True:
+          total_messages += value['count']
+          graph_data[value['name']] = value['count']
+      if not graph_data:
         await self.bot.send_message(context.message.channel, 'Data malformed...')
         return
-      plot.bar(range(len(graph_data)), graph_data.values(), align='center')
-      plot.xticks(range(len(graph_data)), list(graph_data.keys()), rotation='vertical')
-      plot.margins(0.005)
-      plot.title('Messages sent by bots')
-      plot.tight_layout()
-      #plot.subplots_adjust(top=0.09) # Bottom is 0.1 by default, and top cannot be >= to bottom
-      location = os.path.join(os.path.join(os.path.join(os.path.dirname(__file__), '..'), 'stats'), 'tmp.png')
+
+      embed_graph = ''
+
+      for item in sorted(graph_data, key=str.lower):
+        embed_graph += '**' + item + '**: ' + str(graph_data[item]) + \
+        ' (' + "%.2f" % round(graph_data[item] / total_messages * 100, 2) + '%)' + '\n'
+
+      embed.add_field(name='❯ Messages sent by bots',
+                      value=embed_graph, inline=False)
+        
     elif argument == 'messages_byeveryone':
-      tmpmsg = await self.bot.send_message(context.message.channel, 'Generating chart...')
-      progressmsg = await self.bot.say('`φ(．．)`')
+
       data = await self.loadStatFile('authors.json')
-      await self.updateProgressBar(progressmsg, 20)
       graph_data = {}
+      total_messages = 0
       for count, (key, value) in enumerate(list(data.items()), 1):
-        if isinstance(value, int):
-          continue
-        graph_data[value["name"]] = value["count"]
-        await asyncio.sleep(1)
-      if(len(graph_data) == 0):
+        if not isinstance(value, int):
+          total_messages += value['count']
+          graph_data[value['name']] = value['count']
+      if not graph_data:
         await self.bot.send_message(context.message.channel, 'Data malformed...')
         return
-      plot.bar(range(len(graph_data)), graph_data.values(), align='center')
-      plot.xticks(range(len(graph_data)), list(graph_data.keys()), rotation='vertical')
-      plot.margins(0.005)
-      plot.title('Messages sent by everyone')
-      plot.tight_layout()
-      #plot.subplots_adjust(top=0.09) # Bottom is 0.1 by default, and top cannot be >= to bottom
-      location = os.path.join(os.path.join(os.path.join(os.path.dirname(__file__), '..'), 'stats'), 'tmp.png')
+
+      embed_graph = ''
+
+      for item in sorted(graph_data, key=str.lower):
+        embed_graph += '**' + item + '**: ' + str(graph_data[item]) + \
+        ' (' + "%.2f" % round(graph_data[item] / total_messages * 100, 2) + '%)' + '\n'
+
+      embed.add_field(name='❯ Messages sent by everyone',
+                      value=embed_graph, inline=False)
+
     else:
       await self.bot.send_message(context.message.channel, 'Statistics for `' + argument + '` could not be found within me...')
       return
-
-    await self.updateProgressBar(progressmsg, 80)
-    plot.savefig(location)
-    plot.close("all")
-    await self.updateProgressBar(progressmsg, 100)
-    await self.bot.delete_message(tmpmsg)
-
-    await self.bot.send_file(context.message.channel, location)
-
+    
+    await self.bot.send_message(context.message.channel, embed=embed)
   
 def setup(bot):
   bot.add_cog(Stats(bot))
