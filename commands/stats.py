@@ -148,6 +148,7 @@ class Stats():
 
     await self.updateProgressBar(progressmsg, 80)
     plot.savefig(location)
+    asyncio.sleep(0.5)
     plot.close("all")
     await self.updateProgressBar(progressmsg, 100)
     await self.bot.delete_message(tmpmsg)
