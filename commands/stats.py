@@ -77,7 +77,7 @@ class Stats():
         # It is impossible to sort a dictionary, thus the dictionary is converted to a tuple upon
         # sorting. Each item in the tuple is a tuple with the first value being the key and second
         # being the value. 
-        embed_graph += '**' + item[0] + '**: ' + str(item[0]) + \
+        embed_graph += '**' + item[0] + '**: ' + str(item[1]) + \
         ' (' + "%.2f" % round(item[1] / total_messages * 100, 2) + '%)' + '\n'
 
       embed.title = '❯ Messages sent by users (ordered by amount descending)'
@@ -104,7 +104,7 @@ class Stats():
         # It is impossible to sort a dictionary, thus the dictionary is converted to a tuple upon
         # sorting. Each item in the tuple is a tuple with the first value being the key and second
         # being the value. 
-        embed_graph += '**' + item[0] + '**: ' + str(item[0]) + \
+        embed_graph += '**' + item[0] + '**: ' + str(item[1]) + \
         ' (' + "%.2f" % round(item[1] / total_messages * 100, 2) + '%)' + '\n'
 
       # Fix if length is over the limit
