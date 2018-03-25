@@ -159,7 +159,7 @@ class SakanyaCore():
     else:
       return '***REMOVED***'
 
-  startup_extensions = ['commands.love', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'commands.ping', 'commands.stats', 'commands.modules', 'commands.addreaction', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.uselessinteractions', 'other.presenceupdate', 'other.rolecolour', 'other.botchains', 'stats.messagecounter', 'stats.lastactivity'] 
+  startup_extensions = ['commands.love', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'commands.ping', 'commands.stats', 'commands.stats2', 'commands.modules', 'commands.addreaction', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.uselessinteractions', 'other.presenceupdate', 'other.rolecolour', 'other.botchains', 'stats.messagecounter', 'stats.lastactivity'] 
   headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'}
 
 bot = commands.Bot(command_prefix=[SakanyaCore().prefix + ' ', SakanyaCore().prefix, 'saka:'], description=SakanyaCore().description)
