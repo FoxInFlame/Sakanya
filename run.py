@@ -7,9 +7,12 @@
 #                             /____/         
 # 
 # A shy but energetic Discord bot written by FoxInFlame in Discord.py.
-# Version 1.3.0
+# Version 1.3.1
 # Changelog:
 # 1.3.0
+# - 1.3.1
+# - - Fixed stats problems Drutol and IATGOF kept negging about
+# - - Removed unused definitions in stats.py
 # - Reformatted >stats for simpler, more quicker layout that matches Andre's
 # 1.2.0
 # - Commands added: >addreaction
@@ -117,7 +120,7 @@ import sched, time
 
 class SakanyaCore():
   # Some basic info
-  version = '1.3.0'
+  version = '1.3.1'
   prefix = '>'
   debug = False
   debug_server = '344957370901856266'
