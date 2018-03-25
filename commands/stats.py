@@ -7,17 +7,19 @@ import os
 # Import JSON to read roles.json
 import json
 # Import matplotlib to plot stuff
-import matplotlib
+# import matplotlib
 # Force matplotlib to not use any XWindows backend (removing will result in "no $display environment variable" error)
-matplotlib.use('Agg') 
+# matplotlib.use('Agg') 
 # Say, "the default sans-serif font is COMIC SANS"
-matplotlib.rcParams['font.sans-serif'] = "Osaka"
+# matplotlib.rcParams['font.sans-serif'] = "Osaka"
 # Then, "ALWAYS use sans-serif fonts"
-matplotlib.rcParams['font.family'] = "sans-serif"
+# matplotlib.rcParams['font.family'] = "sans-serif"
 
-import matplotlib.pyplot as plot
+# import matplotlib.pyplot as plot
 # Import ticker to set ticks to integer
-from matplotlib.ticker import MaxNLocator
+# from matplotlib.ticker import MaxNLocator
+# Import operator to use on getting values while sorting dictionaries by value
+import operator
 # Import asynchronous waiting
 import asyncio
 # Import Sakanya Core
@@ -27,22 +29,8 @@ class Stats():
   
   def __init__(self, bot):
     self.bot = bot
-    ax = plot.figure().gca()
-    ax.yaxis.set_major_locator(MaxNLocator(integer=True))
-
-  async def updateProgressBar(self, message, percentage, comment=''):
-    """
-    Update the progress bar message with a cute little kaomoji.
-    """
-    await self.bot.send_typing(message.channel)
-    if message is None: return
-    if percentage == 100:
-      await self.bot.delete_message(message=message)
-      return
-    outoften = round(percentage / 10)
-    #await self.bot.edit_message(message=message, new_content='`' + ('__' * outoften)[:-1] + 'φ(．．) ' + comment + '`')
-    await self.bot.edit_message(message=message, new_content='`' + ('__' * outoften) + 'φ(．．) ' + comment + '`')
-
+    #ax = plot.figure().gca()
+    #ax.yaxis.set_major_locator(MaxNLocator(integer=True))
 
   async def loadStatFile(self, statfilename):
     try:
@@ -77,18 +65,23 @@ class Stats():
         if not isinstance(value, int) and value['bot'] is False:
           total_messages += value['count']
           graph_data[value['name']] = value['count']
+
       if not graph_data:
         await self.bot.send_message(context.message.channel, 'Data malformed...')
         return
 
       embed_graph = ''
 
-      for item in sorted(graph_data, key=str.lower):
-        embed_graph += '**' + item + '**: ' + str(graph_data[item]) + \
-        ' (' + "%.2f" % round(graph_data[item] / total_messages * 100, 2) + '%)' + '\n'
+      # sort alphabetically: sorted(graph_data, key=str.lower)
+      for item in sorted(graph_data.items(), key=operator.itemgetter(1), reverse=True):
+        # It is impossible to sort a dictionary, thus the dictionary is converted to a tuple upon
+        # sorting. Each item in the tuple is a tuple with the first value being the key and second
+        # being the value. 
+        embed_graph += '**' + item[0] + '**: ' + str(item[0]) + \
+        ' (' + "%.2f" % round(item[1] / total_messages * 100, 2) + '%)' + '\n'
 
-      embed.add_field(name='❯ Messages sent by users',
-                      value=embed_graph, inline=False)
+      embed.title = '❯ Messages sent by users (ordered by amount descending)'
+      embed.description = embed_graph
         
     elif argument == 'messages_bybots':
 
@@ -99,18 +92,27 @@ class Stats():
         if not isinstance(value, int) and value['bot'] is True:
           total_messages += value['count']
           graph_data[value['name']] = value['count']
+
       if not graph_data:
         await self.bot.send_message(context.message.channel, 'Data malformed...')
         return
 
       embed_graph = ''
 
-      for item in sorted(graph_data, key=str.lower):
-        embed_graph += '**' + item + '**: ' + str(graph_data[item]) + \
-        ' (' + "%.2f" % round(graph_data[item] / total_messages * 100, 2) + '%)' + '\n'
+      # sort alphabetically: sorted(graph_data, key=str.lower)
+      for item in sorted(graph_data.items(), key=operator.itemgetter(1), reverse=True):
+        # It is impossible to sort a dictionary, thus the dictionary is converted to a tuple upon
+        # sorting. Each item in the tuple is a tuple with the first value being the key and second
+        # being the value. 
+        embed_graph += '**' + item[0] + '**: ' + str(item[0]) + \
+        ' (' + "%.2f" % round(item[1] / total_messages * 100, 2) + '%)' + '\n'
 
-      embed.add_field(name='❯ Messages sent by bots',
-                      value=embed_graph, inline=False)
+      # Fix if length is over the limit
+      if len(embed_graph) > 2048:
+        embed_graph = embed_graph[:2044] + '...'
+      
+      embed.title = '❯ Messages sent by bots (ordered by amount descending)'
+      embed.description = embed_graph
         
     elif argument == 'messages_byeveryone':
 
@@ -121,18 +123,27 @@ class Stats():
         if not isinstance(value, int):
           total_messages += value['count']
           graph_data[value['name']] = value['count']
+        
       if not graph_data:
         await self.bot.send_message(context.message.channel, 'Data malformed...')
         return
 
       embed_graph = ''
 
-      for item in sorted(graph_data, key=str.lower):
-        embed_graph += '**' + item + '**: ' + str(graph_data[item]) + \
-        ' (' + "%.2f" % round(graph_data[item] / total_messages * 100, 2) + '%)' + '\n'
+      # sort alphabetically: sorted(graph_data, key=str.lower)
+      for item in sorted(graph_data.items(), key=operator.itemgetter(1), reverse=True):
+        # It is impossible to sort a dictionary, thus the dictionary is converted to a tuple upon
+        # sorting. Each item in the tuple is a tuple with the first value being the key and second
+        # being the value. 
+        embed_graph += '**' + item[0] + '**: ' + str(item[1]) + \
+        ' (' + "%.2f" % round(item[1] / total_messages * 100, 2) + '%)' + '\n'
 
-      embed.add_field(name='❯ Messages sent by everyone',
-                      value=embed_graph, inline=False)
+      # Fix if length is over the limit
+      if len(embed_graph) > 2048:
+        embed_graph = embed_graph[:2044] + '...'
+
+      embed.title = '❯ Messages sent by everyone (ordered by amount descending)'
+      embed.description = embed_graph
 
     else:
       await self.bot.send_message(context.message.channel, 'Statistics for `' + argument + '` could not be found within me...')
