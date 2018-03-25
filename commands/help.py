@@ -71,8 +71,15 @@ class Help():
     ('stats', {
       'module': 'commands.stats',
       'short_description': 'View various stats about this server',
-      'description': 'I record quite a lot of things (more as Fox implements more!), and you can view any of these stats. Currently, `messages_byeveryone`, `messages_byusers`, and `messages_bybots` are available for you to view!',
+      'description': 'I record quite a lot of things (more as Fox implements more!), and you can view a visualised representation of these stats. Currently, `messages_byeverone`, `messages_byusers`, and `messages_bybots` is available for you to use with me! These charts take quite a while to load, so please be patient and don\'t spam me out of rage - I\'ll just crash out of stress.',
       'usage': 'stats <stat_name>',
+      'admin': False
+    }),
+    ('stats2', {
+      'module': 'commands.stats2',
+      'short_description': 'View simple text stats about this server',
+      'description': 'This command will make me return server statisticss in a much simpler text format. The same keys as the normal stat command can be used, so please view `>help stats` for those.',
+      'usage': 'stats2 <stat_name>',
       'admin': False
     }),
     ('ping', {
