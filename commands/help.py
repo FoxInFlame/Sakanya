@@ -78,7 +78,7 @@ class Help():
     ('stats2', {
       'module': 'commands.stats2',
       'short_description': 'View simple text stats about this server',
-      'description': 'This command will make me return server statisticss in a much simpler text format. The same keys as the normal stat command can be used, so please view `>help stats` for those.',
+      'description': 'This command will make me return server statisticss in a much simpler text format. The same keys as the normal stat command can be used, so please view `' + SakanyaCore().prefix + 'help stats` for those.',
       'usage': 'stats2 <stat_name>',
       'admin': False
     }),
@@ -133,7 +133,7 @@ class Help():
       'module': 'commands.modules', # Just a random one because it's in the main file
       'title': 'Quote',
       'short_description': 'Passively quote messages in chats.',
-      'description': 'When a message starting with the Saka prefix (' + SakanyaCore().prefix + ') is posted, and I can\'t find a matching command, I will take that message as a quote and create an embed out of it. This feature is one of the most disliked features I have inside of me, apparently.\n(´。＿。｀)',
+      'description': 'When a message starting with the Saka quote prefix (' + (SakanyaCore().prefix * 3) + ') is posted, and I can\'t find a matching command, I will take that message as a quote and create an embed out of it. This feature is one of the most disliked features I have inside of me, apparently.\n(´。＿。｀)',
       'admin': False
     })
   ]
