@@ -252,14 +252,14 @@ class Saka():
     if not context.message.attachments: # No attachments
       if left is None:
         # >saka
-        await self.bot.say('Format\n`' + SakanyaCore.prefix + 'saka [source] <url>`')
+        await self.bot.say('Format\n`' + SakanyaCore().prefix + 'saka [source] <url>`')
         return
       elif right is None:
         # >saka <something>
         a = urllib.parse.urlparse(left)
         if bool(a.scheme) is False:
           # >saka <noturl>
-          await self.bot.say('Format\n`' + SakanyaCore.prefix + 'saka [source] <url>`')
+          await self.bot.say('Format\n`' + SakanyaCore().prefix + 'saka [source] <url>`')
           return
         # >saka <url>
         url = left
@@ -274,7 +274,7 @@ class Saka():
         a = urllib.parse.urlparse(right)
         if bool(a.scheme) is False:
           # !saka <noturl>
-          await self.bot.say('Format\n`' + SakanyaCore.prefix + 'saka [source] <url>`')
+          await self.bot.say('Format\n`' + SakanyaCore().prefix + 'saka [source] <url>`')
           return
         # >saka <saucenao|whatanime> <url>
         url = right

@@ -25,13 +25,16 @@ from __main__ import SakanyaCore
 
 
 class Stats():
+  """
+  Generate graphs using matplotlib for various stats.
+  """
 
   def __init__(self, bot):
     self.bot = bot
     # 1 inch = 100px
     # 1920px = 19.2in
     # 1080px = 10.8in
-    ax = plot.figure(figsize=(19.2, 10.8), dpi=100, frameon=False, facecolor='lightsalmon').gca()
+    ax = plot.figure().gca()
     ax.yaxis.set_major_locator(MaxNLocator(integer=True))
 
   async def updateProgressBar(self, message, percentage, comment=''):
@@ -59,6 +62,17 @@ class Stats():
     except IOError:
       return {}
 
+  def sort_dict_to_list_alphabetically(self, dictionary_to_sort):
+    """
+    Sort a dict to a list of tuples alphabetically, with the first value of the tuple being the key
+    and the second being the value.
+    """
+    ordered_list = []
+    for item in sorted(dictionary_to_sort, key=str.lower):
+      ordered_list.append((item, dictionary_to_sort[item]))
+    
+    return ordered_list
+
   @commands.command(pass_context=True)
   async def stats(self, context, argument=None):
 
@@ -66,6 +80,9 @@ class Stats():
     if argument is None:
       await self.bot.say('Try `' + SakanyaCore().prefix + 'help stats`.')
       return
+    
+    plot.figure(figsize=(19.2, 10.8), dpi=100,
+                frameon=False, facecolor='lightsalmon')
 
     if argument == 'messages_byusers':
 
@@ -79,12 +96,15 @@ class Stats():
           continue
         if value["bot"] is False:
           graph_data[value["name"]] = value["count"]
-      if len(graph_data) == 0:
+      if not graph_data:
         await self.bot.send_message(context.message.channel, 'Data malformed...')
         return
-      plot.bar(range(len(graph_data)), graph_data.values(), align='center')
-      plot.xticks(range(len(graph_data)), list(
-          graph_data.keys()), fontsize=10, rotation='vertical')
+      
+      # Alphabetical sorting
+      embed_graph = self.sort_dict_to_list_alphabetically(graph_data)
+
+      plot.bar(range(len(embed_graph)), [i[1] for i in embed_graph], align='center')
+      plot.xticks(range(len(embed_graph)), [i[0] for i in embed_graph], fontsize=13, rotation='vertical')
       plot.margins(0.005)
       plot.title('Messages sent by users')
       plot.tight_layout()
@@ -104,12 +124,15 @@ class Stats():
           continue
         if value["bot"] is True:
           graph_data[value["name"]] = value["count"]
-      if len(graph_data) == 0:
+      if not graph_data:
         await self.bot.send_message(context.message.channel, 'Data malformed...')
         return
-      plot.bar(range(len(graph_data)), graph_data.values(), align='center')
-      plot.xticks(range(len(graph_data)), list(
-          graph_data.keys()), fontsize=10, rotation='vertical')
+
+      # Alphabetical sorting
+      embed_graph = self.sort_dict_to_list_alphabetically(graph_data)
+
+      plot.bar(range(len(embed_graph)), [i[1] for i in embed_graph], align='center')
+      plot.xticks(range(len(embed_graph)), [i[0] for i in embed_graph], fontsize=13, rotation='vertical')
       plot.margins(0.005)
       plot.title('Messages sent by bots')
       plot.tight_layout()
@@ -128,18 +151,49 @@ class Stats():
         if isinstance(value, int):
           continue
         graph_data[value["name"]] = value["count"]
-      if len(graph_data) == 0:
+      if not graph_data:
         await self.bot.send_message(context.message.channel, 'Data malformed...')
         return
-      plot.bar(range(len(graph_data)), graph_data.values(), align='center')
-      plot.xticks(range(len(graph_data)), list(
-          graph_data.keys()), fontsize=10, rotation='vertical')
+
+      # Alphabetical sorting
+      embed_graph = self.sort_dict_to_list_alphabetically(graph_data)
+
+      plot.bar(range(len(embed_graph)), [i[1] for i in embed_graph], align='center')
+      plot.xticks(range(len(embed_graph)), [i[0] for i in embed_graph], fontsize=13, rotation='vertical')
       plot.margins(0.005)
       plot.title('Messages sent by everyone')
       plot.tight_layout()
       #plot.subplots_adjust(top=0.09) # Bottom is 0.1 by default, and top cannot be >= to bottom
       location = os.path.join(os.path.join(os.path.join(
           os.path.dirname(__file__), '..'), 'stats'), 'tmp.png')
+
+    elif argument == 'emojis':
+
+      tmpmsg = await self.bot.send_message(context.message.channel, 'Generating chart...')
+      progressmsg = await self.bot.say('`φ(．．)`')
+      data = await self.loadStatFile('reactions.json')
+      await self.updateProgressBar(progressmsg, 20)
+      graph_data = {}
+      for key, value in list(data.items()):
+        graph_data[':' + key.split(':')[1] + ':'] = value
+      if not data:
+        await self.bot.send_message(context.message.channel, 'Data malformed...')
+        return
+      
+      # Alphabetical sorting
+      embed_graph = self.sort_dict_to_list_alphabetically(
+          graph_data)
+      
+      plot.bar(range(len(embed_graph)), [i[1]
+                                         for i in embed_graph], align='center')
+      plot.xticks(range(len(embed_graph)), [
+                  i[0] for i in embed_graph], fontsize=15, rotation='vertical')
+      plot.margins(0.005)
+      plot.title('Server Emojis')
+      plot.tight_layout()
+      #plot.subplots_adjust(top=0.09) # Bottom is 0.1 by default, and top cannot be >= to bottom
+      location = os.path.join(os.path.join(os.path.join(
+          os.path.dirname(__file__), '..'), 'stats'), 'tmp.png')     
 
     else:
 

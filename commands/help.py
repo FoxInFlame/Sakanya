@@ -71,7 +71,7 @@ class Help():
     ('stats', {
       'module': 'commands.stats',
       'short_description': 'View various stats about this server',
-      'description': 'I record quite a lot of things (more as Fox implements more!), and you can view a visualised representation of these stats. Currently, `messages_byeverone`, `messages_byusers`, and `messages_bybots` is available for you to use with me! These charts take quite a while to load, so please be patient and don\'t spam me out of rage - I\'ll just crash out of stress.',
+      'description': 'I record quite a lot of things (more as Fox implements more!), and you can view a visualised representation of these stats. Currently, `messages_byeverone`, `messages_byusers`, `messages_bybots`, and `emojis` is available for you to use with me! These charts take quite a while to load, so please be patient and don\'t spam me out of rage - I\'ll just crash out of stress.',
       'usage': 'stats <stat_name>',
       'admin': False
     }),
