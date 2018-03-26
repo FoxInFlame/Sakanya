@@ -175,13 +175,13 @@ class Help():
       for key, value in self.commands_dict.items():
         if value['module'] in tuple(self.bot.extensions) and value['admin'] is False:
           commands_str = ''.join([commands_str, ''.join(['`', key, '` - ', value['short_description'], '\n'])])
-      helpembed.add_field(name='Commands', value=commands_str)
+      helpembed.add_field(name='❯ Commands', value=commands_str)
       otherfeatures_str = ''
       for key, value in self.features_dict.items():
         if value['module'] in tuple(self.bot.extensions) and value['admin'] is False:
           otherfeatures_str = ''.join([otherfeatures_str, ''.join(['`', key, '` - ', value['short_description'], '\n'])])
-      helpembed.add_field(name='Other Features', value=otherfeatures_str)
-      helpembed.add_field(name='Learn More', value='Parameters surrounded by <> are required, and ones surrounded by [] are optional.\n*To learn more about each feature, type `' + SakanyaCore().prefix + 'help <keyword>`.*')
+      helpembed.add_field(name='❯ Other Features', value=otherfeatures_str)
+      helpembed.add_field(name='❯ Learn More', value='Parameters surrounded by <> are required, and ones surrounded by [] are optional.\n*To learn more about each feature, type `' + SakanyaCore().prefix + 'help <keyword>`.*')
     elif subcommand in self.commands_dict:
       if self.commands_dict[subcommand]['admin'] is False or context.message.author.id == '202501452596379648':
         helpembed.add_field(name=SakanyaCore().prefix + self.commands_dict[subcommand]['usage'], value=self.commands_dict[subcommand]['description'])
