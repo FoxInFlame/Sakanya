@@ -57,6 +57,34 @@ class Stats_ReactionCounter():
         with open(os.path.join(os.path.dirname(__file__), 'reactions.json'), 'w') as file:
           file.write(json.dumps(self.reactions_json, indent=2))
 
+  async def on_reaction_add(self, reaction, user):
+
+    # Don't count statistics if the reaction is not a server emoji
+    if reaction.custom_emoji is False:
+      return
+
+    if str(reaction.emoji) in self.reactions_json:
+      self.reactions_json[str(reaction.emoji)
+                          ] = self.reactions_json[str(reaction.emoji)] + 1
+    else:
+      self.reactions_json[str(reaction.emoji)] = 1
+    with open(os.path.join(os.path.dirname(__file__), 'reactions.json'), 'w') as file:
+          file.write(json.dumps(self.reactions_json, indent=2))
+  
+  async def on_reaction_remove(self, reaction, user):
+    
+    # Don't count statistics if the reaction is not a server emoji
+    if reaction.custom_emoji is False:
+      return
+
+    if str(reaction.emoji) in self.reactions_json:
+      self.reactions_json[str(reaction.emoji)
+                          ] = self.reactions_json[str(reaction.emoji)] - 1
+    # Else do nothing, since 0-0 should be 0 in this case
+
+    with open(os.path.join(os.path.dirname(__file__), 'reactions.json'), 'w') as file:
+          file.write(json.dumps(self.reactions_json, indent=2))
+
   @commands.command(pass_context=True)
   async def reset_reactioncount(self, context, reaction=None):
     if context.message.author.id == '202501452596379648':
