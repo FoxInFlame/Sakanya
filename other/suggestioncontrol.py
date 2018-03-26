@@ -25,7 +25,7 @@ class SuggestionControl():
       message = await self.bot.get_message(
         self.bot.get_channel(jsonmsg['d']['channel_id']),
         jsonmsg['d']['message_id'])
-      member = await self.bot.get_user_info(jsonmsg['d']['user_id'])
+      member = self.bot.get_channel(jsonmsg['d']['channel_id']).server.get_member(jsonmsg['d']['user_id'])
       emoji = jsonmsg['d']['emoji']['name']
       message_data = self.handleSuggestionReactionEvent(emoji, message, member)
       if message_data[0] is True:
