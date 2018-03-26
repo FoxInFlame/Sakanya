@@ -71,7 +71,7 @@ class Help():
     ('stats', {
       'module': 'commands.stats',
       'short_description': 'View various stats about this server',
-      'description': 'I record quite a lot of things (more as Fox implements more!), and you can view a visualised representation of these stats. Currently, a couple stats related to messages are available for you to use with me! These charts take quite a while to load, so please be patient and don\'t spam me out of rage - I\'ll just crash out of stress.\n - `messages_byeveryone`: Counting since 2017-11-23 22:00 JST\n - `messages_byusers`: Counting since 2017-11-23 22:00 JST\n - `messages_bybots`: Counting since 2017-11-23 22:00 JST\n - `emojis`: Counting since 2018-03-26 11:00 JST',
+      'description': 'I record quite a lot of things (more as Fox implements more!), and you can view a visualised representation of these stats. Currently, a couple stats related to messages are available for you to use with me! These charts take quite a while to load, so please be patient and don\'t spam me out of rage - I\'ll just crash out of stress.\n\n - `messages_byeveryone`: Counting since 2017-11-23 22:00 JST\n - `messages_byusers`: Counting since 2017-11-23 22:00 JST\n - `messages_bybots`: Counting since 2017-11-23 22:00 JST\n - `emojis`: Counting since 2018-03-26 11:00 JST',
       'usage': 'stats <stat_name>',
       'admin': False
     }),
