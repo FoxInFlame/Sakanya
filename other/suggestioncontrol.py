@@ -39,7 +39,9 @@ class SuggestionControl():
           await self.bot.send_message(self.bot.get_channel('317924870950223872'), '✅ Wooh! The following suggestion been marked as completed by FoxInFlame!', embed=discord.Embed(
             color = SakanyaCore().embed_color,
             type = 'rich',
-            description = '❯ ' + message.content
+            description = '❯ ' + message.content + '\n' +
+            '(' + message.reactions.count(discord.Reaction(emoji='❌')) + ' downvotes, ' + 
+            message.reactions.count(discord.Reaction(emoji='👍')) + ' upvotes)'
           ))
           await self.bot.delete_message(message)
           return
