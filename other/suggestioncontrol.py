@@ -31,8 +31,10 @@ class SuggestionControl():
           upvotes = 0
           downvotes = 0
           for reaction in message.reactions:
-            if reaction.emoji == '👍': upvotes += 1
-            if reaction.emoji == '❌': downvotes += 1
+            if reaction.emoji == '👍':
+              upvotes += 1
+            if reaction.emoji == '❌':
+              downvotes += 1
 
           await self.bot.send_message(self.bot.get_channel('317924870950223872'), '✅ Wooh! The following suggestion been marked as completed by the author (' + (message.author.nick if message.author.nick is not None else message.author.name) + ')!', embed=discord.Embed(
             color = SakanyaCore().embed_color,
@@ -47,8 +49,10 @@ class SuggestionControl():
           upvotes = 0
           downvotes = 0
           for reaction in message.reactions:
-            if reaction.emoji == '👍': upvotes += 1
-            if reaction.emoji == '❌': downvotes += 1
+            if reaction.emoji == '👍':
+              upvotes += 1
+            if reaction.emoji == '❌':
+              downvotes += 1
 
           await self.bot.send_message(self.bot.get_channel('317924870950223872'), '✅ Wooh! The following suggestion been marked as completed by FoxInFlame!', embed=discord.Embed(
             color = SakanyaCore().embed_color,
@@ -65,8 +69,10 @@ class SuggestionControl():
           upvotes = 0
           downvotes = 0
           for reaction in message.reactions:
-            if reaction.emoji == '👍': upvotes += 1
-            if reaction.emoji == '❌': downvotes += 1
+            if reaction.emoji == '👍':
+              upvotes += 1
+            if reaction.emoji == '❌':
+              downvotes += 1
 
           await self.bot.send_message(self.bot.get_channel('317924870950223872'), 'The following suggestion has been removed due to at least 5 people voting so.', embed=discord.Embed(
             color = SakanyaCore().embed_color,
