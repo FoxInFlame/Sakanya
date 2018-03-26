@@ -189,7 +189,7 @@ class Stats():
       plot.xticks(range(len(embed_graph)), [
                   i[0] for i in embed_graph], fontsize=15, rotation='vertical')
       plot.margins(0.005)
-      plot.title('Server Emojis')
+      plot.title('Server Emoji Usage Frequency')
       plot.tight_layout()
       #plot.subplots_adjust(top=0.09) # Bottom is 0.1 by default, and top cannot be >= to bottom
       location = os.path.join(os.path.join(os.path.join(
