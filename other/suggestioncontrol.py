@@ -21,7 +21,7 @@ class SuggestionControl():
     """
     Delete messages in #suggestions if they have at least 5 Xs
     """
-    if jsonmsg['t'] == 'MESSAGE_REACTION_ADD' and 'emoji' in jsonmsg['d']:
+    if jsonmsg['t'] == 'MESSAGE_REACTION_ADD' and 'emoji' in jsonmsg['d'] and jsonmsg['d']['channel_id'] == '341874607651029003':
       message = await self.bot.get_message(
         self.bot.get_channel(jsonmsg['d']['channel_id']),
         jsonmsg['d']['message_id'])
@@ -39,16 +39,17 @@ class SuggestionControl():
     """
     Woo.
     """
-    message_data = self.handleSuggestionReactionEvent(str(reaction.emoji), reaction.message, user)
-    if message_data[0] is True:
-      await self.bot.send_message(
-        self.bot.get_channel('317924870950223872'),
-        message_data[1],
-        embed=message_data[2])
-      await self.bot.delete_message(reaction.message)
+    if reaction.message.channel.id == '341874607651029003':
+      message_data = self.handleSuggestionReactionEvent(str(reaction.emoji), reaction.message, user)
+      if message_data[0] is True:
+        await self.bot.send_message(
+          self.bot.get_channel('317924870950223872'),
+          message_data[1],
+          embed=message_data[2])
+        await self.bot.delete_message(reaction.message)
 
   def handleSuggestionReactionEvent(self, emoji, message, member):
-    if message.channel.id == '341874607651029003':
+    if message.channel.id == '341874607651029003': # Double check
       upvotes = 0
       downvotes = 0
       for reaction in message.reactions:
@@ -98,7 +99,7 @@ class SuggestionControl():
             str(downvotes) + ' upvotes)')
         )
       
-      return (False, '')
+    return (False, '')
       
           
 def setup(bot):
