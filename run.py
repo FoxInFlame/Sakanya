@@ -7,9 +7,13 @@
 #                             /____/         
 # 
 # A shy but energetic Discord bot written by FoxInFlame in Discord.py.
-# Version 1.3.1
+# Version 1.3.2
 # Changelog:
 # 1.3.0
+# - 1.3.2
+# - - Return of the graph statistics
+# - - While also maintaining the text based statistics
+# - - New emoji statistics
 # - 1.3.1
 # - - Fixed stats problems Drutol and IATGOF kept negging about
 # - - Removed unused definitions in stats.py
@@ -120,7 +124,7 @@ import sched, time
 
 class SakanyaCore():
   # Some basic info
-  version = '1.3.1'
+  version = '1.3.2'
   prefix = '>'
   debug = False
   debug_server = '344957370901856266'
@@ -159,7 +163,7 @@ class SakanyaCore():
     else:
       return '***REMOVED***'
 
-  startup_extensions = ['commands.love', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'commands.ping', 'commands.stats', 'commands.stats2', 'commands.modules', 'commands.addreaction', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.uselessinteractions', 'other.presenceupdate', 'other.rolecolour', 'other.botchains', 'stats.messagecounter', 'stats.lastactivity'] 
+  startup_extensions = ['commands.love', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'commands.ping', 'commands.stats', 'commands.stats2', 'commands.modules', 'commands.addreaction', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.uselessinteractions', 'other.presenceupdate', 'other.rolecolour', 'other.botchains', 'stats.messagecounter', 'stats.reactioncounter', 'stats.lastactivity'] 
   headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'}
 
 bot = commands.Bot(command_prefix=[SakanyaCore().prefix + ' ', SakanyaCore().prefix, 'saka:'], description=SakanyaCore().description)
@@ -184,6 +188,8 @@ async def on_message(message):
 async def on_command_error(error, context):
   if isinstance(error, commands.CommandNotFound):
     if context.message.channel is None:
+      return
+    if context.message.content[:3] != (SakanyaCore().prefix * 3):
       return
     quote = discord.Embed(
       type = 'rich',

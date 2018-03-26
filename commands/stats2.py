@@ -145,6 +145,35 @@ class Stats2():
       embed.title = '❯ Messages sent by everyone (ordered by amount descending)'
       embed.description = embed_graph
 
+    elif argument == 'emojis':
+
+      data = await self.loadStatFile('reactions.json')
+      graph_data = {}
+      total_emojis = 0
+      for key, value in list(data.items()):
+        total_emojis += value
+        graph_data[':' + key.split(':')[1] * ':'] = value
+      
+      if not graph_data:
+        await self.bot.send_message(context.message.channel, 'Data malformed...')
+      
+      embed_graph = ''
+
+      # sort alphabetically: sorted(graph_data, key=str.lower)
+      for item in sorted(graph_data.items(), key=operator.itemgetter(1), reverse=True):
+        # It is impossible to sort a dictionary, thus the dictionary is converted to a tuple upon
+        # sorting. Each item in the tuple is a tuple with the first value being the key and second
+        # being the value.
+        embed_graph += '**' + item[0] + '**: ' + str(item[1]) + \
+            ' (' + "%.2f" % round(item[1] / total_emojis * 100, 2) + '%)' + '\n'
+
+      # Fix if length is over the limit
+      if len(embed_graph) > 2048:
+        embed_graph = embed_graph[:2044] + '...'
+
+      embed.title = '❯ Emojis used (ordered by amount descending)'
+      embed.description = embed_graph
+
     else:
       await self.bot.send_message(context.message.channel, 'Statistics for `' + argument + '` could not be found within me...')
       return
