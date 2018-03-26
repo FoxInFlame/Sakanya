@@ -194,7 +194,7 @@ async def on_command_error(error, context):
     quote = discord.Embed(
       type = 'rich',
       color = SakanyaCore().embed_color,
-      description = context.message.content.strip()
+      description = context.message.content.strip()[3:]
     )
     quote.set_author(name=context.message.author.name + ' quoted:', icon_url=context.message.author.avatar_url)
     await bot.send_message(context.message.channel, embed=quote)
