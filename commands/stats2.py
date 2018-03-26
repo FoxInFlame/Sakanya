@@ -152,7 +152,7 @@ class Stats2():
       total_emojis = 0
       for key, value in list(data.items()):
         total_emojis += value
-        graph_data[':' + key.split(':')[1] * ':'] = value
+        graph_data[':' + key.split(':')[1] + ':'] = value
       
       if not graph_data:
         await self.bot.send_message(context.message.channel, 'Data malformed...')
