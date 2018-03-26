@@ -58,6 +58,14 @@ class FileManagement():
     try: 
       with open(filename, encoding='utf8') as f:
         contents = f.read()
+        if len(contents) < 1800:
+          await self.bot.say(embed=discord.Embed(
+            color=SakanyaCore().embed_color,
+            title = 'File:' + filename,
+            type = 'rich',
+            description = '```' + contents + '```'
+          ))
+          return
         # contents = (contents[:1800] + '...') if len(contents) > 1802 else contents
         async with aiohttp.ClientSession() as session:
           try:
