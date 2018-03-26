@@ -7,9 +7,13 @@
 #                             /____/         
 # 
 # A shy but energetic Discord bot written by FoxInFlame in Discord.py.
-# Version 1.3.2
+# Version 1.3.3
 # Changelog:
 # 1.3.0
+# - 1.3.3
+# - - Quote function requires 3 characters prefix
+# - - Now counts reaction add/remove for emoji counter
+# - - Suggestioncontrol works with Force Completion by FoxInFlame
 # - 1.3.2
 # - - Return of the graph statistics
 # - - While also maintaining the text based statistics
@@ -124,7 +128,7 @@ import sched, time
 
 class SakanyaCore():
   # Some basic info
-  version = '1.3.2'
+  version = '1.3.3'
   prefix = '>'
   debug = False
   debug_server = '344957370901856266'

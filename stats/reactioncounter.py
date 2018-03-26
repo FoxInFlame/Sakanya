@@ -58,6 +58,10 @@ class Stats_ReactionCounter():
           file.write(json.dumps(self.reactions_json, indent=2))
 
   async def on_reaction_add(self, reaction, user):
+    """
+    Add one for the reaction.
+    Only called on message in Saka's cache (which means messages sent after bot start)
+    """
 
     # Don't count statistics if the reaction is not a server emoji
     if reaction.custom_emoji is False:
@@ -69,21 +73,61 @@ class Stats_ReactionCounter():
     else:
       self.reactions_json[str(reaction.emoji)] = 1
     with open(os.path.join(os.path.dirname(__file__), 'reactions.json'), 'w') as file:
-          file.write(json.dumps(self.reactions_json, indent=2))
+      file.write(json.dumps(self.reactions_json, indent=2))
   
   async def on_reaction_remove(self, reaction, user):
+    """
+    Subtract one for the reaction.
+    Only called on message in Saka's cache (which means messages sent after bot start)
+    """
     
     # Don't count statistics if the reaction is not a server emoji
     if reaction.custom_emoji is False:
       return
 
     if str(reaction.emoji) in self.reactions_json:
-      self.reactions_json[str(reaction.emoji)
-                          ] = self.reactions_json[str(reaction.emoji)] - 1
+      if self.reactions_json[str(reaction.emoji)] <= 1:
+        self.reactions_json.pop(str(reaction.emoji), None)
+      else:
+        self.reactions_json[str(reaction.emoji)
+                            ] = self.reactions_json[str(reaction.emoji)] - 1
     # Else do nothing, since 0-0 should be 0 in this case
 
     with open(os.path.join(os.path.dirname(__file__), 'reactions.json'), 'w') as file:
-          file.write(json.dumps(self.reactions_json, indent=2))
+      file.write(json.dumps(self.reactions_json, indent=2))
+
+  async def on_socket_response(self, jsonmsg):
+    """
+    Add/Subtract one for the reaction.
+    Called for all responses, but filter out ones before cache with 'emoji' presence
+    """
+
+    if jsonmsg['t'] == 'MESSAGE_REACTION_ADD' and 'emoji' in jsonmsg['d']:
+
+      if jsonmsg['d']['emoji']['id'] is None:
+        return
+      
+      key = '<:' + jsonmsg['d']['emoji']['name'] + ':' + jsonmsg['d']['emoji']['id'] + '>'
+      if key in self.reactions_json:
+        self.reactions_json[key] = self.reactions_json[key] + 1
+      else:
+        self.reactions_json[key] = 1
+      with open(os.path.join(os.path.dirname(__file__), 'reactions.json'), 'w') as file:
+        file.write(json.dumps(self.reactions_json, indent=2))
+    
+    elif jsonmsg['t'] == 'MESSAGE_REACTION_REMOVE' and 'emoji' in jsonmsg['d']:
+
+      if jsonmsg['d']['emoji']['id'] is None:
+        return
+      
+      key = '<:' + jsonmsg['d']['emoji']['name'] + ':' + jsonmsg['d']['emoji']['id'] + '>'
+      if key in self.reactions_json:
+        if self.reactions_json[key] <= 1:
+          self.reactions_json.pop(key, None)
+        else:
+          self.reactions_json[key] = self.reactions_json[key] - 1
+      with open(os.path.join(os.path.dirname(__file__), 'reactions.json'), 'w') as file:
+        file.write(json.dumps(self.reactions_json, indent=2))
 
   @commands.command(pass_context=True)
   async def reset_reactioncount(self, context, reaction=None):
