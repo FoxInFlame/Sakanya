@@ -36,12 +36,18 @@ class SuggestionControl():
           await self.bot.delete_message(message)
           return
         elif jsonmsg['d']['user_id'] == '202501452596379648' and jsonmsg['d']['emoji'] is not None and jsonmsg['d']['emoji']['name'] == '✅': #:white_check_mark:
+          upvotes = 0
+          downvotes = 0
+          for reaction in message.reactions:
+            if reaction.emoji == '👍': upvotes += 1
+            if reaction.emoji == '❌': downvotes += 1
+
           await self.bot.send_message(self.bot.get_channel('317924870950223872'), '✅ Wooh! The following suggestion been marked as completed by FoxInFlame!', embed=discord.Embed(
             color = SakanyaCore().embed_color,
             type = 'rich',
             description = '❯ ' + message.content + '\n' +
-            '(' + message.reactions.count(discord.Reaction(emoji='❌')) + ' downvotes, ' + 
-            message.reactions.count(discord.Reaction(emoji='👍')) + ' upvotes)'
+            '(' + upvotes + ' downvotes, ' + 
+            downvotes + ' upvotes)'
           ))
           await self.bot.delete_message(message)
           return
