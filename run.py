@@ -7,9 +7,11 @@
 #                             /____/         
 # 
 # A shy but energetic Discord bot written by FoxInFlame in Discord.py.
-# Version 1.3.3
+# Version 1.3.4
 # Changelog:
 # 1.3.0
+# - 1.3.4
+# - - Fix half broken logic regarding suggestion control. One message could have 10 upvotes and 5 downvotes.
 # - 1.3.3
 # - - Quote function requires 3 characters prefix
 # - - Now counts reaction add/remove for emoji counter
