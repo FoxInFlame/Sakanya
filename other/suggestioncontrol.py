@@ -54,10 +54,10 @@ class SuggestionControl():
       downvotes = 0
       for reaction in message.reactions:
         if reaction.emoji == '👍':
-          upvotes += 1
+          upvotes = reaction.count
         if reaction.emoji == '❌':
-          downvotes += 1
-
+          downvotes = reaction.count
+    
       # In #suggestions
       # Check if the reaction is a green checkmark by the author (if so, mark as complete)
       if member.id == message.author.id and emoji == '✅': #:white_check_mark:
