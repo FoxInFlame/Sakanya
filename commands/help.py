@@ -126,7 +126,7 @@ class Help():
       'module': 'other.suggestioncontrol',
       'title': 'Suggestion Control',
       'short_description': 'Control messages in <#341874607651029003> as neccessary.',
-      'description': 'I remove any messages in <#341874607651029003> when the message gets at least 5 <:x:348390305248182272>s, or when it gets one ✅ by the author of the message. ~(>_<~)',
+      'description': 'I remove any messages in <#341874607651029003> when the message gets both at least 5 <:x:348390305248182272>s *and* at least 2 more downvotes than upvotes, or when it gets one ✅ by the author of the message. ~(>_<~)',
       'admin': False
     }),
     ('quote', {

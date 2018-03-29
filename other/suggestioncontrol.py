@@ -86,11 +86,11 @@ class SuggestionControl():
             str(downvotes) + ' downvotes)')
         )
 
-      # Check if it already has an X (if so, delete)
-      if downvotes >= 5:  # Just in case it's really fast and it went over 5
+      # Check if it already has an X (if so, consider deletion)
+      if downvotes >= 5 and if downvotes - upvotes >= 2:
         return (
           True,
-          'The following suggestion has been removed due to at least 5 people voting so.',
+          'The following suggestion has been removed due to at least 5 people thinking so.',
           discord.Embed(
             color = SakanyaCore().embed_color,
             type = 'rich',
