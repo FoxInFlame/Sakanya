@@ -69,8 +69,8 @@ class SuggestionControl():
             color = SakanyaCore().embed_color,
             type = 'rich',
             description = '❯❯ ' + message.content + '\n' +
-            '(' + str(upvotes) + ' downvotes, ' + 
-            str(downvotes) + ' upvotes)')
+            '(' + str(upvotes) + ' upvotes, ' + 
+            str(downvotes) + ' downvotes)')
         )
 
       # Check if the reaction is a green checkmark by FoxInFlame (if so, force mark as complete)
@@ -82,8 +82,8 @@ class SuggestionControl():
             color = SakanyaCore().embed_color,
             type = 'rich',
             description = '❯❯ ' + message.content + '\n' +
-            '(' + str(upvotes) + ' downvotes, ' + 
-            str(downvotes) + ' upvotes)')
+            '(' + str(upvotes) + ' upvotes, ' +
+            str(downvotes) + ' downvotes)')
         )
 
       # Check if it already has an X (if so, delete)
@@ -95,8 +95,8 @@ class SuggestionControl():
             color = SakanyaCore().embed_color,
             type = 'rich',
             description = '❯❯ ' + message.content + '\n' +
-            '(' + str(upvotes) + ' downvotes, ' + 
-            str(downvotes) + ' upvotes)')
+            '(' + str(upvotes) + ' upvotes, ' + 
+            str(downvotes) + ' downvotes)')
         )
       
     return (False, '')
