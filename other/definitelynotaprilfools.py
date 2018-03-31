@@ -195,6 +195,7 @@ class AprilFools():
           previous_channel = next((item for item in self.original_position.copy() if item['order'] == channel['order']), None)
           await self.bot.edit_channel(server_channel, name=previous_channel['name'], topic=previous_channel['topic'])
           await self.bot.move_channel(server_channel, int(channel['order']))
+          print(previous_channel['name'] + ' ' + channel['order'])
           await asyncio.sleep(0.5)
         await self.bot.say('April Fools has been stopped and reset.')
       except Exception as e:
@@ -211,6 +212,7 @@ class AprilFools():
           previous_channel = next((item for item in self.original_position.copy() if item['order'] == channel['order']), None)
           await self.bot.edit_channel(server_channel, name=previous_channel['name'], topic=previous_channel['topic'])
           await self.bot.move_channel(server_channel, int(channel['order']))
+          print(previous_channel['name'] + ' ' + channel['order'])
           await asyncio.sleep(0.5)
       except Exception as e:
         owner = await self.bot.get_user_info('202501452596379648')
@@ -232,8 +234,6 @@ class AprilFools():
         new_position[index]['order'] = shuffle_orders[count]
         count += 1
 
-    owner = await self.bot.get_user_info('202501452596379648')
-    await self.bot.send_message(owner, content=pprint.pformat(new_position))
     return new_position
 
 
