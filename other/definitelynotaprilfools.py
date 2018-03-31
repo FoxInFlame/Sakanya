@@ -10,8 +10,8 @@ import random
 import copy
 # Import sched and time
 import asyncio, time
-# Import pretty print for debug
-import pprint
+# Import operator to use on getting values while sorting dictionaries by value
+import operator
 
 
 class AprilFools():
@@ -237,7 +237,8 @@ class AprilFools():
         new_position[index]['order'] = shuffle_orders[count]
         count += 1
 
-    return new_position
+    sorted_new_position = sorted(new_position, key=itemgetter('order'), reverse=True)
+    return sorted_new_position
 
 
 def setup(bot):
