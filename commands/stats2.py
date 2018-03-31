@@ -2,6 +2,8 @@
 import discord
 # Import undocumented part of Discord to use commands
 from discord.ext import commands
+# Import Sakanya Core
+from __main__ import SakanyaCore
 # Import os to use relative file names
 import os
 # Import JSON to read roles.json
@@ -22,8 +24,6 @@ import json
 import operator
 # Import asynchronous waiting
 import asyncio
-# Import Sakanya Core
-from __main__ import SakanyaCore
 
 class Stats2():
   
