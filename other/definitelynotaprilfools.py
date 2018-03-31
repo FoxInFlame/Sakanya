@@ -145,7 +145,7 @@ class AprilFools():
         'name': 'admin-bot-spam',
         'topic': 'Purely for testing and sending IDs and stuff',
         'order': '11',
-        'shuffle': True
+        'shuffle': False
       }
     ]
 
@@ -193,6 +193,7 @@ class AprilFools():
           previous_channel = next((item for item in self.original_position.copy() if item['order'] == channel['order']), None)
           await self.bot.edit_channel(server_channel, name=previous_channel['name'], topic=previous_channel['topic'])
           await self.bot.move_channel(server_channel, int(channel['order']))
+          await asyncio.sleep(0.21)
         await self.bot.say('April Fools has been stopped and reset.')
       except Exception as e:
         owner = await self.bot.get_user_info('202501452596379648')
@@ -208,6 +209,7 @@ class AprilFools():
           previous_channel = next((item for item in self.original_position.copy() if item['order'] == channel['order']), None)
           await self.bot.edit_channel(server_channel, name=previous_channel['name'], topic=previous_channel['topic'])
           await self.bot.move_channel(server_channel, int(channel['order']))
+          await asyncio.sleep(0.21)
       except Exception as e:
         owner = await self.bot.get_user_info('202501452596379648')
         await self.bot.send_message(owner, content=str(e))
