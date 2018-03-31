@@ -237,7 +237,7 @@ class AprilFools():
         new_position[index]['order'] = shuffle_orders[count]
         count += 1
 
-    sorted_new_position = sorted(new_position, key=itemgetter('order'), reverse=True)
+    sorted_new_position = sorted(new_position, key=operator.itemgetter('order'), reverse=True)
     return sorted_new_position
 
 
