@@ -24,42 +24,42 @@ class AprilFools():
         'id': '344957370901856268',
         'name': 'general',
         'topic': 'general goes here',
-        'order': '0',
+        'order': 0,
         'shuffle': False
       },
       {
         'id': '364358830068596736',
         'name': 'test',
         'topic': 'test goes here\n\ni think.',
-        'order': '1',
+        'order': 1,
         'shuffle': True
       },
       {
         'id': '428587910493765660',
         'name': 'test2',
         'topic': '',
-        'order': '2',
+        'order': 2,
         'shuffle': True
       },
       {
         'id': '428587942324469790',
         'name': 'test3',
         'topic': '',
-        'order': '3',
+        'order': 3,
         'shuffle': True
       },
       {
         'id': '429645923476439050',
         'name': 'channel2',
         'topic': '',
-        'order': '4',
+        'order': 4,
         'shuffle': False
       },
       {
         'id': '429645984818003998',
         'name': 'test4',
         'topic': '',
-        'order': '5',
+        'order': 5,
         'shuffle': True
       }
     ]
@@ -69,84 +69,84 @@ class AprilFools():
         'id': '319721090274295809',
         'name': 'announcements',
         'topic': '',
-        'order': '0',
+        'order': 0,
         'shuffle': True
       },
       {
         'id': '317924870950223872',
         'name': 'general',
         'topic': '',
-        'order': '1',
+        'order': 1,
         'shuffle': True
       },
       {
         'id': '317933848203755521',
         'name': 'programming',
         'topic': 'Is it not obvious? Here\'s the place to talk code.',
-        'order': '2',
+        'order': 2,
         'shuffle': True
       },
       {
         'id': '342686142237507584',
         'name': 'languages',
         'topic': '[No programming languages] Learn, teach, discuss, and explain language to other multilingual individuals. ;)',
-        'order': '3',
+        'order': 3,
         'shuffle': True
       },
       {
         'id': '320219158593667072',
         'name': 'anime',
         'topic': 'To talk about anime. Not games - there\'s #games for that.',
-        'order': '4',
+        'order': 4,
         'shuffle': True
       },
       {
         'id': '342393014985031681',
         'name': 'games',
         'topic': 'All about Houkai 3rd right now, but technically everything related to games (whether that be computer ones, board ones, or even outdoor ones) go here.\n\nEroge (if any) unfortunately would have to be posted in #nsfw due to obvious reasons.',
-        'order': '5',
+        'order': 5,
         'shuffle': True
       },
       {
         'id': '379473083267940354',
         'name': 'cooking',
         'topic': 'This channel is for showcasing some delicious meals you made and you want to show off. Also can be used to share recipes.',
-        'order': '6',
+        'order': 6,
         'shuffle': True
       },
       {
         'id': '344362535996227585',
         'name': 'music',
         'topic': 'For posting, discussing, and listening to music.',
-        'order': '7',
+        'order': 7,
         'shuffle': True
       },
       {
         'id': '342393181251436556',
         'name': 'nsfw',
         'topic': 'So apparently we really need a nsfw channel - for really lewd stuff.',
-        'order': '8',
+        'order': 8,
         'shuffle': False
       },
       {
         'id': '341874607651029003',
         'name': 'suggestions',
         'topic': 'For suggesting things to the Discord server, Discord bots, the MAL club, or other members.',
-        'order': '9',
+        'order': 9,
         'shuffle': True
       },
       {
         'id': '321430399643418634',
         'name': 'bot-and-spam',
         'topic': '',
-        'order': '10',
+        'order': 10,
         'shuffle': True
       },
       {
         'id': '376544021234843658',
         'name': 'admin-bot-spam',
         'topic': 'Purely for testing and sending IDs and stuff',
-        'order': '11',
+        'order': 11,
         'shuffle': False
       }
     ]
@@ -194,7 +194,7 @@ class AprilFools():
           server_channel = context.message.server.get_channel(channel['id'])
           previous_channel = next((item for item in self.original_position.copy() if item['order'] == channel['order']), None)
           await self.bot.edit_channel(server_channel, name=previous_channel['name'], topic=previous_channel['topic'])
-          await self.bot.move_channel(server_channel, int(channel['order']))
+          await self.bot.move_channel(server_channel, channel['order'])
           await asyncio.sleep(0.21)
         await self.bot.say('April Fools has been stopped and reset.')
       except Exception as e:
@@ -210,7 +210,7 @@ class AprilFools():
           server_channel = self.aprilfools_context.message.server.get_channel(channel['id'])
           previous_channel = next((item for item in self.original_position.copy() if item['order'] == channel['order']), None)
           await self.bot.edit_channel(server_channel, name=previous_channel['name'], topic=previous_channel['topic'])
-          await self.bot.move_channel(server_channel, int(channel['order']))
+          await self.bot.move_channel(server_channel, channel['order'])
           await asyncio.sleep(0.21)
       except Exception as e:
         owner = await self.bot.get_user_info('202501452596379648')
