@@ -116,6 +116,13 @@ class Help():
       'description': '**Fox only:** I can react to a specific message with an emoji of your choice. Unfortunately you will have to go through the process of gathering message and channel ids.',
       'usage': 'addreaction <channelid> <messageid> <reaction>',
       'admin': True
+    }),
+    ('aprilfools', {
+      'module': 'other.definitelynotaprilfools',
+      'short_description': 'Shuffle channels around every 10 minutes',
+      'description': '**Fox only:** I will shuffle around the server channels without anybody (hopefully) noticing. It\'s set to shuffle every 9 minutes and 55 seconds exactly so that the shuffling time can account for the remaining 5 seconds without delay.',
+      'usage': 'aprilfools [start|end|pause]',
+      'admin': True
     })
   ]
 
