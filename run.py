@@ -7,8 +7,10 @@
 #                             /____/         
 # 
 # A shy but energetic Discord bot written by FoxInFlame in Discord.py.
-# Version 1.3.4
+# Version 1.4.0
 # Changelog:
+# 1.4.0
+# - Added April Fools channel shuffling
 # 1.3.0
 # - 1.3.4
 # - - Fix half broken logic regarding suggestion control. One message could have 10 upvotes and 5 downvotes.
@@ -130,7 +132,7 @@ import sched, time
 
 class SakanyaCore():
   # Some basic info
-  version = '1.3.3'
+  version = '1.4.0'
   prefix = '>'
   debug = False
   debug_server = '344957370901856266'
@@ -169,7 +171,7 @@ class SakanyaCore():
     else:
       return '***REMOVED***'
 
-  startup_extensions = ['commands.love', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'commands.ping', 'commands.stats', 'commands.stats2', 'commands.modules', 'commands.addreaction', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.uselessinteractions', 'other.presenceupdate', 'other.rolecolour', 'other.botchains', 'stats.messagecounter', 'stats.reactioncounter', 'stats.lastactivity'] 
+  startup_extensions = ['commands.love', 'commands.about', 'commands.restart', 'commands.saka', 'commands.help', 'commands.robot', 'commands.update', 'commands.iam', 'commands.ping', 'commands.stats', 'commands.stats2', 'commands.modules', 'commands.addreaction', 'other.filemanagement', 'other.suggestioncontrol', 'other.mentioninteraction', 'other.uselessinteractions', 'other.presenceupdate', 'other.rolecolour', 'other.botchains', 'other.definitelynotaprilfools', 'stats.messagecounter', 'stats.reactioncounter', 'stats.lastactivity'] 
   headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'}
 
 bot = commands.Bot(command_prefix=[SakanyaCore().prefix + ' ', SakanyaCore().prefix, 'saka:'], description=SakanyaCore().description)
