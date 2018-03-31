@@ -216,7 +216,7 @@ class AprilFools():
         owner = await self.bot.get_user_info('202501452596379648')
         await self.bot.send_message(owner, content=str(e))
 
-      await asyncio.sleep(595) # 9 minuttes 55 seconds
+      await asyncio.sleep(random.randint(2, 30) * 60 - 5) # (random between 2 and 30 minutes) - 5 seconds
 
 
   async def shuffleOrder(self):
