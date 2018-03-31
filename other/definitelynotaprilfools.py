@@ -135,13 +135,17 @@ class AprilFools():
       await self.bot.say('April Fools has been paused.')
     elif control == 'end':
       self.running = False
-      new_order = self.original_position
-      for index, channel in enumerate(new_order):
-        server_channel = context.message.server.get_channel(channel['id'])
-        previous_channel = next((item for item in self.original_position.copy() if item['order'] == channel['order']), None)
-        await self.bot.edit_channel(server_channel, name=previous_channel['name'])
-        await self.bot.move_channel(server_channel, int(channel['order']))
-      await self.bot.say('April Fools has been stopped and reset.')
+      try:
+        new_order = self.original_position
+        for index, channel in enumerate(new_order):
+          server_channel = context.message.server.get_channel(channel['id'])
+          previous_channel = next((item for item in self.original_position.copy() if item['order'] == channel['order']), None)
+          await self.bot.edit_channel(server_channel, name=previous_channel['name'])
+          await self.bot.move_channel(server_channel, int(channel['order']))
+        await self.bot.say('April Fools has been stopped and reset.')
+      except Exception as e:
+        owner = await self.bot.get_user_info('202501452596379648')
+        await self.bot.send_message(owner, content=str(e))
 
   async def shuffleChannels(self):
 
