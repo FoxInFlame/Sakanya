@@ -148,7 +148,7 @@ class SakanyaCore():
   self_assigned_roles = {
     'lewd': '350190393607847937',
     'ama': '349277559449452545',
-    'hungry for new waifus': '381412270481342465',
+    'into events': '381412270481342465',
     'playing houkai3rd': '397940005735104512'
   }
 

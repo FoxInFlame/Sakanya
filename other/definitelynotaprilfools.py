@@ -221,7 +221,6 @@ class AprilFools():
 
   async def shuffleOrder(self):
 
-    # orders = [x['order'] for x in self.original_position]
     shuffle_orders = [x['order'] for x in self.original_position if x['shuffle'] is True]
     random.shuffle(shuffle_orders)
     
