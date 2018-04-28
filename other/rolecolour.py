@@ -58,12 +58,13 @@ class RoleColour():
     await self.bot.move_role(member.server, new_role, (roles - 2))
     await self.bot.add_roles(member, new_role)
     self.roles_json.setdefault(member.id, {
-      "role": new_role.id,
-      "colour": "0",
-      "name": member.name
+      'role': new_role.id,
+      'colour': '0',
+      'name': member.name
     })
     with open(os.path.join(os.path.dirname(__file__), 'roles.json'), 'w') as file: # Then overwrite the file
       file.write(json.dumps(self.roles_json, indent=2))
+    
     owner = await self.bot.get_user_info('202501452596379648')
     await self.bot.send_message(owner, content='*' + member.name + ' has been automatically paired with a new role.')
     
