@@ -130,6 +130,8 @@ from discord.ext import commands
 # Import sched and time to make a scheduler
 import sched, time
 
+import ssl
+
 class SakanyaCore():
   # Some basic info
   version = '1.4.0'
@@ -182,7 +184,7 @@ startup_errors = ''
 @bot.event
 async def on_ready():
   owner = await bot.get_user_info('202501452596379648')
-  await bot.send_message(owner, content='Sakanya is now online as ' + bot.user.name + '! Prefix is `' + SakanyaCore().prefix + '`.\nErrors while starting: ' + ('None' if startup_errors == '' else '```' + startup_errors + '```'))
+  await bot.send_message(owner, content='Sakanya is now online as ' + bot.user.name + '! Prefix is `' + SakanyaCore().prefix + '`.\n' + ssl.OPENSSL_VERSION + 'Errors while starting: ' + ('None' if startup_errors == '' else '```' + startup_errors + '```'))
   print('---------------------------------------------------')
   print('Sakanya by FoxInFlame has logged into Discord as')
   print('@' + bot.user.name + ' ID' + bot.user.id)
