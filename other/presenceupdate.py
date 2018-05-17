@@ -55,7 +55,7 @@ class PresenceUpdate():
           counter_kaomoji += 1
         elif game_type == 2:
           # Listening to - random nyaa music
-          nyaamusic_xml = await session.get('https://nyaa.si/?page=rss&c=2_0&f=0', headers=SakanyaCore().headers)
+          nyaamusic_xml = await session.get('https://nyaa.si/?page=rss&c=2_0&f=0', headers=SakanyaCore().headers, timeout=None)
           tree = etree.fromstring((await nyaamusic_xml.read()).decode('utf-8'))
           game_name = re.sub("[\(\[].*?[\)\]]", "", tree.xpath('//item[1]/title/text()')[0])
         elif game_type == 3:
@@ -66,11 +66,11 @@ class PresenceUpdate():
           if watching_type == 0:
             # Watching - you
             game_name = 'you'
-          elif watching_type == 1:
-            # Watching - random nyaa anime
-            nyaaanime_xml = await session.get('https://nyaa.si/?page=rss&c=1_2&f=0', headers=SakanyaCore().headers)
-            tree = etree.fromstring((await nyaaanime_xml.read()).decode('utf-8'))
-            game_name = re.sub("[\(\[].*?[\)\]]", "", tree.xpath('//item[1]/title/text()')[0])
+          # elif watching_type == 1:
+          #   # Watching - random nyaa anime
+          #   nyaaanime_xml = await session.get('https://nyaa.si/?page=rss&c=1_2&f=0', headers=SakanyaCore().headers)
+          #   tree = etree.fromstring((await nyaaanime_xml.read()).decode('utf-8'))
+          #   game_name = re.sub("[\(\[].*?[\)\]]", "", tree.xpath('//item[1]/title/text()')[0])
           else:
             # Watching - random youtube video
             randomyoutube = await session.get('https://randomyoutube.net/api/getvid?api_token=***REMOVED***')
