@@ -55,9 +55,10 @@ class PresenceUpdate():
           counter_kaomoji += 1
         elif game_type == 2:
           # Listening to - random nyaa music
-          nyaamusic_xml = await session.get('https://nyaa.si/?page=rss&c=2_0&f=0', headers=SakanyaCore().headers, timeout=None)
-          tree = etree.fromstring((await nyaamusic_xml.read()).decode('utf-8'))
-          game_name = re.sub("[\(\[].*?[\)\]]", "", tree.xpath('//item[1]/title/text()')[0])
+          # nyaamusic_xml = await session.get('https://nyaa.si/?page=rss&c=2_0&f=0', headers=SakanyaCore().headers, timeout=None)
+          # tree = etree.fromstring((await nyaamusic_xml.read()).decode('utf-8'))
+          # game_name = re.sub("[\(\[].*?[\)\]]", "", tree.xpath('//item[1]/title/text()')[0])
+          game_name = 'Music'
         elif game_type == 3:
           # Watching - you
           # Watching - random nyaa anime
