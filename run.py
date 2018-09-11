@@ -129,9 +129,11 @@ import discord
 from discord.ext import commands
 # Import sched and time to make a scheduler
 import sched, time
-# Import logging
+# Import logging to view crash logs
 import logging
-logging.basicConfig(fileName='log.log', level=logging.DEBUG)
+logging.basicConfig(filename='log.log', level=logging.WARNING)
+# Import OS for file systems
+import os
 
 import ssl
 
@@ -225,20 +227,21 @@ if __name__ == "__main__":
       startup_errors += 'Failed to load extension {0}\n{1}: {2}\n'.format(extension, type(e).__name__, str(e))
 
   print('') # Empty line in case of continuous execution
-  print(startup_errors)
   try:
     with open(os.path.join(os.path.dirname(__file__), 'log.log'), 'r') as data_file:
-      print(data_file)
+      data = data_file.read();
+      startup_errors += data
       with open(os.path.join(os.path.dirname(__file__), 'log.log'), 'w') as file:
         file.write('')
   except IOError:
-    print(IOError)    
+    pass
   print('Loaded Modules:', tuple(bot.extensions))
   print('Connecting to Discord...')
   try:
     bot.run(SakanyaCore().bot_token()) # True or empty/False for debug
   except Exception as e:
     logging.exception('Crash.')
+    raise SystemExit
 
 
 # End of file.
