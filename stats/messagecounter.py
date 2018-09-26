@@ -11,6 +11,7 @@ from __main__ import SakanyaCore
 
 class Stats_MessageCounter():
   """
+  EDIT: After IATGOF's server crash, Counting since 2018-09-26 19:43 JST
   Counting since 2017-11-23 22:00 JST
   """
   
@@ -35,19 +36,19 @@ class Stats_MessageCounter():
     if message.author.id in self.authors_json:
       if isinstance(self.authors_json[message.author.id], int):
         self.authors_json[message.author.id] = {
-          "count": self.authors_json[message.author.id] + 1
+          'count': self.authors_json[message.author.id] + 1
         }
       else:
-        self.authors_json[message.author.id]["count"] = self.authors_json[message.author.id]["count"] + 1
+        self.authors_json[message.author.id]['count'] = self.authors_json[message.author.id]['count'] + 1
     else:
       self.authors_json[message.author.id] = {
-        "count": 1
+        'count': 1
       }
 
-    self.authors_json[message.author.id]["name"] = message.author.name
+    self.authors_json[message.author.id]['name'] = message.author.name
     
-    if "bot" not in self.authors_json[message.author.id]:
-      self.authors_json[message.author.id]["bot"] = message.author.bot
+    if 'bot' not in self.authors_json[message.author.id]:
+      self.authors_json[message.author.id]['bot'] = message.author.bot
 
     with open(os.path.join(os.path.dirname(__file__), 'authors.json'), 'w') as file: # Then overwrite the file
       file.write(json.dumps(self.authors_json, indent=2))
@@ -65,5 +66,18 @@ class Stats_MessageCounter():
     else:
       await self.bot.add_reaction(context.message, '❎')  # Add x mark
 
+  @commands.command(pass_context=True)
+  async def override_messagecount(self, context, userid=None, overrideCount=None):
+    if context.message.author.id == '202501452596379648' and overrideCount is not None:
+      if userid in self.authors_json:
+        self.authors_json[userid]['count'] = overrideCount
+      else:
+        self.authors_json[userid] = {
+           'count': overrideCount
+        }
+        await self.bot.add_reaction(context.message, '✅')
+    else:
+      await self.bot.add_reaction(context.message, '❎')
+  
 def setup(bot):
   bot.add_cog(Stats_MessageCounter(bot))
