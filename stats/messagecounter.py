@@ -73,6 +73,7 @@ class Stats_MessageCounter():
   @commands.command(pass_context=True)
   @SakanyaCore.command_botowner_only
   async def override_messagecount(self, context, userid=None, overrideCount=None):
+    print('a1')
     if context.message.author.id == '202501452596379648' and overrideCount is not None:
       if userid in self.authors_json:
         self.authors_json[userid]['count'] = int(overrideCount)

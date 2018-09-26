@@ -86,7 +86,9 @@ class SakanyaCore():
 
   # Function Decorators
   def command_botowner_only(self):
+    print('hi')
     async def check_sender(f):
+      print('b')
       async def new_f(*args, **kwargs):
         print(args)
         if 'message' in args[1]:
