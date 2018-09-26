@@ -13,6 +13,7 @@ from __main__ import SakanyaCore
 
 class Stats_ReactionCounter():
   """
+  EDIT: After IATGOF's server crash, Counting since 2018-09-26 19:43 JST
   Counting since 2018-03-26 11:00 JST
   """
 
@@ -140,6 +141,14 @@ class Stats_ReactionCounter():
           await self.bot.add_reaction(context.message, '✅')  # Add checkmark
     else:
       await self.bot.add_reaction(context.message, '❎')  # Add x mark
+
+  @commands.command(pass_context=True)
+  async def override_reactioncount(self, context, reaction=None, overrideCount=None):
+    if context.message.author.id == '202501452596379648' and overrideCount is not None:
+      self.reactions_json[reaction] = overrideCount
+      await self.bot.add_reaction(context.message, '✅')
+    else:
+      await self.bot.add_reaction(context.message, '❎')
 
 def setup(bot):
   bot.add_cog(Stats_ReactionCounter(bot))

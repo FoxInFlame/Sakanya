@@ -7,8 +7,11 @@
 #                             /____/         
 # 
 # A shy but energetic Discord bot written by FoxInFlame in Discord.py.
-# Version 1.4.0
+# Version 1.5.0
 # Changelog:
+# 1.5.0
+# - Moved to Heroku using Free Dynos (1000 hours/month) because IATGOF's server lost its DB.
+# - Commands added: >override_messagecount, >override_reactioncount
 # 1.4.0
 # - Added April Fools channel shuffling
 # 1.3.0
