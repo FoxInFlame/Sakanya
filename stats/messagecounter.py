@@ -72,8 +72,11 @@ class Stats_MessageCounter():
       if userid in self.authors_json:
         self.authors_json[userid]['count'] = overrideCount
       else:
+        override_user = await self.bot.get_user_info(userid)
         self.authors_json[userid] = {
-           'count': overrideCount
+           'count': overrideCount,
+           'name': override_user.name,
+           'bot': override_user.bot
         }
         await self.bot.add_reaction(context.message, '✅')
     else:
