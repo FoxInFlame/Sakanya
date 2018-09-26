@@ -6,8 +6,11 @@ from discord.ext import commands
 import random
 # Import difflib for string difference calculation
 import difflib
+# Import sys to import from parent directory
+import sys
+sys.path.append("..")
 # Import Sakanya Core
-from __main__ import SakanyaCore
+from core import SakanyaCore
 
 class Love():
   def __init__(self, bot):

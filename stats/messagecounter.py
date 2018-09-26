@@ -6,8 +6,11 @@ from discord.ext import commands
 import os
 # Import JSON to read roles.json
 import json
+# Import sys to import from parent directory
+import sys
+sys.path.append("..")
 # Import Sakanya Core
-from __main__ import SakanyaCore
+from core import SakanyaCore
 
 class Stats_MessageCounter():
   """
@@ -68,6 +71,7 @@ class Stats_MessageCounter():
       await self.bot.add_reaction(context.message, '❎')  # Add x mark
 
   @commands.command(pass_context=True)
+  @SakanyaCore.command_botowner_only
   async def override_messagecount(self, context, userid=None, overrideCount=None):
     if context.message.author.id == '202501452596379648' and overrideCount is not None:
       if userid in self.authors_json:

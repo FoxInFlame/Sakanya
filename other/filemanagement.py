@@ -2,8 +2,11 @@
 import discord
 # Import undocumented part of Discord to use commands
 from discord.ext import commands
+# Import sys to import from parent directory
+import sys
+sys.path.append("..")
 # Import Sakanya Core
-from __main__ import SakanyaCore
+from core import SakanyaCore
 # Import os for file system checks
 import os
 # Import aiohttp for asynchronous HTTP requests

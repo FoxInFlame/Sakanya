@@ -6,8 +6,11 @@ from discord.ext import commands
 import glob
 # Import datetime to find the age
 from datetime import datetime
+# Import sys to import from parent directory
+import sys
+sys.path.append("..")
 # Import Sakanya Core
-from __main__ import SakanyaCore
+from core import SakanyaCore
 
 class About():
   def get_lines(self):

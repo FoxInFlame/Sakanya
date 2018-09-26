@@ -8,8 +8,11 @@ import os
 import asyncio
 # Import JSON to read roles.json
 import json
+# Import sys to import from parent directory
+import sys
+sys.path.append("..")
 # Import Sakanya Core
-from __main__ import SakanyaCore
+from core import SakanyaCore
 
 class Stats_ReactionCounter():
   """
