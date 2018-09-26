@@ -78,6 +78,9 @@ class Stats_MessageCounter():
            'name': override_user.name,
            'bot': override_user.bot
         }
+      # Then overwrite the file
+      with open(os.path.join(os.path.dirname(__file__), 'authors.json'), 'w') as file:
+        file.write(json.dumps(self.authors_json, indent=2))
         await self.bot.add_reaction(context.message, '✅')
     else:
       await self.bot.add_reaction(context.message, '❎')
