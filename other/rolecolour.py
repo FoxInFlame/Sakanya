@@ -20,7 +20,7 @@ import random
 class RoleColour():
   def __init__(self, bot):
     self.bot = bot
-    with open(os.path.join(os.path.dirname(__file__), 'roles.json')) as data_file:
+    with open(os.path.join(os.path.dirname(__file__), 'roles.json'), 'a+') as data_file:
       try:
         self.roles_json = json.load(data_file)
       except ValueError as e:
