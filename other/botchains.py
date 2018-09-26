@@ -4,8 +4,11 @@ import discord
 from discord.ext import commands
 # Import regexp
 import re
+# Import sys to import from parent directory
+import sys
+sys.path.append("..")
 # Import Sakanya Core
-from __main__ import SakanyaCore
+from core import SakanyaCore
 
 class BotChains():
   def __init__(self, bot):

@@ -4,8 +4,11 @@ import discord
 from discord.ext import commands
 # Import time for ping time
 import time
+# Import sys to import from parent directory
+import sys
+sys.path.append("..")
 # Import Sakanya Core
-from __main__ import SakanyaCore
+from core import SakanyaCore
 
 class Ping():
   def __init__(self, bot):

@@ -1,15 +1,18 @@
+# Import os for a restart
+import os
+# Import subprocess to call git
+import subprocess
+# Import time for sleeping
+import time
+# Import sys to import from parent directory
+import sys
+sys.path.append("..")
 # Import discord
 import discord
 # Import undocumented part of Discord to use commands
 from discord.ext import commands
 # Import Sakanya Core
-from __main__ import SakanyaCore
-# Import os and sys for a restart
-import os, sys
-# Import subprocess to call git
-import subprocess
-# Import time for sleeping
-import time
+from core import SakanyaCore
 
 class Update():
   def __init__(self, bot):

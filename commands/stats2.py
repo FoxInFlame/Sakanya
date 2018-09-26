@@ -2,8 +2,11 @@
 import discord
 # Import undocumented part of Discord to use commands
 from discord.ext import commands
+# Import sys to import from parent directory
+import sys
+sys.path.append("..")
 # Import Sakanya Core
-from __main__ import SakanyaCore
+from core import SakanyaCore
 # Import os to use relative file names
 import os
 # Import JSON to read roles.json

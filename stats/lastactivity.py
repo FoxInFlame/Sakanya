@@ -4,8 +4,11 @@ import discord
 import os
 # Import JSON to read lastmessage.json
 import json
+# Import sys to import from parent directory
+import sys
+sys.path.append("..")
 # Import Sakanya Core
-from __main__ import SakanyaCore
+from core import SakanyaCore
 # Import datetime
 import datetime
 # Import asynchronous waiting 
