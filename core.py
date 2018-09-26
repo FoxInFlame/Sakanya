@@ -88,6 +88,7 @@ class SakanyaCore():
   def command_botowner_only(self):
     async def check_sender(f):
       async def new_f(*args, **kwargs):
+        print(args)
         if 'message' in args[1]:
           assert args[1].message.author.id == '202501452596379648', \
           await args[0].bot.add_reaction(args[1].message, '✅')
