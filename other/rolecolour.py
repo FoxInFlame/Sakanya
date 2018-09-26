@@ -20,11 +20,14 @@ import random
 class RoleColour():
   def __init__(self, bot):
     self.bot = bot
-    with open(os.path.join(os.path.dirname(__file__), 'roles.json'), 'a+') as data_file:
-      try:
-        self.roles_json = json.load(data_file)
-      except ValueError as e:
-        self.roles_json = {}
+    try:
+      with open(os.path.join(os.path.dirname(__file__), 'roles.json'), 'r') as data_file:
+        try:
+          self.roles_json = json.load(data_file)
+        except ValueError as e:
+          self.roles_json = {}
+    except IOError:
+      self.roles_json = {}
 
   def luminance(self, r, g, b):
     def rgb_map(v):
