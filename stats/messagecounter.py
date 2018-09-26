@@ -11,7 +11,8 @@ from __main__ import SakanyaCore
 
 class Stats_MessageCounter():
   """
-  EDIT: After IATGOF's server crash, Counting since 2018-09-26 19:43 JST
+  EDIT: After IATGOF's server crash, Counting since 2018-09-26 21:32 JST
+  (+ rough visual estimate of previous stats since 9/18)
   Counting since 2017-11-23 22:00 JST
   """
   
@@ -74,7 +75,7 @@ class Stats_MessageCounter():
       else:
         override_user = await self.bot.get_user_info(userid)
         self.authors_json[userid] = {
-           'count': overrideCount,
+           'count': int(overrideCount),
            'name': override_user.name,
            'bot': override_user.bot
         }
