@@ -70,8 +70,9 @@ class Stats_MessageCounter():
     else:
       await self.bot.add_reaction(context.message, '❎')  # Add x mark
 
-  @commands.command(pass_context=True)
+
   @SakanyaCore.command_botowner_only
+  @commands.command(pass_context=True)
   async def override_messagecount(self, context, userid=None, overrideCount=None):
     print('a1')
     if context.message.author.id == '202501452596379648' and overrideCount is not None:
