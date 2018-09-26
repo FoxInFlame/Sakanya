@@ -138,8 +138,6 @@ logging.basicConfig(filename='log.log', level=logging.WARNING)
 # Import OS for file systems
 import os
 
-import ssl
-
 class SakanyaCore():
   # Some basic info
   version = '1.5.0'
@@ -151,7 +149,7 @@ class SakanyaCore():
   production_channel = '317924870950223872'
   name = 'Sakanya'
   embed_color = 15839636
-  description = 'A reverse image search bot made for The nulls of MAL.'
+  description = 'A reverse image search bot made for The Nulls.'
   self_introduction = 'I\'m a Discord bot created by the hands of FoxInFlame#9833 using *discord.py*. Although I may not be a girl in real life, I would love it if you could still treat me as a normal girl here on Discord. I wish I were born in real life... \n(｡•́︿•̀｡)'
   colourrestrictions = False
   presenceupdate_timer = 1800 # seconds
@@ -192,7 +190,7 @@ startup_errors = ''
 @bot.event
 async def on_ready():
   owner = await bot.get_user_info('202501452596379648')
-  await bot.send_message(owner, content='Sakanya is now online as ' + bot.user.name + '! Prefix is `' + SakanyaCore().prefix + '`.\n' + ssl.OPENSSL_VERSION + 'Errors while starting: ' + ('None' if startup_errors == '' else '```' + startup_errors + '```'))
+  await bot.send_message(owner, content='Sakanya is now online as ' + bot.user.name + '! Prefix is `' + SakanyaCore().prefix + '`.\n' + 'Errors while starting: ' + ('None' if startup_errors == '' else '```' + startup_errors + '```'))
   print('---------------------------------------------------')
   print('Sakanya by FoxInFlame has logged into Discord as')
   print('@' + bot.user.name + ' ID' + bot.user.id)
@@ -207,7 +205,7 @@ async def on_command_error(error, context):
   if isinstance(error, commands.CommandNotFound):
     if context.message.channel is None:
       return
-    if context.message.content[:3] != (SakanyaCore().prefix * 3):
+    if context.message.content[:3] != (SakanyaCore().prefix * 3): # Check if 3 prefixes are in a row
       return
     quote = discord.Embed(
       type = 'rich',

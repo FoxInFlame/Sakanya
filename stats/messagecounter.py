@@ -71,7 +71,7 @@ class Stats_MessageCounter():
   async def override_messagecount(self, context, userid=None, overrideCount=None):
     if context.message.author.id == '202501452596379648' and overrideCount is not None:
       if userid in self.authors_json:
-        self.authors_json[userid]['count'] = overrideCount
+        self.authors_json[userid]['count'] = int(overrideCount)
       else:
         override_user = await self.bot.get_user_info(userid)
         self.authors_json[userid] = {
