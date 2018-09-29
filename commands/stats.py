@@ -57,7 +57,7 @@ class Stats():
       try:
         data = json.loads(data_file)
         return data
-      except ValueError as e:
+      except (TypeError, ValueError) as e:
         return {}
     except:
       return {}
