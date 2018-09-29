@@ -84,16 +84,9 @@ class SakanyaCore():
       return '***REMOVED***'
     return '***REMOVED***'
 
-  # Function Decorators
-  def command_botowner_only(self):
-    print('hi')
-    async def check_sender(f):
-      print('b')
-      async def new_f(*args, **kwargs):
-        print(args)
-        if 'message' in args[1]:
-          assert args[1].message.author.id == '202501452596379648', \
-          await args[0].bot.add_reaction(args[1].message, '✅')
-      new_f.func_name = f.func_name
-      return await new_f
-    return check_sender
+  # Command Decorators 
+  def is_owner(context):
+    """
+    Check if command disperser is the owner of the bot
+    """
+    return context.message.author.id == '202501452596379648'
