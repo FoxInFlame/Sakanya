@@ -20,7 +20,7 @@ class Stats_MessageCounter():
       data_file = SakanyaCore().r.get('authors')
       try:
         self.authors_json = json.loads(data_file)
-      except ValueError:
+      except (TypeError, ValueError) as e:
         self.authors_json = {}
     except:
       self.authors_json = {}

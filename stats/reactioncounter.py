@@ -21,7 +21,7 @@ class Stats_ReactionCounter():
       data_file = SakanyaCore().r.get('reactions')
       try:
         self.reactions_json = json.loads(data_file)
-      except ValueError as e:
+      except (TypeError, ValueError) as e:
         self.reactions_json = {}
     except:
       self.reactions_json = {}

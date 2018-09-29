@@ -20,7 +20,7 @@ class Stats_LastActivity():
       data_file = SakanyaCore().r.get('lastactivity')
       try:
         self.dates_json = json.loads(data_file)
-      except ValueError as e:
+      except (TypeError, ValueError) as e:
         self.dates_json = {}
     except:
       self.dates_json = {}

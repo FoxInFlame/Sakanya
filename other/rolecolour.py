@@ -24,7 +24,7 @@ class RoleColour():
       data_file = SakanyaCore().r.get('roles')
       try:
         self.roles_json = json.loads(data_file)
-      except ValueError as e:
+      except (TypeError, ValueError) as e:
         self.roles_json = {}
     except IOError:
       self.roles_json = {}
