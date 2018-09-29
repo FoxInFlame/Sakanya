@@ -59,23 +59,19 @@ class Stats_MessageCounter():
 
 
   @commands.command(pass_context=True)
+  @commands.check(SakanyaCore.is_owner)
   async def reset_messagecount(self, context, userid=None):
-    if context.message.author.id == '202501452596379648':
-      resetuser = self.authors_json.pop(userid, None)
-      if resetuser is not None:
-        # Then overwrite the file
-        with open(os.path.join(os.path.dirname(__file__), 'authors.json'), 'w') as file:
-          file.write(json.dumps(self.authors_json, indent=2))
-          await self.bot.add_reaction(context.message, '✅')  # Add checkmark
-    else:
-      await self.bot.add_reaction(context.message, '❎')  # Add x mark
+    resetuser = self.authors_json.pop(userid, None)
+    if resetuser is not None:
+      # Then overwrite the file
+      with open(os.path.join(os.path.dirname(__file__), 'authors.json'), 'w') as file:
+        file.write(json.dumps(self.authors_json, indent=2))
+        await self.bot.add_reaction(context.message, '✅')  # Add checkmark
 
-
-  @SakanyaCore.command_botowner_only
   @commands.command(pass_context=True)
+  @commands.check(SakanyaCore.is_owner)
   async def override_messagecount(self, context, userid=None, overrideCount=None):
-    print('a1')
-    if context.message.author.id == '202501452596379648' and overrideCount is not None:
+    if overrideCount is not None:
       if userid in self.authors_json:
         self.authors_json[userid]['count'] = int(overrideCount)
       else:
