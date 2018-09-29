@@ -2,15 +2,10 @@
 import discord
 # Import undocumented part of Discord to use commands
 from discord.ext import commands
-# Import os to use relative file names
-import os
 # Impor asyncio to sleep when resetting to disable overwrite
 import asyncio
-# Import JSON to read roles.json
+# Import JSON to read json
 import json
-# Import sys to import from parent directory
-import sys
-sys.path.append("..")
 # Import Sakanya Core
 from core import SakanyaCore
 
@@ -23,12 +18,12 @@ class Stats_ReactionCounter():
   def __init__(self, bot):
     self.bot = bot
     try:
-      with open(os.path.join(os.path.dirname(__file__), 'reactions.json'), 'r') as data_file:
-        try:
-          self.reactions_json = json.load(data_file)
-        except ValueError as e:
-          self.reactions_json = {}
-    except IOError:
+      data_file = SakanyaCore().r.get('reactions')
+      try:
+        self.reactions_json = json.loads(data_file)
+      except ValueError as e:
+        self.reactions_json = {}
+    except:
       self.reactions_json = {}
 
   async def on_ready(self):
@@ -58,8 +53,7 @@ class Stats_ReactionCounter():
           self.reactions_json[str(server_emoji)
                               ] = amount_of_times_reaction_used
         
-        with open(os.path.join(os.path.dirname(__file__), 'reactions.json'), 'w') as file:
-          file.write(json.dumps(self.reactions_json, indent=2))
+        SakanyaCore().r.set('reactions', json.dumps(self.reactions_json))
 
   async def on_reaction_add(self, reaction, user):
     """
@@ -76,8 +70,7 @@ class Stats_ReactionCounter():
                           ] = self.reactions_json[str(reaction.emoji)] + 1
     else:
       self.reactions_json[str(reaction.emoji)] = 1
-    with open(os.path.join(os.path.dirname(__file__), 'reactions.json'), 'w') as file:
-      file.write(json.dumps(self.reactions_json, indent=2))
+    SakanyaCore().r.set('reactions', json.dumps(self.reactions_json))
   
   async def on_reaction_remove(self, reaction, user):
     """
@@ -89,66 +82,72 @@ class Stats_ReactionCounter():
     if reaction.custom_emoji is False:
       return
 
+    # If the reaction exists already, act accordingly
+    # Otherwise, don't do anything
     if str(reaction.emoji) in self.reactions_json:
+      # Remove key altogether if result is 0
       if self.reactions_json[str(reaction.emoji)] <= 1:
         self.reactions_json.pop(str(reaction.emoji), None)
       else:
         self.reactions_json[str(reaction.emoji)
                             ] = self.reactions_json[str(reaction.emoji)] - 1
-    # Else do nothing, since 0-0 should be 0 in this case
-
-    with open(os.path.join(os.path.dirname(__file__), 'reactions.json'), 'w') as file:
-      file.write(json.dumps(self.reactions_json, indent=2))
+    # Set Redis as well
+    SakanyaCore().r.set('reactions', json.dumps(self.reactions_json))
 
   async def on_socket_response(self, jsonmsg):
     """
     Add/Subtract one for the reaction.
-    Called for all responses, but filter out ones before cache with 'emoji' presence
+    Called for all responses, but filter out ones before cache with the presence of the
+    'emoji' key
     """
 
     if jsonmsg['t'] == 'MESSAGE_REACTION_ADD' and 'emoji' in jsonmsg['d']:
 
+      # Check if the event is valid
       if jsonmsg['d']['emoji']['id'] is None:
         return
-      
+      # Parse the emoji ID (which is going to be used as the key)
       key = '<:' + jsonmsg['d']['emoji']['name'] + ':' + jsonmsg['d']['emoji']['id'] + '>'
+      # Check existence of emoji in database
       if key in self.reactions_json:
         self.reactions_json[key] = self.reactions_json[key] + 1
       else:
         self.reactions_json[key] = 1
-      with open(os.path.join(os.path.dirname(__file__), 'reactions.json'), 'w') as file:
-        file.write(json.dumps(self.reactions_json, indent=2))
+      # Set Redis database as well
+      SakanyaCore().r.set('reactions', json.dumps(self.reactions_json))
     
     elif jsonmsg['t'] == 'MESSAGE_REACTION_REMOVE' and 'emoji' in jsonmsg['d']:
 
+      # Check if the event is valid
       if jsonmsg['d']['emoji']['id'] is None:
         return
-      
+      # Parse the emoji ID
       key = '<:' + jsonmsg['d']['emoji']['name'] + ':' + jsonmsg['d']['emoji']['id'] + '>'
+      # Check existence of emoji in database
       if key in self.reactions_json:
+        # If value becomes 0, remove the key altogether
         if self.reactions_json[key] <= 1:
           self.reactions_json.pop(key, None)
         else:
           self.reactions_json[key] = self.reactions_json[key] - 1
-      with open(os.path.join(os.path.dirname(__file__), 'reactions.json'), 'w') as file:
-        file.write(json.dumps(self.reactions_json, indent=2))
+      # Set Redis Database as well
+      SakanyaCore().r.set('reactions', json.dumps(self.reactions_json))
 
   @commands.command(pass_context=True)
+  @commands.check(SakanyaCore().is_owner)
   async def reset_reactioncount(self, context, reaction=None):
-    if context.message.author.id == '202501452596379648':
-      asyncio.sleep(1) # Prevent bumping into on_message handlers
-      resetreaction = self.reactions_json.pop(reaction, None)
-      if resetreaction is not None:
-        # Then overwrite the file
-        with open(os.path.join(os.path.dirname(__file__), 'reactions.json'), 'w') as file:
-          await self.bot.add_reaction(context.message, '✅')  # Add checkmark
-    else:
-      await self.bot.add_reaction(context.message, '❎')  # Add x mark
+    asyncio.sleep(1) # Prevent bumping into on_message handlers
+    resetreaction = self.reactions_json.pop(reaction, None)
+    if resetreaction is not None:
+      SakanyaCore().r.set('reactions', json.dumps(self.reactions_json))
+      await self.bot.add_reaction(context.message, '✅')
 
   @commands.command(pass_context=True)
+  @commands.check(SakanyaCore().is_owner)
   async def override_reactioncount(self, context, reaction=None, overrideCount=None):
-    if context.message.author.id == '202501452596379648' and overrideCount is not None:
+    if overrideCount is not None:
       self.reactions_json[reaction] = overrideCount
+      SakanyaCore().r.set('reactions', json.dumps(self.reactions_json))
       await self.bot.add_reaction(context.message, '✅')
     else:
       await self.bot.add_reaction(context.message, '❎')
