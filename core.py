@@ -92,7 +92,7 @@ class SakanyaCore():
     return '***REMOVED***'
 
   # Command Decorators 
-  def is_owner(self, context):
+  def is_owner(context):
     """
     Check if command disperser is the owner of the bot
     """
