@@ -21,7 +21,7 @@ class RoleColour():
   def __init__(self, bot):
     self.bot = bot
     try:
-      data_file = SakanyaCore().r.get('roles'):
+      data_file = SakanyaCore().r.get('roles')
       try:
         self.roles_json = json.loads(data_file)
       except ValueError as e:
