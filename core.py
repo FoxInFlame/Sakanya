@@ -1,3 +1,6 @@
+import os
+import redis
+
 class SakanyaCore():
 
   # Some basic info
@@ -55,6 +58,10 @@ class SakanyaCore():
                      'AppleWebKit/537.36 (KHTML, like Gecko) '
                      'Chrome/41.0.2228.0 Safari/537.36')
   }
+  r = redis.from_url(('redis://h:pb604b8bd8a656795caa4cd755e2e092e092e6854071f8465ee339206543638'
+                      '41@ec2-52-17-131-209.eu-west-1.compute.amazonaws.com:11869'),
+                      charset='utf-8',
+                      decode_responses=True)
 
   # Actual core code stuff
   def server_id(self):
@@ -85,7 +92,7 @@ class SakanyaCore():
     return '***REMOVED***'
 
   # Command Decorators 
-  def is_owner(context):
+  def is_owner(self, context):
     """
     Check if command disperser is the owner of the bot
     """

@@ -2,14 +2,11 @@
 import discord
 # Import undocumented part of Discord to use commands
 from discord.ext import commands
-# Import sys to import from parent directory
-import sys
-sys.path.append("..")
 # Import Sakanya Core
 from core import SakanyaCore
 # Import os to use relative file names
 import os
-# Import JSON to read roles.json
+# Import JSON to read \json
 import json
 # Import matplotlib to plot stuff
 # import matplotlib
@@ -37,13 +34,13 @@ class Stats2():
 
   async def loadStatFile(self, statfilename):
     try:
-      with open(os.path.join(os.path.join(os.path.join(os.path.dirname(__file__), '..'), 'stats'), statfilename), 'r') as data_file:
-        try:
-          data = json.load(data_file)
-          return data
-        except ValueError as e:
-          return {}
-    except IOError:
+      data_file = SakanyaCore().r.get(statfilename)
+      try:
+        data = json.loads(data_file)
+        return data
+      except ValueError as e:
+        return {}
+    except:
       return {}
 
   @commands.command(pass_context=True)
@@ -61,7 +58,7 @@ class Stats2():
 
     if argument == 'messages_byusers':
 
-      data = await self.loadStatFile('authors.json')
+      data = await self.loadStatFile('authors')
       graph_data = {}
       total_messages = 0
       for count, (key, value) in enumerate(list(data.items()), 1):
@@ -88,7 +85,7 @@ class Stats2():
         
     elif argument == 'messages_bybots':
 
-      data = await self.loadStatFile('authors.json')
+      data = await self.loadStatFile('authors')
       graph_data = {}
       total_messages = 0
       for count, (key, value) in enumerate(list(data.items()), 1):
@@ -119,7 +116,7 @@ class Stats2():
         
     elif argument == 'messages_byeveryone':
 
-      data = await self.loadStatFile('authors.json')
+      data = await self.loadStatFile('authors')
       graph_data = {}
       total_messages = 0
       for count, (key, value) in enumerate(list(data.items()), 1):
@@ -150,7 +147,7 @@ class Stats2():
 
     elif argument == 'emojis':
 
-      data = await self.loadStatFile('reactions.json')
+      data = await self.loadStatFile('reactions')
       graph_data = {}
       total_emojis = 0
       for key, value in list(data.items()):

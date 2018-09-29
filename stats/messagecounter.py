@@ -2,13 +2,8 @@
 import discord
 # Import undocumented part of Discord to use commands
 from discord.ext import commands
-# Import os to use relative file names
-import os
-# Import JSON to read roles.json
+# Import JSON to read json
 import json
-# Import sys to import from parent directory
-import sys
-sys.path.append("..")
 # Import Sakanya Core
 from core import SakanyaCore
 
@@ -22,12 +17,12 @@ class Stats_MessageCounter():
   def __init__(self, bot):
     self.bot = bot
     try:
-      with open(os.path.join(os.path.dirname(__file__), 'authors.json'), 'r') as data_file:
-        try:
-          self.authors_json = json.load(data_file)
-        except ValueError as e:
-          self.authors_json = {}
-    except IOError:
+      data_file = SakanyaCore().r.get('authors')
+      try:
+        self.authors_json = json.loads(data_file)
+      except ValueError:
+        self.authors_json = {}
+    except:
       self.authors_json = {}
 
   async def on_message(self, message):
@@ -54,8 +49,7 @@ class Stats_MessageCounter():
     if 'bot' not in self.authors_json[message.author.id]:
       self.authors_json[message.author.id]['bot'] = message.author.bot
 
-    with open(os.path.join(os.path.dirname(__file__), 'authors.json'), 'w') as file: # Then overwrite the file
-      file.write(json.dumps(self.authors_json, indent=2))
+    SakanyaCore().r.set('authors', json.dumps(self.authors_json))
 
 
   @commands.command(pass_context=True)
@@ -63,10 +57,8 @@ class Stats_MessageCounter():
   async def reset_messagecount(self, context, userid=None):
     resetuser = self.authors_json.pop(userid, None)
     if resetuser is not None:
-      # Then overwrite the file
-      with open(os.path.join(os.path.dirname(__file__), 'authors.json'), 'w') as file:
-        file.write(json.dumps(self.authors_json, indent=2))
-        await self.bot.add_reaction(context.message, '✅')  # Add checkmark
+      SakanyaCore().r.set('authors', json.dumps(self.authors_json))
+      await self.bot.add_reaction(context.message, '✅')
 
   @commands.command(pass_context=True)
   @commands.check(SakanyaCore.is_owner)
@@ -81,10 +73,8 @@ class Stats_MessageCounter():
            'name': override_user.name,
            'bot': override_user.bot
         }
-      # Then overwrite the file
-      with open(os.path.join(os.path.dirname(__file__), 'authors.json'), 'w') as file:
-        file.write(json.dumps(self.authors_json, indent=2))
-        await self.bot.add_reaction(context.message, '✅')
+      SakanyaCore().r.set('authors', json.dumps(self.authors_json))
+      await self.bot.add_reaction(context.message, '✅')
     else:
       await self.bot.add_reaction(context.message, '❎')
   

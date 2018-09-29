@@ -1,12 +1,7 @@
 # Import discord
 import discord
-# Import os to use relative file names
-import os
 # Import JSON to read lastmessage.json
 import json
-# Import sys to import from parent directory
-import sys
-sys.path.append("..")
 # Import Sakanya Core
 from core import SakanyaCore
 # Import datetime
@@ -22,12 +17,12 @@ class Stats_LastActivity():
   def __init__(self, bot):
     self.bot = bot
     try:
-      with open(os.path.join(os.path.dirname(__file__), 'lastactivity.json'), 'r') as data_file:
-        try:
-          self.dates_json = json.load(data_file)
-        except ValueError as e:
-          self.dates_json = {}
-    except IOError:
+      data_file = SakanyaCore().r.get('lastactivity')
+      try:
+        self.dates_json = json.loads(data_file)
+      except ValueError as e:
+        self.dates_json = {}
+    except:
       self.dates_json = {}
 
   async def on_ready(self):
@@ -44,8 +39,7 @@ class Stats_LastActivity():
   async def updateActivity(self, user):
     self.dates_json[user] = str(datetime.datetime.utcnow())
 
-    with open(os.path.join(os.path.dirname(__file__), 'lastactivity.json'), 'w') as file: # Then overwrite the file
-      file.write(json.dumps(self.dates_json, indent=2))
+    SakanyaCore().r.set('lastactivity', json.dumps(self.dates_json))
 
   async def on_socket_response(self, jsonmsg):
     # Filtering out just The nulls is hard (because server id is not returned - only channel id)
@@ -70,8 +64,7 @@ class Stats_LastActivity():
       await self.updateActivity(jsonmsg['d']['user']['id'])
     elif jsonmsg['t'] == 'GUILD_MEMBER_REMOVE':
       self.dates_json.pop(jsonmsg['d']['user']['id'])
-      with open(os.path.join(os.path.dirname(__file__), 'lastactivity.json'), 'w') as file: # Then overwrite the file
-        file.write(json.dumps(self.dates_json, indent=2))
+    SakanyaCore().r.set('lastactivity', json.dumps(self.dates_json))
 
   async def checkForInactiveUsers(self):
     """

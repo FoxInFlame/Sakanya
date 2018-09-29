@@ -2,9 +2,6 @@
 import discord
 # Import undocumented part of Discord to use commands
 from discord.ext import commands
-# Import sys to import from parent directory
-import sys
-sys.path.append("..")
 # Import Sakanya Core
 from core import SakanyaCore
 # Import colour to use colours
@@ -24,11 +21,11 @@ class RoleColour():
   def __init__(self, bot):
     self.bot = bot
     try:
-      with open(os.path.join(os.path.dirname(__file__), 'roles.json'), 'r') as data_file:
-        try:
-          self.roles_json = json.load(data_file)
-        except ValueError as e:
-          self.roles_json = {}
+      data_file = SakanyaCore().r.get('roles'):
+      try:
+        self.roles_json = json.loads(data_file)
+      except ValueError as e:
+        self.roles_json = {}
     except IOError:
       self.roles_json = {}
 
@@ -68,8 +65,7 @@ class RoleColour():
       'colour': '0',
       'name': member.name
     })
-    with open(os.path.join(os.path.dirname(__file__), 'roles.json'), 'w') as file: # Then overwrite the file
-      file.write(json.dumps(self.roles_json, indent=2))
+    SakanyaCore().r.set('roles', json.dumps(roles_json))
     
     owner = await self.bot.get_user_info('202501452596379648')
     await self.bot.send_message(owner, content='*' + member.name + ' has been automatically paired with a new role.')
@@ -162,8 +158,7 @@ class RoleColour():
             "colour": discordColour,
             "name": userInstance_global.name
           })
-          with open(os.path.join(os.path.dirname(__file__), 'roles.json'), 'w') as file: # Then overwrite the file
-            file.write(json.dumps(self.roles_json, indent=2))
+          SakanyaCore().r.set('roles', json.dumps(roles_json))
           await self.bot.edit_message(pairing_message, embed=discord.Embed(
             color = SakanyaCore().embed_color,
             type = 'rich',
@@ -213,8 +208,7 @@ class RoleColour():
           return
         await self.bot.edit_role(server, roleInstance_server, colour=discord.Colour(value=int(new_colour.hex_l[1:], 16))) # Without the "0x" part before the hex string, python cannot know if it should convert to decimal. But using ",16" makes it forcibly decimal (which is what discord.py wants)
         self.roles_json[context.message.author.id]['colour'] = new_colour.hex_l[1:] # Update the JSON
-        with open(os.path.join(os.path.dirname(__file__), 'roles.json'), 'w') as file: # Then overwrite the file
-          file.write(json.dumps(self.roles_json, indent=2))
+        SakanyaCore().r.set('roles', json.dupms(roles_json))
         if new_colour.hex_l == '#000000':
           await self.bot.say('*<@' + context.message.author.id + '> ٩(｡•́‿•̀｡)۶ You have removed your role-specific colour!*') # Send confirmation message
         else:

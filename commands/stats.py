@@ -2,14 +2,11 @@
 import discord
 # Import undocumented part of Discord to use commands
 from discord.ext import commands
-# Import sys to import from parent directory
-import sys
-sys.path.append("..")
 # Import Sakanya Core
 from core import SakanyaCore
 # Import os to use relative file names
 import os
-# Import JSON to read roles.json
+# Import JSON to read json
 import json
 # Import matplotlib to plot stuff
 import matplotlib
@@ -56,13 +53,13 @@ class Stats():
 
   async def loadStatFile(self, statfilename):
     try:
-      with open(os.path.join(os.path.join(os.path.join(os.path.dirname(__file__), '..'), 'stats'), statfilename), 'r') as data_file:
-        try:
-          data = json.load(data_file)
-          return data
-        except ValueError as e:
-          return {}
-    except IOError:
+      data_file = SakanyaCore().r.get(statfilename)
+      try:
+        data = json.loads(data_file)
+        return data
+      except ValueError as e:
+        return {}
+    except:
       return {}
 
   def sort_dict_to_list_alphabetically(self, dictionary_to_sort):
@@ -91,7 +88,7 @@ class Stats():
 
       tmpmsg = await self.bot.send_message(context.message.channel, 'Generating chart...')
       progressmsg = await self.bot.say('`φ(．．)`')
-      data = await self.loadStatFile('authors.json')
+      data = await self.loadStatFile('authors')
       await self.updateProgressBar(progressmsg, 20)
       graph_data = {}
       for count, (key, value) in enumerate(list(data.items()), 1):
@@ -119,7 +116,7 @@ class Stats():
 
       tmpmsg = await self.bot.send_message(context.message.channel, 'Generating chart...')
       progressmsg = await self.bot.say('`φ(．．)`')
-      data = await self.loadStatFile('authors.json')
+      data = await self.loadStatFile('authors')
       await self.updateProgressBar(progressmsg, 20)
       graph_data = {}
       for count, (key, value) in enumerate(list(data.items()), 1):
@@ -147,7 +144,7 @@ class Stats():
 
       tmpmsg = await self.bot.send_message(context.message.channel, 'Generating chart...')
       progressmsg = await self.bot.say('`φ(．．)`')
-      data = await self.loadStatFile('authors.json')
+      data = await self.loadStatFile('authors')
       await self.updateProgressBar(progressmsg, 20)
       graph_data = {}
       for count, (key, value) in enumerate(list(data.items()), 1):
@@ -174,7 +171,7 @@ class Stats():
 
       tmpmsg = await self.bot.send_message(context.message.channel, 'Generating chart...')
       progressmsg = await self.bot.say('`φ(．．)`')
-      data = await self.loadStatFile('reactions.json')
+      data = await self.loadStatFile('reactions')
       await self.updateProgressBar(progressmsg, 20)
       graph_data = {}
       for key, value in list(data.items()):
