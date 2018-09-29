@@ -90,7 +90,7 @@
 # - Rename mockxaetral to uselessinteractions
 # - Added response to Andy's 'No Motsy' message
 # 1.0.8
-# - Removed unneccessary new line in >update response
+# - Removed unnecessary new line in >update response
 # - Fixed status message after update was aborted
 # - Added a small command that you wouldn't notice :)
 # 1.0.7
@@ -140,7 +140,14 @@ import os
 # Import Sakanya
 from core import SakanyaCore
 
-bot = commands.Bot(command_prefix=[SakanyaCore().prefix + ' ', SakanyaCore().prefix, 'saka:'], description=SakanyaCore().description)
+bot = commands.Bot(
+  command_prefix=[
+    SakanyaCore().prefix + ' ',
+    SakanyaCore().prefix,
+    'saka:'
+  ], 
+  description=SakanyaCore().description
+)
 bot.remove_command('help') # Remove default help command
 
 startup_errors = ''
