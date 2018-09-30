@@ -208,13 +208,13 @@ class RoleColour():
           return
         await self.bot.edit_role(server, roleInstance_server, colour=discord.Colour(value=int(new_colour.hex_l[1:], 16))) # Without the "0x" part before the hex string, python cannot know if it should convert to decimal. But using ",16" makes it forcibly decimal (which is what discord.py wants)
         self.roles_json[context.message.author.id]['colour'] = new_colour.hex_l[1:] # Update the JSON
-        SakanyaCore().r.set('roles', json.dupms(self.roles_json))
+        SakanyaCore().r.set('roles', json.dumps(self.roles_json))
         if new_colour.hex_l == '#000000':
           await self.bot.say('*<@' + context.message.author.id + '> ٩(｡•́‿•̀｡)۶ You have removed your role-specific colour!*') # Send confirmation message
         else:
           await self.bot.say('*<@' + context.message.author.id + '> ٩(｡•́‿•̀｡)۶ You have changed your colour to ' + new_colour.hex_l + '!*') # Send confirmation message
       else:
-        await self.bot.say('(-_-;)・・・ Your username is not yet bound to a specifc role. Let\'s mention Fox so that he can do that for you. \n<@202501452596379648>')
+        await self.bot.say('(-_-;)・・・ Your username is not yet bound to a specific role. Let\'s mention Fox so that he can do that for you. \n<@202501452596379648>')
 
     except (ValueError, AttributeError) as e:
       print(e)
