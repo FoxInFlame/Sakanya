@@ -53,13 +53,12 @@ class SuggestionControl():
 
   def handleSuggestionReactionEvent(self, emoji, message, member):
     if message.channel.id == '341874607651029003': # Double check
-      upvotes = 0
-      downvotes = 0
+      upvotes = downvotes = 0 # Just setting up.
       for reaction in message.reactions:
         if reaction.emoji == '👍':
-          upvotes = reaction.count
+          upvotes = reaction.count - 1 # Remove Saka's vote
         if reaction.emoji == '❌':
-          downvotes = reaction.count
+          downvotes = reaction.count - 1 # Remove Saka's vote
     
       # In #suggestions
       # Check if the reaction is a green checkmark by the author (if so, mark as complete)
