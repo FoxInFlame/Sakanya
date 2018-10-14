@@ -53,7 +53,13 @@ class Help():
     ('iam', {
       'module': 'commands.iam',
       'short_description': 'Add yourself a self-assigned role',
-      'description': 'You can describe yourself using roles, and access role-specific channels using them!\n\nIf you have the **AMA** role, you will be mentioned with someone needs help or wants to ask a question.\n\nThe **lewd** role will give access to the #nsfw channel.\n\nIf you\'re a fan of events, saying so will make Bob notify you whenever a new challenge, war, etc is initiated (you have this by default).\n\nIf no role is specified, I will list all the self-assigned roles you have.',
+      'description': ('You can describe yourself using roles, and access role-specific channels using them!\n\n'
+      '**AMA**: You will be mentioned with someone needs help or wants to ask a question.\n\n'
+      '**lewd**: You will be given access to the #nsfw channel.\n\n'
+      '**Ready for Events at All Times**: BobDono (bot) will notify you whenever a new challenge, waifu war, etc is initiated (you have this role by default).\n\n'
+      '**Interested in Politics**: You will be given access to the #politics channel.\n\n'
+      '**AoKana Fan**: Just a social status.\n\n'
+      'If no role is specified, I will list all the self-assigned roles you have.'),
       'usage': 'iam ({})'.format(' | '.join(list(SakanyaCore().self_assigned_roles))),
       'admin': False
     }),
