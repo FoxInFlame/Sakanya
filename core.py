@@ -24,7 +24,7 @@ class SakanyaCore():
       'lewd': '350190393607847937',
       'ama': '349277559449452545',
       'ready for events at all times': '381412270481342465',
-      'playing houkai3rd': '397940005735104512',
+      'aokana fan': '397940005735104512',
       'interested in politics': '501030470729990144'
   }
 
