@@ -7,16 +7,14 @@ class FindUser():
   def __init__(self, bot):
     self.bot = bot
 
-  async def FindUser(self):
+  async def FindUser(self, username=None):
     """
     Find user by name
-    
-    Format:
-      >restart
-
-    Examples:
-      >restart
     """
+    if username is None:
+      return False
+
     print('testing very much find user')
+
 def setup(bot):
   bot.add_cog(FindUser(bot))
