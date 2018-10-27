@@ -6,7 +6,7 @@ class SakanyaCore():
   # Some basic info
   version = '1.5.0'
   prefix = '>'
-  debug = False
+  debug = True
   debug_server = '344957370901856266'
   debug_channel = '344957370901856268'
   production_server = '317924870950223872'
@@ -42,6 +42,7 @@ class SakanyaCore():
       'commands.stats2',
       'commands.modules',
       'commands.addreaction',
+      'commands.timeout',
       'other.filemanagement',
       'other.suggestioncontrol',
       'other.mentioninteraction',
@@ -98,3 +99,9 @@ class SakanyaCore():
     Check if command disperser is the owner of the bot
     """
     return context.message.author.id == '202501452596379648'
+  
+  def is_admin(context):
+    """
+    Check if command disperser is an amin
+    """
+    return context.message.author.server_permissions.administrator
