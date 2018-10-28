@@ -113,9 +113,11 @@ class Timeout():
     """
     while not self.bot.is_closed:
       if self.timeouts_json is not None or bool(self.timeouts_json) is True:
+        print('Checking for expiries...')
         for member_id, data in self.timeouts_json.items():
           expiry_date = datetime.strptime(data['expiry'], '%Y-%m-%d %H:%M:%S')
           if expiry_date <= datetime.now():
+            print(f'expiry has been reacahed for {member_id}')
             await self.delete_readonly_overwrite(
                 self.bot.get_server(data['server']),
                 member_id,
