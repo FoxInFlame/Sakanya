@@ -36,6 +36,10 @@ class FileManagement():
     """
     try:
       contents = SakanyaCore().r.get(key)
+      print(contents)
+      if contents is None:
+        self.bot.say('no content')
+        return
       if len(contents) < 1800:
         await self.bot.say(embed=discord.Embed(
           color = SakanyaCore().embed_color,
