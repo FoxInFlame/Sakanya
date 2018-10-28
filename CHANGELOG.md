@@ -1,6 +1,7 @@
 # Changelog:
 1.6.0
-- Commands added: >timeout
+- Commands removed: >timeout
+- Commands added: >timeout, >bots
 
 1.5.0
 - Moved to Heroku using Free Dynos (1000 hours/month) because IATGOF's server lost its DB.
