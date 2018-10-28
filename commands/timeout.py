@@ -1,18 +1,16 @@
-# Import discord
-import discord
-# Import undocumented part of Discord to use commands
-from discord.ext import commands
-# Import sys to import from parent directory
-# Import Sakanya Core
-from core import SakanyaCore
-# Import JSON
 import json
-# Track time
 from datetime import datetime, timedelta
-
 import asyncio
+import discord
+from discord.ext import commands
+from core import SakanyaCore
 
 class Timeout():
+  """
+  This module is no longer used and is kept for archival purposes only.
+  When it is ran, it could potentially delete server channels without warning. Don't use.
+  (#announcements disappeared because of this.)
+  """
   def __init__(self, bot):
     self.bot = bot
     self.timeouts_json = {}
@@ -21,7 +19,7 @@ class Timeout():
       self.timeouts_json = json.loads(data_file)
     except (IOError, TypeError, ValueError):
       self.timeouts_json = {}
-  
+
   async def on_ready(self):
     self.bot.loop.create_task(self.check_timeout_expiries())
 
@@ -57,13 +55,13 @@ class Timeout():
     Timeout a specific user for a set amount of time.
     When timeouts go active, the user is first sent to a channel dedicated to that person,
     where a message from Sakanya says that they are timed out.
-    Once they agree to this by pressing a reaction, they are allowed to browse the channels but 
-    not post anything in them, until the timeout is reached, which is when they are given full 
-    permission to participate in the discussion again. 
+    Once they agree to this by pressing a reaction, they are allowed to browse the channels but
+    not post anything in them, until the timeout is reached, which is when they are given full
+    permission to participate in the discussion again.
 
     By setting user as discord.Member, the command only triggers when a mention or an exact
     nickname/username match occurs.
-    
+
     Format:
       >timeout <username> 30 [Reason goes here]
 
@@ -75,17 +73,17 @@ class Timeout():
 
     if member.id in self.timeouts_json:
       self.timeouts_json[member.id]['expiry'] = expiry_date
-    else: 
+    else:
       await self.make_all_channels_readonly(context.message.server, member)
       channel = await self.create_user_specific_channel(context.message.server, member)
 
       await self.bot.send_message(channel, (
-        'Hi there ' + member.mention + '! You have been timed out for **' + minutes + ' minutes** '
-        'for the following reason: ```' + reason + '```' 
-        'Here\'s a quick overview of how a timeout works: \n'
-        '- You lose the ability to send messages to channels until the expiry time is reached. \n'
-        '- You can still read messages and follow the conversation. \n'
-        '- Depending on your acts during the timeout, the expiry time might be delayed more.'))
+          f'Hi there {member.mention}! You have been timed out for **{minutes} minutes** '
+          f'for the following reason: ```{reason}```'
+          'Here\'s a quick overview of how a timeout works: \n'
+          '- You lose the ability to send messages to channels until the expiry time is reached. \n'
+          '- You can still read messages and follow the conversation. \n'
+          '- Depending on your acts during the timeout, the expiry time might be delayed more.'))
       await self.bot.move_channel(channel, 0)
 
       self.timeouts_json[member.id] = {
@@ -118,8 +116,11 @@ class Timeout():
         for member_id, data in self.timeouts_json.items():
           expiry_date = datetime.strptime(data['expiry'], '%Y-%m-%d %H:%M:%S')
           if expiry_date <= datetime.now():
-            await self.delete_readonly_overwrite(self.bot.get_server(data['server']), member_id, data['channel'])
-      
+            await self.delete_readonly_overwrite(
+                self.bot.get_server(data['server']),
+                member_id,
+                data['channel'])
+
       await asyncio.sleep(60)
 
 

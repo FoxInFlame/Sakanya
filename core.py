@@ -1,7 +1,10 @@
-import os
 import redis
 
 class SakanyaCore():
+  """
+  The core file for Sakanya.
+  Contains variable specific to Nulls, and specific settings that can be changed at will.
+  """
 
   # Some basic info
   version = '1.6.0'
@@ -24,7 +27,6 @@ class SakanyaCore():
       'lewd': '350190393607847937',
       'ama': '349277559449452545',
       'ready for events at all times': '381412270481342465',
-      'aokana fan': '397940005735104512',
       'interested in politics': '501030470729990144'
   }
 
@@ -42,7 +44,7 @@ class SakanyaCore():
       'commands.stats2',
       'commands.modules',
       'commands.addreaction',
-      'commands.timeout',
+      'commands.bots',
       'other.filemanagement',
       'other.suggestioncontrol',
       'other.mentioninteraction',
@@ -62,8 +64,8 @@ class SakanyaCore():
   }
   r = redis.from_url(('redis://h:pb604b8bd8a656795caa4cd755e2e092e092e6854071f8465ee339206543638'
                       '41@ec2-52-17-131-209.eu-west-1.compute.amazonaws.com:11869'),
-                      charset='utf-8',
-                      decode_responses=True)
+                     charset='utf-8',
+                     decode_responses=True)
 
   # Actual core code stuff
   def server_id(self):
@@ -93,13 +95,13 @@ class SakanyaCore():
       return '***REMOVED***'
     return '***REMOVED***'
 
-  # Command Decorators 
+  # Command Decorators
   def is_owner(self, context):
     """
     Check if command disperser is the owner of the bot
     """
     return context.message.author.id == '202501452596379648'
-  
+
   def is_admin(self, context):
     """
     Check if command disperser is an admin

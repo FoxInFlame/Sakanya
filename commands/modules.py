@@ -1,22 +1,22 @@
-# Import discord
 import discord
-# Import undocumented part of Discord to use commands
 from discord.ext import commands
-# Import sys to import from parent directory
-import sys
-sys.path.append("..")
-# Import Sakanya Core
 from core import SakanyaCore
 
+
 class Modules():
+  """
+  This class provides functions for the command `>modules`.
+  """
+
   def __init__(self, bot):
     self.bot = bot
 
   @commands.command(pass_context=True)
+  @commands.check(SakanyaCore().is_admin)
   async def modules(self, context, action=None, moduleName=None):
     """
     List, enable or disable modules.
-    
+
     Format:
       >modules [enable|disable] [modulename]
 
@@ -33,32 +33,35 @@ class Modules():
 
     if action is None:
       await self.bot.say(embed=discord.Embed(
-        color = SakanyaCore().embed_color,
-        type = 'rich',
-        title = 'Loaded modules',
-        description = '· `' + ('`\n· `'.join(tuple(self.bot.extensions))) + '`'
+          color=SakanyaCore().embed_color,
+          type='rich',
+          title='Loaded modules',
+          description='· `' + ('`\n· `'.join(tuple(self.bot.extensions))) + '`'
       ))
       return
-    
-    if (action != "enable" and action != "disable") or moduleName is None:
+
+    if (action != 'enable' and action != 'disable') or moduleName is None:
       await self.bot.say('Wrong usage. Check source code.')
       return
- 
-    if action == "enable":
+
+    if action == 'enable':
       try:
         self.bot.load_extension(moduleName)
       except (AttributeError, ImportError) as e:
-        await self.bot.say("Failed to enable extension `{0}`\n{1}: {2}".format(moduleName, type(e).__name__, str(e)))
+        await self.bot.say((
+            f'Failed to enable extension `{moduleName}`\n'
+            f'{type(e).__name__}: {str(e)}'))
         return
-      await self.bot.say("`{}` has been enabled.".format(moduleName))
+      await self.bot.say(f'`{moduleName}` has been enabled.')
       return
-    elif action == "disable":
+
+    elif action == 'disable':
       if moduleName in tuple(self.bot.extensions):
         self.bot.unload_extension(moduleName)
       else:
-        await self.bot.say("Failed to disable extension `{}`\nExtension does not exist.".format(moduleName))
+        await self.bot.say(f'Failed to disable extension `{moduleName}`\nExtension does not exist.')
         return
-      await self.bot.say("`{}` has been disabled.".format(moduleName))
+      await self.bot.say(f'`{moduleName}` has been disabled.')
 
 def setup(bot):
   bot.add_cog(Modules(bot))

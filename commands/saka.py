@@ -1,33 +1,22 @@
-# Import discord
 import discord
-# Import undocumented part of Discord to use commands
 from discord.ext import commands
-# Import sys to import from parent directory
-import sys
-sys.path.append("..")
-# Import Sakanya Core
 from core import SakanyaCore
-# Import collections to use Named Tuples
-import collections
-# Import URLlib.parse to manipulate URLs
-import urllib.parse
-# Import asyncio for more async stuff
+import collections  # Import collections to use Named Tuples
+import urllib.parse  # Import URLlib.parse to manipulate URLs
 import asyncio
-# Import aiohttp for asynchronous HTTP requests
-import aiohttp
-# Import Pillow to manipulate images
-from PIL import Image
-# Import BytesIO for using URL with Pillow
-from io import BytesIO
-# Import base64 to parse images
-import base64
-# Import JSON to handle json responses
-import json
-# Import lxml to parse XML and HTML
-from lxml import etree
-# Import URLlib.error to handle error
+import aiohttp  # Import aiohttp for asynchronous HTTP requests
+from PIL import Image  # Import Pillow to manipulate images
+from io import BytesIO  # Import BytesIO for using URL with Pillow
+import base64  # Import base64 to parse images
+import json# Import JSON to handle json responses
+from lxml import etree  # Import lxml to parse XML and HTML
+
 
 class Saka():
+  """
+  This class provides functions for the command `>saka`.
+  """
+
   def __init__(self, bot):
     self.bot = bot
 
@@ -41,8 +30,12 @@ class Saka():
       await self.bot.delete_message(message=message)
       return
     outoften = round(percentage / 10)
-    await self.bot.edit_message(message=message, new_content='`' + ('__' * outoften)[:-1] + 'φ(．．)`')
-    await self.bot.edit_message(message=message, new_content='`' + ('__' * outoften) + 'φ(．．)`')
+    await self.bot.edit_message(
+        message=message,
+        new_content='`' + ('__' * outoften)[:-1] + 'φ(．．)`')
+    await self.bot.edit_message(
+        message=message,
+        new_content='`' + ('__' * outoften) + 'φ(．．)`')
 
   async def getTopImageResult(self, progressmsg, source: str, url: str):
     """
