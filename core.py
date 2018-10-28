@@ -94,14 +94,14 @@ class SakanyaCore():
     return '***REMOVED***'
 
   # Command Decorators 
-  def is_owner(context):
+  def is_owner(self, context):
     """
     Check if command disperser is the owner of the bot
     """
     return context.message.author.id == '202501452596379648'
   
-  def is_admin(context):
+  def is_admin(self, context):
     """
-    Check if command disperser is an amin
+    Check if command disperser is an admin
     """
     return context.message.author.server_permissions.administrator
