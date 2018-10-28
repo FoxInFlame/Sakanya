@@ -4,9 +4,9 @@ import redis
 class SakanyaCore():
 
   # Some basic info
-  version = '1.5.0'
+  version = '1.6.0'
   prefix = '>'
-  debug = True
+  debug = False
   debug_server = '344957370901856266'
   debug_channel = '344957370901856268'
   production_server = '317924870950223872'
