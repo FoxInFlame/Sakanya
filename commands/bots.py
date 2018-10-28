@@ -67,7 +67,7 @@ class Bots():
           f'{value["description"]}\n'
           f'For more details, type `{value["detail_command"]}`.\n'
           f'For a list of {key}\'s commands, type `{value["help_command"]}`.\n\n')
-    self.bot.say(text)
+    await self.bot.say(text)
 
 
 def setup(bot):
