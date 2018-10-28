@@ -120,6 +120,7 @@ class Timeout():
                 self.bot.get_server(data['server']),
                 member_id,
                 data['channel'])
+            self.timeouts_json.pop(member_id, None)
 
       await asyncio.sleep(60)
 
