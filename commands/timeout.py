@@ -100,6 +100,8 @@ class Timeout():
     """
     member = server.get_member(member_id)
     channel = server.get_channel(channel_id)
+    if channel is None:
+      return  # Already freed
     for channel in server.channels:
       await self.bot.delete_channel_permissions(channel, member)
     await self.bot.send_message(channel, 'You are now free!')
@@ -112,6 +114,7 @@ class Timeout():
     Check for timeout expiries, and release those members if they are expired.
     """
     while not self.bot.is_closed:
+      print('heh')
       if self.timeouts_json is not None or bool(self.timeouts_json) is True:
         print('Checking for expiries...')
         for member_id, data in self.timeouts_json.items():
