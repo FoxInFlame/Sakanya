@@ -45,6 +45,7 @@ class SakanyaCore():
       'commands.modules',
       'commands.addreaction',
       'commands.bots',
+      'commands.timeout',
       'other.filemanagement',
       'other.suggestioncontrol',
       'other.mentioninteraction',
