@@ -121,6 +121,7 @@ class Timeout():
                 member_id,
                 data['channel'])
             self.timeouts_json.pop(member_id, None)
+            SakanyaCore().r.set('timeouts', json.dumps(self.timeouts_json))
 
       await asyncio.sleep(60)
 
