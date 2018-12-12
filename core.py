@@ -9,7 +9,7 @@ class SakanyaCore():
   # Some basic info
   version = '1.6.0'
   prefix = '>'
-  debug = False
+  debug = True
   debug_server = '344957370901856266'
   debug_channel = '344957370901856268'
   production_server = '317924870950223872'
@@ -45,15 +45,15 @@ class SakanyaCore():
       'commands.modules',
       'commands.addreaction',
       'commands.bots',
-      'commands.timeout',
+      'user_management.user_command',
       'other.filemanagement',
       'other.suggestioncontrol',
       'other.mentioninteraction',
-      'other.uselessinteractions',
+      # 'other.uselessinteractions',
       'other.presenceupdate',
       'other.rolecolour',
-      'other.botchains',
-      'other.definitelynotaprilfools',
+      # 'other.botchains',
+      # 'other.definitelynotaprilfools',
       'stats.messagecounter',
       'stats.reactioncounter',
       'stats.lastactivity'
@@ -67,6 +67,10 @@ class SakanyaCore():
                       '41@ec2-52-17-131-209.eu-west-1.compute.amazonaws.com:11869'),
                      charset='utf-8',
                      decode_responses=True)
+
+  # Bot State Data
+  currently_filling_user_info = {}
+
 
   # Actual core code stuff
   def server_id(self):

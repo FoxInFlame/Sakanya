@@ -32,10 +32,10 @@ class Saka():
     outoften = round(percentage / 10)
     await self.bot.edit_message(
         message=message,
-        new_content='`' + ('__' * outoften)[:-1] + 'φ(．．)`')
+        new_content=f"`{('__' * outoften)[:-1]}φ(．．)`")
     await self.bot.edit_message(
         message=message,
-        new_content='`' + ('__' * outoften) + 'φ(．．)`')
+        new_content=f"`{'__' * outoften}φ(．．)`")
 
   async def getTopImageResult(self, progressmsg, source: str, url: str):
     """
@@ -101,29 +101,51 @@ class Saka():
                 urlresult = await c.json(encoding='utf8')
                 await self.updateProgressBar(progressmsg, 60)
                 topresult = urlresult['results'][0]
-                description = 'Submitted image <:arrow_right:346575669477769216>\n\n**Similarity:** ' + topresult['header']['similarity'] + '%\n'
+                description = (
+                  'Submitted image <:arrow_right:346575669477769216>\n\n'
+                  f"**Similarity:** {topresult['header']['similarity']}%\n")
                 resulturl = '' # Default value
                 if ('title' in topresult['data']) and (topresult['data']['title'] == ''): topresult['data']['title'] = '<Untitled>'
                 if ('source' in topresult['data']) and (topresult['data']['source'] == ''): topresult['data']['source'] = '<Untitled>'
                 if 'da_id' in topresult['data']:
                   # If deviantart
-                  description += '**Title:** ' + topresult['data']['title'] + '\n**Author:** ' + (topresult['data']['author_name'] if topresult['data']['author_name'] is not None else 'Unknown') + '\n**Source:** DeviantArt'
-                  resulturl = 'https://deviantart.com/view/' + str(topresult['data']['da_id'])
+                  description += (
+                    f"**Title:** {topresult['data']['title']}\n"
+                    f"**Author:** {topresult['data']['author_name'] if topresult['data']['author_name'] is not None else 'Unknown'}\n"
+                    "**Source:** DeviantArt")
+                  resulturl = f"https://deviantart.com/view/{str(topresult['data']['da_id'])}"
                 elif 'creator' in topresult['data'] and isinstance(topresult['data']['creator'], list):
                   # If creator is an array
-                  description += '**Title:** ' + (topresult['data']['eng_name'] if topresult['data']['eng_name'] is not None else '<Untitled>') + '\n**Author:** ' + ', '.join(topresult['data']['creator'])
+                  description += (
+                    f"**Title:** {topresult['data']['eng_name'] if topresult['data']['eng_name'] is not None else '<Untitled>'}\n"
+                    f"**Author:** {', '.join(topresult['data']['creator'])}")
                 elif 'pixiv_id' in topresult['data']:
                   # If pixiv
-                  description += '**Title:** ' + topresult['data']['title'] + '\n**Author:** ' + (topresult['data']['member_name'] if topresult['data']['member_name'] is not None else 'Unknown') + ('#' + str(topresult['data']['member_id']) if topresult['data']['member_id'] is not None else '') + '\n**Source:** Pixiv'
-                  resulturl = 'http://www.pixiv.net/member_illust.php?mode=medium&illust_id=' + str(topresult['data']['pixiv_id'])
+                  description += (
+                    f"**Title:** {topresult['data']['title']}\n"
+                    f"**Author:** {topresult['data']['member_name'] if topresult['data']['member_name'] is not None else 'Unknown'}"
+                    f"#{str(topresult['data']['member_id']) if topresult['data']['member_id'] is not None else ''}\n"
+                    "**Source:** Pixiv")
+                  resulturl = f"http://www.pixiv.net/member_illust.php?mode=medium&illust_id={str(topresult['data']['pixiv_id'])}"
                 elif 'anidb_aid' in topresult['data']:
                   # If aniDB anime
-                  description += '**Title:** ' + topresult['data']['source'] + (' (' + topresult['data']['year'] + ')' if topresult['data']['year'] is not None else '<Unknown Year>') + '\n*Episode ' + (topresult['data']['part'] if topresult['data']['part'] is not None else 'Unknown Episode') + (' ' + topresult['data']['est_time'] if topresult['data']['est_time'] is not None else '') + '*\n**Source:** AniDB'
-                  resulturl = 'https://anidb.net/perl-bin/animedb.pl?show=anime&aid=' + str(topresult['data']['anidb_aid'])
+                  description += (
+                    f"**Title:** {topresult['data']['source']} "
+                    (f" ({topresult['data']['year']})" if topresult['data']['year'] is not None else '<Unknown Year>') + "\n"
+                    f"*Episode {topresult['data']['part'] if topresult['data']['part'] is not None else 'Unknown Episode'} {topresult['data']['est_time'] if topresult['data']['est_time'] is not None else ''}*\n"
+                    "**Source:** AniDB")
+                  resulturl = f"https://anidb.net/perl-bin/animedb.pl?show=anime&aid={str(topresult['data']['anidb_aid'])}"
                 elif 'imdb_id' in topresult['data']:
                   # Imdb show/film
-                  description += '**IMDb database id:** ' + str(topresult['data']['imdb_id']) + ('\nReleased in ' + topresult['data']['year'] + '' if topresult['data']['year'] is not None else '<Unknown Year>') + '\n*' + (topresult['data']['part'] if topresult['data']['part'] is not None else 'Unknown Part') + (' ' + topresult['data']['est_time'] if topresult['data']['est_time'] is not None else '') + '*\n**Source:** IMDb'
-                  resulturl = 'https://www.imdb.com/title/' + str(topresult['data']['imdb_id'])
+                  description += (
+                    f"**IMDb database id:** {str(topresult['data']['imdb_id'])}"
+                    (f"\nReleased in {topresult['data']['year']}"
+                     ('' if topresult['data']['year'] is not None else '<Unknown Year>')
+                    ) + '\n*'
+                    (topresult['data']['part'] if topresult['data']['part'] is not None else 'Unknown Part')
+                    (f" {topresult['data']['est_time']}" if topresult['data']['est_time'] is not None else '') + '*\n'
+                    "**Source:** IMDb")
+                  resulturl = f"https://www.imdb.com/title/{str(topresult['data']['imdb_id'])}"
                 elif 'seiga_id' in topresult['data']:
                   # If Nico nico seiga drawing
                   description += '**Title:** ' + topresult['data']['title'] + '\n**Author:**' + (topresult['data']['member_name'] if topresult['data']['member_name'] is not None else 'Unknown') + ('#' + str(topresult['data']['member_id']) if topresult['data']['member_id'] is not None else '') + '\n**Source:** Nico Nico Seiga'

@@ -74,7 +74,7 @@ if __name__ == '__main__':
   for extension in SakanyaCore().startup_extensions:
     try:
       bot.load_extension(extension)
-    except Exception as e:
+    except (AttributeError, ImportError) as e:
       startup_errors += (
           f'Failed to load extension {extension}\n'
           f'{type(e).__name__}: {str(e)} \n')
@@ -82,12 +82,7 @@ if __name__ == '__main__':
   print('') # Empty line in case of continuous execution
   print('Loaded Modules: ', tuple(bot.extensions))
   print('Connecting to Discord...')
-  try:
-    bot.run(SakanyaCore().bot_token()) # True or empty/False for debug
-  except Exception:
-    print('Crash.')
-    raise SystemExit
-
+  bot.run(SakanyaCore().bot_token()) # True or empty/False for debug
 
 # End of file.
 # 
