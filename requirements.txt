@@ -45,7 +45,7 @@ pylint==1.9.2
 pyparsing==2.2.1
 python-dateutil==2.7.3
 PyWavelets==0.5.2
-PyYAML==3.12
+PyYAML==5.1
 redis==2.10.6
 scikit-image==0.14.0
 scipy==1.1.0
